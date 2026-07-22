@@ -122,6 +122,52 @@ tbody tr:hover{background:var(--surface2);}
 .zero-sup{font-size:10px;vertical-align:super;opacity:.8;margin:0 2px;}
 .green{color:var(--green);}
 .red{color:var(--red);}
+
+/* Desktop: Investment Overview as a full-width sortable table */
+.inv-thead,.inv-trow{display:none;}
+@media(min-width:1000px){
+  .inv-overview{display:flex !important;flex-direction:column;grid-template-columns:none !important;gap:0 !important;max-width:none;}
+  .inv-overview .inv-row{display:none !important;}
+  .inv-overview .inv-cols{display:none !important;}
+  .inv-thead{display:grid;position:sticky;top:0;z-index:2;background:var(--surface);grid-template-columns:minmax(150px,1.1fr) .7fr .9fr .9fr 1fr .7fr .9fr 1.2fr;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border2);font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+  .inv-thead .inv-th{cursor:pointer;user-select:none;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;}
+  .inv-thead .inv-th:hover{color:var(--text);}
+  .inv-thead .inv-arrow{font-size:8px;opacity:.45;}
+  .inv-thead .inv-th.active{color:var(--accent);}
+  .inv-thead .inv-th.active .inv-arrow{opacity:1;}
+  .inv-trow{display:grid;grid-template-columns:minmax(150px,1.1fr) .7fr .9fr .9fr 1fr .7fr .9fr 1.2fr;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:12px;}
+  .inv-trow:hover{background:var(--surface2);}
+  .inv-trow .tcell-r,.inv-thead .tcell-r{text-align:right;justify-content:flex-end;}
+  .inv-trow .inv-tname{display:flex;align-items:center;gap:10px;min-width:0;font-family:var(--font-head);}
+  .inv-trow .inv-tname .ticker-logo,.inv-trow .inv-tname .ticker-logo-placeholder{width:42px;height:42px;font-size:14px;flex-shrink:0;}
+  .inv-trow .inv-tname .tk{font-weight:800;font-size:13px;}
+}
+
+.inv-tval{font-weight:800;}
+.mover-grid{display:block;}
+@media(min-width:1000px){
+  .mover-grid{display:grid;grid-template-rows:repeat(5,auto);grid-auto-flow:column;column-gap:26px;}
+}
+
+/* Risk scan: dimension accordions */
+.risk-dim{border:1px solid var(--border2);border-radius:12px;background:var(--surface2);margin-bottom:8px;padding:0 12px;}
+.risk-dim summary{list-style:none;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:11px 0;cursor:pointer;user-select:none;}
+.risk-dim summary::-webkit-details-marker{display:none;}
+.risk-dim-name{font-family:var(--font-head);font-weight:800;font-size:12px;}
+.risk-dim-meter{white-space:nowrap;line-height:1;}
+.risk-dim-right{display:inline-flex;align-items:center;gap:10px;font-size:12px;color:var(--text);white-space:nowrap;}
+.risk-bulb{display:inline-flex;align-items:center;gap:5px;background:rgba(240,180,41,.16);color:var(--accent);font-weight:700;font-size:11px;padding:3px 10px;border-radius:20px;line-height:1.4;}
+.risk-dim-chev{width:28px;height:28px;border-radius:50%;background:rgba(150,155,172,.16);display:inline-flex;align-items:center;justify-content:center;color:var(--text);transition:transform .18s ease;flex-shrink:0;}
+.risk-dim-chev svg{width:13px;height:13px;}
+.risk-dim[open] .risk-dim-chev{transform:rotate(180deg);}
+.risk-dim>div{padding-bottom:10px;}
+@media(max-width:520px){
+  .risk-dim summary{grid-template-columns:1fr auto;grid-template-areas:"name right" "meter meter";row-gap:2px;}
+  .risk-dim-name{grid-area:name;}
+  .risk-dim-right{grid-area:right;}
+  .risk-dim-meter{grid-area:meter;justify-self:center;padding:6px 0 2px;}
+}
+
 /* Dividend controls */
 #sec-dividends select,#dv-edit-modal select{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
 #sec-dividends td:last-child{white-space:nowrap;}
@@ -1674,6 +1720,9 @@ tr.tx-detail-row>td{padding:0 !important;}
       </div>
     </div>
 
+    <div class="dash-anchor" id="dash-sec-risk"></div>
+    <div id="dash-risk-scan"></div>
+
     <!-- STOCKS + CRYPTO - compact 2-col row below -->
     <div class="dash-grid-2" style="margin-bottom:20px;overflow:visible;margin-left:0;margin-right:0;">
       <div class="chart-card">
@@ -1757,8 +1806,6 @@ tr.tx-detail-row>td{padding:0 !important;}
       <canvas id="line-chart" height="110"></canvas>
     </div>
 
-    <div class="dash-anchor" id="dash-sec-risk"></div>
-    <div id="dash-risk-scan"></div>
   </div>
 
   <!-- PORTFOLIO TAB -->
@@ -2627,6 +2674,7 @@ const _privacyMaskSelector = [
   // Dashboard + mobile totals
   '#hdr-invested', '#hdr-value', '#hdr-pnl', '#mob-hdr-invested', '#mob-hdr-value', '#mob-hdr-pnl',
   '#hero-value', '#hero-change',
+  '.inv-tval', '.inv-tunits', '.inv-tavg', '.inv-tpnl',
   // Dashboard cards + holdings list
   '.dash-card-value', '.psh-val',
   // Pie legends + performers + closed summary/cards
@@ -6532,6 +6580,34 @@ function computePortfolioRisks() {
     else pass('Asset Mix', `Crypto is ${cryptoPct.toFixed(1)}% of the total portfolio.`);
   }
 
+  // Income (trailing 12 months of recorded dividends vs cost)
+  const _divs = Array.isArray(state.dividends) ? state.dividends : [];
+  if (!_divs.length) na('Income', 'N/A - no dividends recorded yet.');
+  else {
+    const cut = Date.now() - 365*86400000;
+    const inc12 = _divs.filter(d => new Date(d.date).getTime() >= cut).reduce((s,d)=>s+(d.amount||0),0);
+    const costAll = holdings.reduce((s,h)=>s+(h.totalSpent||0),0);
+    const yld = costAll>0 ? inc12/costAll*100 : 0;
+    if (!inc12) flag('Income','med','Dividends are recorded, but none in the last 12 months.');
+    else if (yld >= 2.5) pass('Income', `Trailing 12m income is ~${yld.toFixed(1)}% of cost ($${fmt(inc12)}).`);
+    else flag('Income','info',`Trailing 12m income is ~${yld.toFixed(1)}% of cost ($${fmt(inc12)}). Modest, fine for growth-focused portfolios.`);
+  }
+
+  // Currency exposure (AUD vs USD share of current value)
+  {
+    const audVal = audHoldings.reduce((s,h)=>s+valOf(h),0);
+    const usdVal = usdHoldings.reduce((s,h)=>s+valOf(h),0);
+    const tot = audVal+usdVal;
+    if (!tot || !audVal || !usdVal) na('Currency Exposure','N/A - single-currency portfolio.');
+    else {
+      const domPct = Math.max(audVal,usdVal)/tot*100;
+      const dom = audVal>=usdVal?'AUD':'USD';
+      if (domPct <= 85) pass('Currency Exposure', `Reasonable split: ${dom} is ${domPct.toFixed(1)}% of value.`);
+      else if (domPct <= 95) flag('Currency Exposure','info',`${dom} is ${domPct.toFixed(1)}% of value. Heavily weighted to one currency.`);
+      else flag('Currency Exposure','med',`${dom} is ${domPct.toFixed(1)}% of value. Nearly everything rides one currency.`);
+    }
+  }
+
   const bigLosers = holdings.filter(h => { const cp = cpOf(h.ticker); const pnl = h.avgCost > 0 && cp ? ((cp - h.avgCost) / h.avgCost * 100) : null; return pnl !== null && pnl <= -25; });
   if (!holdings.length) na('Unrealised Losses', 'N/A - no holdings');
   else if (!bigLosers.length) pass('Unrealised Losses', 'No holdings are down more than 25% from average cost.');
@@ -6586,36 +6662,109 @@ function _renderTopMoversCard() {
       <div style="display:flex;gap:14px;margin-top:10px;">
         <div style="flex:1;">
           <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Gainers</div>
-          ${(topUp.length?topUp:[]).map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border2);gap:10px;">
+          ${topUp.length?('<div class="mover-grid">'+topUp.map(r=>`<div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7px 0;border-bottom:1px solid var(--border2);gap:10px;">
             <div style="display:flex;align-items:center;gap:6px;"><span class="mover-logo">${logoHtml(r.tk,r.assetType||'nasdaq',18)}</span><span style="font-family:var(--font-head);font-weight:800;font-size:12px;letter-spacing:.5px;">${r.tk}</span></div>
-            <span class="chg-badge ${r.chg>=0?'green':'red'}" style="font-size:12px;flex-shrink:0;">${r.chg>=0?'+':''}${r.chg.toFixed(2)}%</span>
-          </div>`).join('') || `<div style="font-size:12px;color:var(--muted);padding:6px 0;">No change data yet (fetch prices first).</div>`}
+            <span class="chg-badge ${r.chg>=0?'green':'red'}" style="font-size:12px;flex-shrink:0;justify-self:start;">${r.chg>=0?'+':''}${r.chg.toFixed(2)}%</span>
+          </div>`).join('')+'</div>') : `<div style="font-size:12px;color:var(--muted);padding:6px 0;">No change data yet (fetch prices first).</div>`}
         </div>
         <div style="flex:1;">
           <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Losers</div>
-          ${(topDn.length?topDn:[]).map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border2);gap:10px;">
+          ${topDn.length?('<div class="mover-grid">'+topDn.map(r=>`<div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7px 0;border-bottom:1px solid var(--border2);gap:10px;">
             <div style="display:flex;align-items:center;gap:6px;"><span class="mover-logo">${logoHtml(r.tk,r.assetType||'nasdaq',18)}</span><span style="font-family:var(--font-head);font-weight:800;font-size:12px;letter-spacing:.5px;">${r.tk}</span></div>
-            <span class="chg-badge ${r.chg>=0?'green':'red'}" style="font-size:12px;flex-shrink:0;">${r.chg>=0?'+':''}${r.chg.toFixed(2)}%</span>
-          </div>`).join('') || `<div style="font-size:12px;color:var(--muted);padding:6px 0;">No change data yet (fetch prices first).</div>`}
+            <span class="chg-badge ${r.chg>=0?'green':'red'}" style="font-size:12px;flex-shrink:0;justify-self:start;">${r.chg>=0?'+':''}${r.chg.toFixed(2)}%</span>
+          </div>`).join('')+'</div>') : `<div style="font-size:12px;color:var(--muted);padding:6px 0;">No change data yet (fetch prices first).</div>`}
         </div>
       </div>
     </div>`;
 }
+function _riskDimensions(results){
+  const score = r => r.status==='pass' ? 10 : r.status==='na' ? null : (r.level==='high' ? 2 : r.level==='info' ? 8 : 5);
+  const DIMS = [
+    { name:'Concentration', rules:['AUD Concentration','USD/Crypto Concentration'] },
+    { name:'Diversification', rules:['AUD Diversification','Sector Concentration'] },
+    { name:'Asset Mix', rules:['Asset Mix'] },
+    { name:'Crypto Risk', rules:['Stablecoin Exposure','Meme Coin Exposure'] },
+    { name:'Loss Control', rules:['Unrealised Losses'] },
+    { name:'Income', rules:['Income'] },
+    { name:'Currency Exposure', rules:['Currency Exposure'] },
+  ];
+  return DIMS.map(d=>{
+    const rs = results.filter(r=>d.rules.includes(r.rule));
+    const scored = rs.map(score).filter(s=>s!=null);
+    const val = scored.length ? Math.round((scored.reduce((a,b)=>a+b,0)/scored.length)*10)/10 : null;
+    const recs = rs.filter(r=>r.status==='flag').map(r=>r.msg);
+    return { name:d.name, score:val, recs, rules:rs };
+  });
+}
+function _riskDotMeter(score){
+  if(score==null) return '<span style="font-size:10px;color:var(--muted);">N/A</span>';
+  const filled = Math.round(score);
+  const col = score>=8 ? 'var(--green)' : score>=5 ? 'var(--accent)' : 'var(--red)';
+  let out='';
+  for(let i=1;i<=10;i++){
+    out += '<span style="display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:2px;background:'+(i<=filled?col:'rgba(150,155,172,.35)')+';"></span>';
+  }
+  return out;
+}
 function _renderRiskScanCard() {
   const risks = computePortfolioRisks();
-  return `<div class="dash-card" style="padding:18px;margin-bottom:16px;">
-      <div style="text-align:center;margin-bottom:8px;">
-        <div class="chart-title">🛡 Portfolio Risk Scan</div>
-        <div class="chart-subtitle">Updates automatically as your portfolio changes</div>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">Concentration, sector weight, unrealised losses, crypto risk.</div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">
-        <div style="font-weight:700;color:var(--text);margin-bottom:4px;">Rules active</div>
-        <div>Stocks: concentration, sector concentration, earnings proximity</div>
-        <div>Crypto: concentration, stablecoin % cap, meme exposure cap</div>
-      </div>
-      ${_renderRisks(risks)}
-    </div>`;
+  const dims = _riskDimensions(risks);
+  const scoredDims = dims.filter(d=>d.score!=null);
+  const overall = scoredDims.length ? Math.round(scoredDims.reduce((a,d)=>a+d.score,0)/scoredDims.length*10)/10 : null;
+  const ocol = overall==null ? 'var(--muted)' : overall>=8 ? 'var(--green)' : overall>=5 ? 'var(--accent)' : 'var(--red)';
+  const pd = risks.find(r=>r.rule==='Price Data' && r.status==='flag');
+  const rows = dims.map((d,i)=>{
+    const flagged = d.rules.filter(r=>r.status==='flag');
+    const recHtml = flagged.length
+      ? '<div style="padding:8px 2px 2px;">'+flagged.map(r=>{
+          const chips = (r.items&&r.items.length)
+            ? '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;margin-left:22px;">'+r.items.map(it=>'<span style="font-size:10px;font-family:var(--font-mono);background:var(--red-dim);color:var(--red);padding:2px 8px;border-radius:6px;">'+it+'</span>').join('')+'</div>'
+            : '';
+          return '<div style="font-size:11px;color:var(--text);padding:6px 0;border-top:1px solid var(--border);"><div style="display:flex;gap:8px;align-items:flex-start;"><span style="flex-shrink:0;">\u{1F4A1}</span><span>'+r.msg+'</span></div>'+chips+'</div>';
+        }).join('')+'</div>'
+      : '<div style="font-size:11px;color:var(--muted);padding:8px 2px 2px;border-top:1px solid var(--border);margin-top:6px;">No issues flagged. '+(d.score==null?'Not applicable to your holdings.':'Looking healthy.')+'</div>';
+    const _open = (typeof window!=='undefined' && window.matchMedia && window.matchMedia('(min-width:1000px)').matches) ? ' open' : '';
+    return '<details class="risk-dim"'+_open+'>'
+      + '<summary><span class="risk-dim-name">'+d.name+'</span>'
+      + '<span class="risk-dim-meter">'+_riskDotMeter(d.score)+'</span>'
+      + '<span class="risk-dim-right">'+(d.recs.length?('<span class="risk-bulb">\u{1F4A1} '+d.recs.length+'</span>'):'')+'<span class="risk-dim-chev"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>'
+      + '</summary>'+recHtml+'</details>';
+  }).join('');
+  return '<div class="dash-card" style="padding:18px;margin-bottom:16px;">'
+    + '<div style="text-align:center;margin-bottom:8px;">'
+    + '<div class="chart-title">\u{1F6E1} Portfolio Risk Scan</div>'
+    + '<div class="chart-subtitle">Scores your holdings dimension by dimension. Updates automatically.</div>'
+    + '</div>'
+    + '<div style="text-align:center;margin-bottom:4px;font-family:var(--font-mono);">'
+    + '<span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Portfolio Score </span>'
+    + '<span style="font-size:22px;font-weight:800;color:'+ocol+';">'+(overall==null?'\u2014':overall)+'</span>'
+    + '<span style="font-size:12px;color:var(--muted);">/10</span>'
+    + '</div>'
+    + (pd?('<div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:4px;">\u26A0 '+pd.msg+' Scores may shift once all prices load.</div>'):'')
+    + '<div style="position:relative;height:260px;max-width:420px;margin:0 auto 10px;"><canvas id="risk-radar"></canvas></div>'
+    + rows
+    + '</div>';
+}
+function _drawRiskRadar(){
+  const canvas=document.getElementById('risk-radar'); if(!canvas || typeof Chart==='undefined') return;
+  if(window._riskRadar){ try{window._riskRadar.destroy();}catch(_){ } window._riskRadar=null; }
+  const dims=_riskDimensions(computePortfolioRisks());
+  const vals=dims.map(d=>d.score==null?0:d.score);
+  const scored=dims.filter(d=>d.score!=null);
+  const avg=scored.length?scored.reduce((a,d)=>a+d.score,0)/scored.length:0;
+  const col = avg>=8 ? '#4ade80' : avg>=5 ? '#f0b429' : '#f87171';
+  const grid='rgba(150,155,172,.38)';
+  window._riskRadar=new Chart(canvas.getContext('2d'),{
+    type:'radar',
+    data:{ labels:dims.map(d=>[d.name,(d.score==null?'N/A':d.score+'/10')]),
+      datasets:[{ data:vals, borderColor:col, borderWidth:2,
+        backgroundColor:col+'2a', pointBackgroundColor:col, pointRadius:3, pointHoverRadius:4 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>' '+(dims[c.dataIndex].score==null?'N/A':dims[c.dataIndex].score+' / 10') } } },
+      scales:{ r:{ min:0, max:10, ticks:{ display:false, stepSize:2 },
+        grid:{ color:grid }, angleLines:{ color:grid },
+        pointLabels:{ color: (typeof cssVar==='function'?cssVar('--text'):'#e6e8ee'), font:{ size: 11, family:'DM Mono, monospace' } } } } }
+  });
 }
 
 function renderTerminal(auto=false) {
@@ -7206,8 +7355,15 @@ function renderTradeAnalytics() {
   }
 }
 
+function invSortBy(col){
+  state.ui=state.ui||{};
+  if(state.ui.invCol===col){ state.ui.invDir=(state.ui.invDir==='asc')?'desc':'asc'; }
+  else { state.ui.invCol=col; state.ui.invDir=(col==='ticker'||col==='type')?'asc':'desc'; }
+  try{save();}catch(_){ }
+  renderDashboard();
+}
 function setInvSort(mode, el){
-  state.ui=state.ui||{}; state.ui.invSort=(mode==='chg')?'chg':'value';
+  state.ui=state.ui||{}; state.ui.invSort=(mode==='chg')?'chg':'value'; state.ui.invCol=null;
   try{save();}catch(_){ }
   renderDashboard();
 }
@@ -7224,6 +7380,7 @@ function renderDashboard() {
   if (_topMoversEl) _topMoversEl.innerHTML = _renderTopMoversCard();
   const _riskScanEl = document.getElementById('dash-risk-scan');
   if (_riskScanEl) _riskScanEl.innerHTML = _renderRiskScanCard();
+  try { _drawRiskRadar(); } catch(_) {}
 
   const holdings = computeHoldings();
   const tickers = Object.keys(holdings).filter(k => holdings[k].units > 0.0001);
@@ -7287,12 +7444,39 @@ function renderDashboard() {
         }
         return b.val - a.val;
       });
+    const _icol=(state.ui&&state.ui.invCol)||null;
+    if(_icol){
+      const dir=(state.ui.invDir==='asc')?1:-1;
+      const key=it=>{
+        switch(_icol){
+          case 'ticker': return it.ticker;
+          case 'type': return it.assetType||'';
+          case 'cp': return it.cp==null?-Infinity:it.cp;
+          case 'chg': return it.chg==null?-Infinity:it.chg;
+          case 'val': return it.val;
+          case 'units': return it.units;
+          case 'avg': return it.units>0?it.totalSpent/it.units:-Infinity;
+          case 'pnl': return it.cp?(it.val-it.totalSpent):-Infinity;
+          default: return it.val;
+        }
+      };
+      items.sort((a,b)=>{ const ka=key(a), kb=key(b);
+        if(typeof ka==='string') return ka.localeCompare(kb)*dir;
+        return (ka-kb)*dir; });
+    }
 
     const head = `<div class="inv-cols"><span>Asset</span><span>Price</span><span>Portfolio</span></div>`;
+    const _col=(state.ui&&state.ui.invCol)||null, _dir=(state.ui&&state.ui.invDir)||'desc';
+    const th=(key,label,right)=>{
+      const act=_col===key;
+      const arrow=act?(_dir==='asc'?'\u25B2':'\u25BC'):'\u21C5';
+      return '<span class="inv-th'+(act?' active':'')+(right?' tcell-r':'')+'" onclick="invSortBy(\''+key+'\')">'+label+' <span class="inv-arrow">'+arrow+'</span></span>';
+    };
+    const thead = '<div class="inv-thead">'+th('ticker','Name')+th('type','Type')+th('cp','Price',1)+th('chg','Change',1)+th('val','Value',1)+th('units','Units',1)+th('avg','Avg Price',1)+th('pnl','Profit/Loss',1)+'</div>';
     if (!items.length) {
       invEl.innerHTML = head + `<div style="font-size:11px;color:var(--muted);text-align:center;padding:8px 0;">No ${_invOverviewMode==='crypto'?'crypto':'stock'} holdings yet.</div>`;
     } else {
-      invEl.innerHTML = head + items.map(it => {
+      invEl.innerHTML = head + thead + items.map(it => {
         const tk = it.ticker.toUpperCase();
         const logoSrc = (state.logoOverrides && state.logoOverrides[tk]) || (typeof _logoCache !== 'undefined' && _logoCache[tk]) || null;
         const logo = logoSrc
@@ -7326,7 +7510,24 @@ function renderDashboard() {
             <div class="inv-units">${unitsStr}</div>
             ${pnlStr}
           </div>
-        </div>`;
+        </div>` + (function(){
+          var avg = it.units>0 ? it.totalSpent/it.units : null;
+          var pnlPct = (it.cp && it.totalSpent>0) ? (pnl/it.totalSpent*100) : null;
+          var pctTxt = (pnlPct!=null) ? (' ('+(pnl>=0?'+':'')+pnlPct.toFixed(1)+'%)') : '';
+          var pnlCell = it.cp
+            ? '<span class="chg-badge '+(pnl>=0?'green':'red')+'" style="font-size:11px;">'+(pnl>=0?'+':'-')+'$'+fmt(Math.abs(pnl))+pctTxt+'</span>'
+            : '<span class="muted">\u2014</span>';
+          return '<div class="inv-trow">'
+            + '<div class="inv-tname">'+logo+'<span class="tk">'+tk+'</span></div>'
+            + '<div><span class="inv-type">'+typeStr+'</span></div>'
+            + '<div class="tcell-r">'+(it.cp?('$'+fmtPriceFull(it.cp)):'\u2014')+'</div>'
+            + '<div class="tcell-r">'+(chgStr||'<span class="muted">\u2014</span>')+'</div>'
+            + '<div class="tcell-r inv-tval">$'+fmt(it.val)+'</div>'
+            + '<div class="tcell-r inv-tunits">'+fmtUnits(it.units)+'</div>'
+            + '<div class="tcell-r inv-tavg">'+(avg!=null?('$'+fmtPriceFull(avg)):'\u2014')+'</div>'
+            + '<div class="tcell-r inv-tpnl">'+pnlCell+'</div>'
+            + '</div>';
+        })();
       }).join('');
     }
   }

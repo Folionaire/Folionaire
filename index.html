@@ -3248,13 +3248,31 @@ function importGenericCsv(text, platform){
     for(const n of names){ const i=hdr.findIndex(h=>h.includes(n)); if(i>=0) return i; }
     return -1;
   };
-  const iDate  = find('date','time','timestamp','traded at','executed','date(utc)');
-  const iType  = find('type','side','action','transaction type','operation','direction');
-  const iSym   = find('symbol','coin','token','ticker','asset','currency','pair','product','market','name');
-  const iAmt   = find('amount','quantity','qty','units','size','filled','coin amount','no. of coins');
+  const iDate  = find('date','trade date','time','timestamp','traded at','executed','date(utc)');
+  const iType  = find('transaction type','type','side','action','operation','direction');
+  let   iSym   = find('instrument code','code','instrument','symbol','coin','token','ticker','asset','pair','product','name','currency','market');
+  const iAmt   = find('quantity','amount','qty','units','size','filled','coin amount','no. of coins','no of coins','executed');
   const iPrice = find('price','unit price','price per coin','executed price','avg price','purchase price','price (usd)');
+  // A holdings/performance export has no date and no buy/sell column - it is a snapshot,
+  // so the cost basis lives in an average-cost column, not the current "Price" column.
+  const iCostPrice = find('avg buy price','average buy price','avg cost','average cost','cost base','cost basis','buy price');
+  const isSnapshot = (iDate < 0 && iType < 0);
+  const iPriceUse  = (isSnapshot && iCostPrice >= 0) ? iCostPrice : iPrice;
   const iTotal = find('total','value','subtotal','cost','proceeds','total value','total (usd)','amount (usd)');
-  if(iSym<0 || iAmt<0){
+  const _iAmtSafe = (iAmt >= 0 && iAmt === iPrice) ? -1 : iAmt; // never mistake a price column for quantity
+  // Share-platform columns (Sharesight, broker exports): market, currency and brokerage
+  const iMkt   = find('market code','market','exchange','venue');
+  // "Currency Gain" is a dollar figure, not a currency code - exclude perf columns
+  let   iCur   = hdr.findIndex(h => h==='currency' || h==='ccy' || h==='currency code');
+  if (iCur < 0) iCur = hdr.findIndex(h => h.includes('currency') && !/gain|return|%|conversion|rate/.test(h));
+  if (iCur === iSym) iCur = -1;               // don't reuse the ticker column as a currency
+  if (iSym >= 0 && iSym === iMkt) iSym = -1;  // a market column is not a ticker column
+  const iFee   = find('brokerage','commission','fee','fees');
+  const CRYPTO_PLATFORMS = ['CoinGecko','CoinMarketCap','Binance','Coinbase','Crypto.com'];
+  const AU_SHARE_PLATFORMS = ['Sharesight','Navexa'];
+  const platformIsCrypto   = CRYPTO_PLATFORMS.indexOf(platform) >= 0;
+  const platformIsAUShares = AU_SHARE_PLATFORMS.indexOf(platform) >= 0;
+  if(iSym<0 || _iAmtSafe<0){
     // Not a recognisable per-coin transaction CSV - try the Folionaire / exchange
     // parser (handles Folionaire exports and Crypto.com-style files) before giving up.
     if (typeof loadFromCSV === 'function') { loadFromCSV(text); return; }
@@ -3265,24 +3283,55 @@ function importGenericCsv(text, platform){
   const txs = [];
   for(let i=1;i<lines.length;i++){
     const c = _splitCsvLine(lines[i]); if(!c.length) continue;
-    let sym = String(c[iSym]||'').toUpperCase().replace(/["']/g,'').trim();
-    sym = sym.split(/[\/\-\s]/)[0].replace(/(USDT|USDC|BUSD|AUD|USD|EUR|GBP)$/,'') || sym;
+    const rawSym = String(c[iSym]||'').toUpperCase().replace(/["']/g,'').trim();
+    if(!rawSym) continue;
+    const mkt    = iMkt>=0 ? String(c[iMkt]||'').toUpperCase().trim() : '';
+    const rowCur = iCur>=0 ? String(c[iCur]||'').toUpperCase().trim() : '';
+    // Work out whether this row is a share or a coin, and which currency it settled in
+    let assetType, currency;
+    if (/ASX/.test(mkt))                                  { assetType='asx';    currency='AUD'; }
+    else if (/NASDAQ|NYSE|AMEX|ARCA|BATS|^US$/.test(mkt))  { assetType='nasdaq'; currency='USD'; }
+    else if (/\.(AX|ASX)$/.test(rawSym))                  { assetType='asx';    currency='AUD'; }
+    else if (platformIsCrypto)                             { assetType='crypto'; currency='USD'; }
+    else if (rowCur==='AUD')                               { assetType='asx';    currency='AUD'; }
+    else if (rowCur==='USD')                               { assetType='nasdaq'; currency='USD'; }
+    else if (platformIsAUShares)                           { assetType='asx';    currency='AUD'; }
+    else if (iFee>=0)                                      { assetType='nasdaq'; currency='USD'; }
+    else                                                   { assetType='crypto'; currency='USD'; }
+    if (rowCur==='AUD' || rowCur==='USD') currency = rowCur;
+    // Clean the ticker: exchange suffixes for shares, quote currency for coin pairs
+    let sym = rawSym.replace(/\.(AX|ASX|AS|US|NZ|NYSE|NAS|TO|L)$/,'');
+    if (assetType==='crypto') sym = sym.split(/[\/\-\s]/)[0].replace(/(USDT|USDC|BUSD|AUD|USD|EUR|GBP)$/,'') || sym;
+    else sym = sym.split(/[\/\s]/)[0];
     if(!sym) continue;
-    const amt = Math.abs(num(c[iAmt])); if(amt<=0) continue;
+    const amt = Math.abs(num(c[_iAmtSafe])); if(amt<=0) continue;
     const typeRaw = (iType>=0 ? String(c[iType]||'') : '').toLowerCase();
     const type = /sell|sold|withdraw|send|out|debit/.test(typeRaw) ? 'sell' : 'buy';
-    let price = iPrice>=0 ? num(c[iPrice]) : 0;
-    let total = iTotal>=0 ? num(c[iTotal]) : 0;
+    let price = iPriceUse>=0 ? num(c[iPriceUse]) : 0;
+    // In snapshot mode the "Value" column is current value, not what you paid
+    let total = (isSnapshot || iTotal<0) ? 0 : num(c[iTotal]);
+    const fees = iFee>=0 ? Math.abs(num(c[iFee])) : 0;
     if(total<=0 && price>0) total = price*amt;
     if(price<=0 && total>0) price = total/amt;
     txs.push({
       id: Date.now()+Math.random()+i,
-      type, assetType:'crypto', currency:'USD', ticker:sym,
+      type, assetType, currency, ticker:sym,
       units: amt, price: Math.round(price*1e8)/1e8, total: Math.round(total*1e4)/1e4,
-      date: _impDate(iDate>=0 ? c[iDate] : ''), portfolio:'main', notes: platform
+      fees: Math.round(fees*100)/100,
+      date: _impDate(iDate>=0 ? c[iDate] : ''), portfolio:'main',
+      notes: isSnapshot ? (platform+' snapshot - set real buy date for CGT') : platform
     });
   }
   if(!txs.length){ alert('No valid transactions found in this CSV.'); return; }
+  if (isSnapshot) {
+    const okSnap = confirm(
+      'This looks like a holdings snapshot, not a trade history.\n\n'
+      + 'It has no date or buy/sell columns, so Folionaire will import '+txs.length+' holdings as single buys dated today'
+      + (iCostPrice>=0 ? ', using the average buy price column for cost.' : '.')
+      + '\n\nThat means CGT dates and the 12-month discount will NOT be correct, and you may need to fix the market/currency on US holdings.\n\n'
+      + 'For full history, export your TRADES/transactions instead if your platform offers it.\n\nImport anyway?');
+    if (!okSnap) return;
+  }
   const merge = state.transactions.length>0
     ? confirm(`Import ${txs.length} transactions from ${platform}?\n\nOK = Merge with existing\nCancel = Replace all`)
     : true;
@@ -7692,15 +7741,25 @@ function showTradeDotTip(el){
   tip=document.createElement('div');
   tip.id='trade-dot-tip'; tip._for=el;
   tip.textContent=el.getAttribute('data-tip')||'';
-  tip.style.cssText='position:fixed;z-index:99999;background:var(--surface);border:1px solid var(--border2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:11px;font-family:var(--font-mono);box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap;pointer-events:none;transform:translate(-50%,-130%);';
-  tip.style.maxWidth = Math.min(240, window.innerWidth-24) + 'px';
-  tip.style.whiteSpace = 'normal';
+  const PAD = 10;
+  // clientWidth/Height exclude the scrollbar, unlike window.innerWidth
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+  const vh = document.documentElement.clientHeight || window.innerHeight;
+  // No CSS transform: position is computed directly so clamping is exact
+  tip.style.cssText='position:fixed;z-index:99999;background:var(--surface);border:1px solid var(--border2);color:var(--text);border-radius:8px;padding:7px 11px;font-size:11px;font-family:var(--font-mono);line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:normal;pointer-events:none;left:0;top:0;';
+  tip.style.maxWidth = Math.min(260, vw - PAD*2) + 'px';
   document.body.appendChild(tip);
-  const r=el.getBoundingClientRect();
-  const tw = tip.offsetWidth || 200;
-  const half = tw/2 + 12;
-  tip.style.left=Math.min(Math.max(r.left+r.width/2, half), window.innerWidth-half)+'px';
-  tip.style.top=Math.max(r.top, tip.offsetHeight+8)+'px';
+  const r = el.getBoundingClientRect();
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  // horizontal: centre on the icon, then clamp fully inside the viewport
+  let left = r.left + r.width/2 - tw/2;
+  left = Math.max(PAD, Math.min(left, vw - tw - PAD));
+  // vertical: sit above the icon when it fits, otherwise flip below it
+  let top = r.top - th - 8;
+  if (top < PAD) top = Math.min(r.bottom + 8, vh - th - PAD);
+  top = Math.max(PAD, top);
+  tip.style.left = left + 'px';
+  tip.style.top  = top + 'px';
   clearTimeout(window._tdTipTimer);
   window._tdTipTimer=setTimeout(()=>{ try{tip.remove();}catch(_){} }, 2400);
 }
@@ -12541,7 +12600,9 @@ function saveSectorEdit() {
     <button class="load-opt" onclick="pickPlatformCsv('Binance')"><span class="load-opt-ico">🟡</span><span><span class="load-opt-title">Binance</span><span class="load-opt-sub">Wallet → Transaction History → Export</span></span></button>
     <button class="load-opt" onclick="pickPlatformCsv('Coinbase')"><span class="load-opt-ico">🔵</span><span><span class="load-opt-title">Coinbase</span><span class="load-opt-sub">Reports → Generate report → CSV</span></span></button>
     <button class="load-opt" onclick="pickPlatformCsv('Crypto.com')"><span class="load-opt-ico">💠</span><span><span class="load-opt-title">Crypto.com</span><span class="load-opt-sub">Accounts → Transaction History → Export</span></span></button>
-    <button class="load-opt" onclick="pickPlatformCsv('Other')"><span class="load-opt-ico">📄</span><span><span class="load-opt-title">Other platform CSV</span><span class="load-opt-sub">Kraken, KuCoin, Sharesight, etc. - auto-detects columns</span></span></button>
+    <button class="load-opt" onclick="pickPlatformCsv('Sharesight')"><span class="load-opt-ico">📈</span><span><span class="load-opt-title">Sharesight</span><span class="load-opt-sub">Reports → All Trades → Export CSV</span></span></button>
+    <button class="load-opt" onclick="pickPlatformCsv('Navexa')"><span class="load-opt-ico">🇦🇺</span><span><span class="load-opt-title">Navexa</span><span class="load-opt-sub">Portfolio → Trades → Export CSV</span></span></button>
+    <button class="load-opt" onclick="pickPlatformCsv('Other')"><span class="load-opt-ico">📄</span><span><span class="load-opt-title">Other platform CSV</span><span class="load-opt-sub">Broker exports, Kraken, KuCoin, others - detects market, currency and brokerage</span></span></button>
 
     <div style="font-size:10px;color:var(--muted);margin-top:14px;line-height:1.5;">Imports auto-detect the date, type, coin, amount and price columns. You'll be asked to <strong>merge</strong> with or <strong>replace</strong> your current data. Crypto is assumed unless the CSV says otherwise, and prices refresh right after.</div>
 

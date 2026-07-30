@@ -10989,7 +10989,7 @@ function renderBudget(){
   if (body){
     const list = [...entries].sort((a,b)=>new Date(b.date)-new Date(a.date));
     if (!list.length){
-      body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="icon">\U0001F4B5</div><p>No income or expenses logged yet. Add your first entry above.</p></div></td></tr>';
+      body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="icon">💵</div><p>No income or expenses logged yet. Add your first entry above.</p></div></td></tr>';
     } else {
       body.innerHTML = list.map(e=>{
         const aud = _entryAUD(e.amount, e.currency);

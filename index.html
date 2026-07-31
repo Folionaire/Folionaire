@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root,[data-theme="dark"] {
+  color-scheme: dark;
   --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#242830;--border2:#2e3440;
   --text:#e8eaf0;--muted:#6b7280;--accent:#f0b429;--accent2:#ffd166;
   --green:#22c55e;--green-dim:#16a34a22;--red:#ef4444;--red-dim:#dc262622;
@@ -18,6 +19,7 @@
   --font-head:'Roboto',sans-serif;--font-mono:'DM Mono',monospace;
 }
 [data-theme="light"] {
+  color-scheme: light;
   --bg:#f4f5f7;--surface:#ffffff;--surface2:#f0f1f3;--border:#e2e4e9;--border2:#d0d3dc;
   --text:#111318;--muted:#6b7280;--accent:#d4920a;--accent2:#e6a817;
   --green:#16a34a;--green-dim:#16a34a18;--red:#dc2626;--red-dim:#dc262618;
@@ -25,6 +27,7 @@
   --font-head:'Roboto',sans-serif;--font-mono:'DM Mono',monospace;
 }
 [data-theme="terminal"] {
+  color-scheme: dark;
   --bg:#060a12;--surface:#0d1420;--surface2:#121b2c;--border:#1c2740;--border2:#263354;
   --text:#e6ecf7;--muted:#7788a3;--accent:#22d3ee;--accent2:#38bdf8;
   --green:#34d399;--green-dim:#34d39922;--red:#f87171;--red-dim:#f8717122;
@@ -255,6 +258,12 @@ tbody tr:hover{background:var(--surface2);}
 .es-stat-row .es-val{font-family:var(--font-mono);font-weight:800;}
 .es-ladder-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px;}
 #sec-exit select{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
+
+/* Centred control clusters: stop inputs and buttons stretching on wide screens */
+.ctrl-cluster{max-width:540px;margin-left:auto;margin-right:auto;}
+/* Action buttons that should read as tools, not filters */
+.tool-btn{background:rgba(240,180,41,.14) !important;border:1px solid var(--accent) !important;color:var(--accent) !important;font-weight:700;}
+.tool-btn:hover{background:var(--accent) !important;color:#0a0c10 !important;}
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);background:transparent;font-size:13px;cursor:pointer;transition:background .15s ease,color .15s ease;}
 .icon-btn:hover{background:var(--accent);color:#0a0c10;}
 .icon-btn.danger{border-color:var(--red);color:var(--red);}
@@ -286,7 +295,7 @@ tbody tr:hover{background:var(--surface2);}
 
 
 /* Dividend controls */
-#sec-dividends select,#dv-edit-modal select{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
+#sec-dividends select,#dv-edit-modal select,#amit-portfolio,#split-portfolio,#amit-kind,#swp-portfolio{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
 #sec-dividends td:last-child{white-space:nowrap;}
 #sec-dividends td:last-child .btn-ghost{margin-right:12px;}
 #sec-dividends .dv-check{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;margin-right:4px;}
@@ -331,7 +340,8 @@ tbody tr:hover{background:var(--surface2);}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;font-family:var(--font-head);font-weight:600;}
 .form-group 
-input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.6;cursor:pointer;}
+input[type="date"]::-webkit-calendar-picker-indicator{opacity:.75;cursor:pointer;}
+input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
 input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
 input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:9px 11px;font-family:var(--font-mono);font-size:13px;outline:none;transition:border .15s;border-radius:8px;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
@@ -603,6 +613,40 @@ input,.form-group select,.form-group textarea{width:100%;background:var(--bg);bo
 .empty-state{text-align:center;padding:50px 20px;color:var(--muted);}
 .empty-state .icon{font-size:34px;margin-bottom:11px;}
 .notif{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:9px 16px;font-family:var(--font-mono);font-size:12px;z-index:9000;animation:fadeIn .2s ease;pointer-events:none;}
+
+/* Tips panel */
+#tips-panel{position:fixed;bottom:22px;right:22px;width:320px;max-width:calc(100vw - 44px);
+  background:var(--surface);border:1px solid var(--accent);border-radius:12px;
+  padding:13px 38px 11px 15px;z-index:8500;box-shadow:0 10px 30px rgba(0,0,0,.4);
+  font-family:var(--font-mono);animation:fadeIn .22s ease;}
+#tips-panel .tips-head{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);
+  font-family:var(--font-head);font-weight:800;margin-bottom:5px;}
+#tips-panel .tips-msg{font-size:12px;line-height:1.6;color:var(--text);}
+#tips-panel .tips-foot{display:flex;align-items:center;gap:10px;margin-top:11px;padding-top:9px;
+  border-top:1px solid var(--border);}
+#tips-panel .tips-count{font-size:10px;color:var(--muted);min-width:30px;}
+#tips-panel .tips-nav{display:flex;gap:5px;margin-left:auto;}
+#tips-panel .tips-nav button{width:26px;height:26px;border-radius:50%;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;
+  justify-content:center;padding:0;font-size:11px;}
+#tips-panel .tips-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+#tips-panel .tips-nav button:disabled{opacity:.32;cursor:default;}
+#tips-panel .tips-mute{background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;
+  padding:0;text-decoration:underline;font-family:var(--font-mono);}
+#tips-panel .tips-mute:hover{color:var(--accent);}
+#tips-panel .tips-close{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:50%;
+  border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:12px;line-height:1;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+#tips-panel .tips-close:hover{background:var(--accent);color:#0a0c10;}
+@media(min-width:769px){
+  #tips-panel{right:auto;left:236px;transition:left .2s ease;}
+  body.sidebar-collapsed #tips-panel{left:88px;}
+}
+@media(max-width:768px){#tips-panel{left:12px;right:12px;bottom:74px;width:auto;max-width:none;}}
+.notif-sticky{position:fixed;bottom:22px;right:22px;max-width:340px;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:11px 38px 11px 14px;font-family:var(--font-mono);font-size:12px;line-height:1.55;border-radius:10px;z-index:9001;animation:fadeIn .2s ease;box-shadow:0 8px 24px rgba(0,0,0,.35);}
+.notif-sticky-close{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:12px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+.notif-sticky-close:hover{background:var(--accent);color:#0a0c10;}
+@media(max-width:768px){.notif-sticky{left:12px;right:12px;bottom:74px;max-width:none;}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
 select option{background:var(--surface);color:var(--text);}
 [data-theme="light"] select,
@@ -771,6 +815,7 @@ body.privacy-on canvas{filter:blur(7px);opacity:.9;}
     padding: 20px 14px 16px;
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
+    position: relative;
   }
   .sidebar-logo .logo { white-space: nowrap; font-size: 17px !important; }
   .folio-mark{width:34px;height:34px;border-radius:6px;flex-shrink:0;display:block;}
@@ -879,6 +924,85 @@ body.privacy-on canvas{filter:blur(7px);opacity:.9;}
   .header { display: none !important; }
   .tabs   { display: none !important; }
   .mobile-setting-card{display:none !important;}
+
+
+  /* ── Collapsed sidebar: icons only, at double size ── */
+  /* Sits ON the sidebar's right frame line, level with the logo, half protruding.
+     position:fixed so the sidebar's overflow can't clip it. */
+  /* 44px hit area (WCAG minimum) with a 26px visible circle drawn via ::before,
+     so the target is easy to hit without making the control look oversized. */
+  .sidebar-collapse-btn{
+    position:fixed; left:220px; top:38px; width:44px; height:44px;
+    transform:translate(-50%,-50%);
+    border:none; background:transparent; padding:0; border-radius:50%;
+    color:var(--accent) !important; cursor:pointer; display:inline-flex;
+    align-items:center; justify-content:center; z-index:250;
+    transition:left .2s ease, color .15s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .sidebar-collapse-btn::before{
+    content:''; position:absolute; left:50%; top:50%;
+    width:26px; height:26px; margin:-13px 0 0 -13px;
+    border-radius:50%; border:1px solid var(--accent); background:var(--surface);
+    transition:background .15s, box-shadow .15s;
+  }
+  .sidebar-collapse-btn svg{ position:relative; width:14px; height:14px; stroke:currentColor; transition:transform .2s ease; }
+  .sidebar-collapse-btn:hover::before{ background:var(--accent); box-shadow:0 0 0 4px rgba(240,180,41,.16); }
+  .sidebar-collapse-btn:hover{ color:#0a0c10 !important; }
+  .sidebar-collapse-btn:focus-visible::before{ box-shadow:0 0 0 3px var(--accent); }
+  body.sidebar-collapsed .sidebar-collapse-btn{ left:72px; color:var(--accent) !important; }
+  body.sidebar-collapsed .sidebar-collapse-btn:hover{ color:#0a0c10 !important; }
+  body.sidebar-collapsed .sidebar-collapse-btn svg{ transform:rotate(180deg); }
+
+  /* Collapsed-only action rail under the nav */
+  .sidebar-collapsed-actions{ display:none; }
+  body.sidebar-collapsed .sidebar-collapsed-actions{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    padding:12px 0 14px; margin-top:6px; border-top:1px solid var(--border);
+    flex-shrink:0;
+  }
+  body.sidebar-collapsed .sidebar-collapsed-actions button{
+    width:38px; height:38px; border-radius:9px; border:1px solid var(--border2);
+    background:var(--surface2); color:var(--muted); cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center; padding:0;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  body.sidebar-collapsed .sidebar-collapsed-actions button svg{ width:19px; height:19px; }
+  body.sidebar-collapsed .sidebar-collapsed-actions button:hover{
+    background:rgba(255,255,255,.13); color:var(--accent); border-color:var(--accent);
+  }
+  [data-theme="light"] body.sidebar-collapsed .sidebar-collapsed-actions button:hover{ background:rgba(0,0,0,.07); }
+
+  body.sidebar-collapsed .sidebar{ width:72px; min-width:72px; }
+  body.sidebar-collapsed .app-body{ margin-left:72px; }
+  body.sidebar-collapsed .sidebar-logo{ padding:18px 8px 20px; }
+  /* "FOLIO" is a bare text node, so the whole .logo block has to go, leaving the hat */
+  body.sidebar-collapsed .sidebar-logo .logo,
+  body.sidebar-collapsed .sidebar-stats,
+  body.sidebar-collapsed .sidebar-actions,
+  body.sidebar-collapsed .sidebar-api,
+  body.sidebar-collapsed .sidebar > footer,
+  body.sidebar-collapsed .sidebar-section-label,
+  body.sidebar-collapsed .sidebar-quick-actions{ display:none !important; }
+  body.sidebar-collapsed .sidebar-logo a > div{ justify-content:center; gap:0; }
+  body.sidebar-collapsed .folio-mark{ width:42px; height:42px; margin:0 auto; }
+  body.sidebar-collapsed .sidebar-nav{ padding:14px 0; }
+
+  /* Hide the label text, keep the icon, double its size */
+  body.sidebar-collapsed .sidebar-tab{
+    justify-content:center; gap:0; padding:12px 0; font-size:0; letter-spacing:0;
+  }
+  body.sidebar-collapsed .sidebar-tab.active{ border-left:3px solid var(--accent); padding-left:0; }
+  body.sidebar-collapsed .sidebar-tab .tab-icon{ width:34px; height:34px; }
+  body.sidebar-collapsed .sidebar-tab .tab-icon svg{ width:34px; height:34px; }
+
+  /* Brighter, clearer hover in dark and terminal themes */
+  .sidebar-tab:hover{ background:rgba(255,255,255,.09); color:var(--text); }
+  .sidebar-tab:hover .tab-icon{ filter:brightness(1.5) saturate(1.25); }
+  [data-theme="light"] .sidebar-tab:hover{ background:rgba(0,0,0,.06); }
+  [data-theme="light"] .sidebar-tab:hover .tab-icon{ filter:brightness(1.1); }
+  body.sidebar-collapsed .sidebar-tab:hover{ background:rgba(255,255,255,.13); }
+  [data-theme="light"] body.sidebar-collapsed .sidebar-tab:hover{ background:rgba(0,0,0,.07); }
 
   /* Push main content right */
   .app-body {
@@ -1331,6 +1455,7 @@ tr.tx-detail-row>td{padding:0 !important;}
 
   <!-- Logo -->
   <div class="sidebar-logo">
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" onclick="toggleSidebar()" aria-label="Collapse sidebar" title="Collapse / expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
     <a onclick="switchTab('dashboard',document.querySelector('.sidebar-tab[data-tab=dashboard]'))" style="cursor:pointer;text-decoration:none;">
       <div style="display:flex;align-items:center;gap:8px;">
         <svg class="folio-mark" viewBox="0 0 4096 4096" fill="none" aria-hidden="true"><circle cx="2048" cy="2048" r="2048" fill="#f0b429"/><defs><mask id="fnhat1" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="#0a0c10" mask="url(#fnhat1)"/></g></svg>
@@ -1373,6 +1498,11 @@ tr.tx-detail-row>td{padding:0 !important;}
   </nav>
 
   <!-- Stats -->
+  <div class="sidebar-collapsed-actions">
+    <button onclick="saveToFile()" title="Save JSON backup" aria-label="Save JSON backup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></button>
+    <button onclick="openLoadPicker('load-input-s')" title="Load a file" aria-label="Load a file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></button>
+    <button onclick="fetchAllPrices(true)" title="Fetch prices" aria-label="Fetch prices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.2-6.9"/><path d="M21 4v5h-5"/></svg></button>
+  </div>
   <div class="sidebar-stats">
     <div class="sidebar-stat">
       <div class="label">Total Invested</div>
@@ -1949,17 +2079,17 @@ tr.tx-detail-row>td{padding:0 !important;}
   <div class="section" id="sec-portfolio">
     <div style="text-align:center;margin-bottom:14px;">
       <div class="section-title" style="margin-bottom:10px;">Portfolio</div>
-      <div style="padding:0 4px;margin:0 auto 10px;">
+      <div class="ctrl-cluster" style="padding:0 4px;margin-bottom:10px;">
         <div class="input-clear-wrap" id="wrap-holdings-filter">
           <input type="text" id="holdings-filter-ticker" placeholder="🔍 Filter ticker…" oninput="updateClearBtn('holdings-filter-ticker');renderPortfolio()"
             style="width:100%;box-sizing:border-box;font-size:12px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:var(--font-mono);border-radius:20px;outline:none;">
           <button class="input-clear-btn" id="holdings-filter-ticker-clear" type="button" onclick="clearInput('holdings-filter-ticker');renderPortfolio()" aria-label="Clear ticker filter">&times;</button>
         </div>
       </div>
-      <div id="portfolio-actions" style="display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <div id="portfolio-actions" class="ctrl-cluster" style="display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;">
         <button class="mob-spark-btn active" onclick="openModal()" style="padding:8px 20px;font-size:12px;width:100%;box-sizing:border-box;text-align:center;margin-bottom:8px;">+ Add Transaction</button>
       </div>
-      <div style="display:flex;gap:8px;padding:4px 4px 4px;flex-wrap:wrap;">
+      <div class="ctrl-cluster" style="display:flex;gap:8px;padding:4px;flex-wrap:wrap;">
         <button class="mob-spark-btn" onclick="fetchAllLogos()" style="padding:8px 16px;font-size:12px;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Load Logos</button>
         <button class="mob-spark-btn" onclick="openPmModal()" style="padding:8px 16px;font-size:12px;flex:1;">⚙ Portfolio Settings</button>
       </div>
@@ -1993,12 +2123,15 @@ tr.tx-detail-row>td{padding:0 !important;}
   <div class="section" id="sec-history">
     <div style="text-align:center;margin-bottom:14px;">
       <div class="section-title" style="margin-bottom:10px;">Transaction History</div>
-      <div style="padding:0 4px;margin-bottom:8px;">
+      <div class="ctrl-cluster" style="padding:0 4px;margin-bottom:8px;">
         <div class="input-clear-wrap" id="wrap-filter-ticker">
           <input type="text" id="filter-ticker" placeholder="🔍 Filter by ticker…" oninput="updateClearBtn('filter-ticker');renderHistory()"
             style="width:100%;box-sizing:border-box;font-size:12px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);border-radius:20px;outline:none;">
           <button class="input-clear-btn" id="filter-ticker-clear" type="button" onclick="clearInput('filter-ticker');renderHistory()" aria-label="Clear ticker filter">&times;</button>
         </div>
+      </div>
+      <div class="ctrl-cluster" style="padding:0 4px;margin-bottom:10px;">
+        <button class="mob-spark-btn active" onclick="openModal()" style="padding:8px 20px;font-size:12px;width:100%;box-sizing:border-box;text-align:center;">+ Add Transaction</button>
       </div>
       <div style="display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;">
         <select id="filter-type" onchange="renderHistory()" class="mob-spark-btn" style="font-size:11px;padding:6px 12px;border-radius:20px;outline:none;cursor:pointer;">
@@ -2016,7 +2149,8 @@ tr.tx-detail-row>td{padding:0 !important;}
         <select id="filter-portfolio" onchange="renderHistory()" class="mob-spark-btn" style="font-size:11px;padding:6px 12px;border-radius:20px;outline:none;cursor:pointer;"></select>
         <select id="filter-year" onchange="renderHistory()" class="mob-spark-btn" style="font-size:11px;padding:6px 12px;border-radius:20px;outline:none;cursor:pointer;"></select>
         <button class="mob-spark-btn" id="batch-mode-btn" onclick="toggleBatchMode()" style="font-size:11px;padding:6px 14px;">&#x2611; Select</button>
-        <button class="mob-spark-btn" onclick="openFomoChecker()" style="font-size:11px;padding:6px 14px;">🔍 FOMO Checker</button>
+        <button class="mob-spark-btn tool-btn" onclick="openSwapModal()" style="font-size:11px;padding:6px 14px;">⇄ Log Swap</button>
+        <button class="mob-spark-btn tool-btn" onclick="openFomoChecker()" style="font-size:11px;padding:6px 14px;">🔍 FOMO Checker</button>
       </div>
     </div>
     <div id="batch-bar" style="display:none;position:sticky;bottom:62px;z-index:100;align-items:center;gap:8px;padding:10px 14px;background:var(--surface);border:1px solid var(--accent);border-radius:12px;margin:0 4px 8px;box-shadow:0 4px 16px rgba(0,0,0,.3);">
@@ -2059,9 +2193,12 @@ tr.tx-detail-row>td{padding:0 !important;}
         <div class="fld-group"><label class="fld-label">Amount received</label><input type="number" id="dv-amount" placeholder="0.00" step="0.01" style="width:100%;"></div>
         <div class="fld-group"><label class="fld-label">Currency</label><select id="dv-currency" style="width:100%;"><option value="AUD">AUD</option><option value="USD">USD</option></select></div>
         <div class="fld-group"><label class="fld-label">Franked %</label><input type="number" id="dv-franked" placeholder="100" step="1" min="0" max="100" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Tax withheld <span class="wp-info" data-tip="Foreign withholding tax taken out before you were paid. US shares are usually 15% under the treaty. Claimable as a foreign income tax offset." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="dv-withheld" placeholder="0.00" step="0.01" min="0" style="width:100%;"></div>
         <div class="fld-group"><label class="fld-label">Tax Rate</label><div style="display:flex;gap:6px;"><button type="button" class="mob-spark-btn dv-rate-btn active" id="dv-rate-30" onclick="setDvRate(30)" style="flex:1;font-size:11px;padding:8px 4px;">30%</button><button type="button" class="mob-spark-btn dv-rate-btn" id="dv-rate-25" onclick="setDvRate(25)" style="flex:1;font-size:11px;padding:8px 4px;">25%</button></div></div>
         <div class="fld-group"><label class="fld-label">Portfolio</label><select id="dv-portfolio" style="width:100%;"><option value="main">Main</option></select></div>
-        <div style="grid-column:1/-1;"><label class="fld-label">Note (optional)</label><input type="text" id="dv-note" placeholder="e.g. Q3 distribution, DRP" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Reinvested (DRP) <span class="wp-info" data-tip="If this dividend bought more shares, enter the units and price. A matching buy is created so the new parcel gets its own acquisition date for CGT." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="dv-drp-units" placeholder="units" step="any" min="0" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">DRP price per unit</label><input type="number" id="dv-drp-price" placeholder="0.00" step="any" min="0" style="width:100%;"></div>
+        <div style="grid-column:1/-1;"><label class="fld-label">Note (optional)</label><input type="text" id="dv-note" placeholder="e.g. Q3 distribution" style="width:100%;"></div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap;">
         <button class="btn" id="dv-add-btn" onclick="addDividend()">+ Add Dividend</button>
@@ -2076,7 +2213,7 @@ tr.tx-detail-row>td{padding:0 !important;}
     </div>
     <div id="dividend-summary" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;"></div>
     <div class="table-wrap"><table class="data-table">
-      <thead><tr><th>Pay date</th><th>Ticker</th><th>Amount</th><th>Franked %</th><th>Franking credit</th><th>Gross</th><th>Note</th><th></th></tr></thead>
+      <thead><tr><th>Pay date</th><th>Ticker</th><th>Amount</th><th>Franked %</th><th>Franking credit</th><th>Tax withheld</th><th>Gross</th><th>Note</th><th></th></tr></thead>
       <tbody id="dividend-body"></tbody>
     </table></div>
   </div>
@@ -2204,6 +2341,44 @@ tr.tx-detail-row>td{padding:0 !important;}
     </div>
     <div id="tax-franking-note" style="font-size:11px;color:var(--muted);margin-bottom:14px;"></div>
     <div id="tax-summary-cards" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;"></div>
+    <div class="chart-card" style="margin-bottom:16px;">
+      <div style="text-align:center;margin-bottom:12px;">
+        <div class="chart-title">Share Splits &amp; Consolidations</div>
+        <div class="chart-subtitle">Rescales the parcels you held on that date. Total cost base and acquisition dates stay the same.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;align-items:end;">
+        <div class="fld-group"><label class="fld-label">Ticker</label><input type="text" id="split-ticker" placeholder="e.g. CBA" style="width:100%;text-transform:uppercase;"></div>
+        <div class="fld-group"><label class="fld-label">Effective date</label><input type="date" id="split-date" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">New units <span class="wp-info" data-tip="A 2-for-1 split is 2 new for 1 old. A 1-for-10 consolidation is 1 new for 10 old." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="split-new" placeholder="2" step="any" min="0" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">for every old</label><input type="number" id="split-old" placeholder="1" step="any" min="0" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Applies to</label><select id="split-portfolio" style="width:100%;"></select></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap;">
+        <button class="btn" onclick="addSplitAdj()">+ Add Split</button>
+        <span style="font-size:11px;color:var(--muted);">Flows through to holdings, CGT parcels and the tax summary.</span>
+      </div>
+      <div id="split-list" style="margin-top:14px;"></div>
+    </div>
+    <div class="chart-card" style="margin-bottom:16px;">
+      <div style="text-align:center;margin-bottom:12px;">
+        <div class="chart-title">Cost Base Adjustments</div>
+        <div class="chart-subtitle">AMIT statements and returns of capital both rewrite the cost base of parcels you held at the time.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;align-items:end;">
+        <div class="fld-group"><label class="fld-label">Fund ticker</label><input type="text" id="amit-ticker" placeholder="e.g. VAS" style="width:100%;text-transform:uppercase;"></div>
+        <div class="fld-group"><label class="fld-label">Type</label><select id="amit-kind" onchange="_amitKindChanged()" style="width:100%;"><option value="amit">AMIT statement</option><option value="roc">Return of capital</option></select></div>
+        <div class="fld-group" id="amit-fy-wrap"><label class="fld-label">Financial year <span class="wp-info" data-tip="The financial year the statement covers. Enter 2025 for the year ending 30 June 2025." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="amit-fy" placeholder="2025" min="1990" max="2100" step="1" style="width:100%;"></div>
+        <div class="fld-group" id="amit-date-wrap" style="display:none;"><label class="fld-label">Payment date</label><input type="date" id="amit-date" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Cost base increase $ <span class="wp-info" data-tip="From the AMMA statement. Raises your cost base, which reduces a future capital gain." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="amit-inc" placeholder="0.00" step="0.01" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Cost base decrease $ <span class="wp-info" data-tip="Usually tax-deferred amounts. Lowers your cost base, which increases a future capital gain." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="amit-dec" placeholder="0.00" step="0.01" style="width:100%;"></div>
+        <div class="fld-group"><label class="fld-label">Applies to</label><select id="amit-portfolio" style="width:100%;"></select></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap;">
+        <button class="btn" onclick="addAmitAdj()">+ Add Adjustment</button>
+        <span style="font-size:11px;color:var(--muted);">Spread per unit across the parcels held at 30 June of that year, then flows into CGT and the tax summary.</span>
+      </div>
+      <div id="amit-list" style="margin-top:14px;"></div>
+    </div>
     <div class="table-scroll" id="tax-scroll">
       <table id="tax-table">
         <thead>
@@ -2558,6 +2733,15 @@ tr.tx-detail-row>td{padding:0 !important;}
         </div>
       </div>
       <div class="dash-card" style="padding:20px;">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px;">Tips &amp; Hints</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Short hints appear on each page explaining what it does and what you have not tried yet. Each one shows once, then the set cycles again.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <button class="mob-spark-btn" id="tips-on-btn" onclick="setTipsEnabled(true)" style="font-size:11px;padding:6px 16px;">On</button>
+          <button class="mob-spark-btn" id="tips-off-btn" onclick="setTipsEnabled(false)" style="font-size:11px;padding:6px 16px;">Off</button>
+          <button class="btn-ghost btn-sm" onclick="resetTipsSeen()" style="font-size:11px;">Show all again</button>
+        </div>
+      </div>
+      <div class="dash-card" style="padding:20px;">
         <div style="font-weight:700;font-size:13px;margin-bottom:6px;">Exchange Rate <span style="font-weight:400;color:var(--muted);">(AUD/USD)</span></div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Used for Combined views, Wealth Plan and the Currency Exposure risk check.</div>
         <div id="fx-rate-status" style="font-size:12px;font-family:var(--font-mono);margin-bottom:12px;"></div>
@@ -2631,7 +2815,7 @@ tr.tx-detail-row>td{padding:0 !important;}
           <a href="https://folionaire.gumroad.com/l/folionaire" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:none;">Folionaire v1.0</a> - Personal portfolio tracker<br>
           <br>
           <strong style="color:var(--text);">Not financial or tax advice</strong><br>
-          Folionaire is a personal tracking and information tool only - it is not financial, investment, or tax advice. The CGT and tax figures are estimates based on general Australian rules and may not reflect your circumstances. What is applied: FIFO parcel matching, the 12-month discount test (acquisition day excluded), brokerage included in the cost base, capital losses offset against gains before the 50% discount, and prior-year losses you enter. What is not: broker-specific parcel selection, foreign-currency conversion at transaction-date rates (USD sales are shown separately and still need converting), the 45-day franking holding rule, and anything specific to trusts, SMSFs or businesses. Always verify with a registered tax agent before lodging a return.<br>
+          Folionaire is a personal tracking and information tool only - it is not financial, investment, or tax advice. The CGT and tax figures are estimates based on general Australian rules and may not reflect your circumstances. <strong>Before you rely on any of these figures, have a registered tax agent review one full financial year of output against your own records.</strong> What is applied: FIFO parcel matching, the 12-month discount test (acquisition day excluded), brokerage in the cost base, capital losses offset before the 50% discount, prior-year losses, AMIT cost base adjustments, returns of capital, and share splits. What is not: broker-specific parcel selection, foreign-currency conversion at transaction-date rates (USD sales are shown separately and still need converting), enforcement of the 45-day franking rule, mergers, demergers and takeovers, and anything specific to trusts, SMSFs or businesses.<br>
           <br>
           <strong style="color:var(--text);">Your data stays with you</strong><br>
           Everything is saved locally in your browser - your holdings are never uploaded to a server or cloud account, and no account is required. Export to JSON any time to back up your data or move it to another device.<br>
@@ -2856,7 +3040,7 @@ tr.tx-detail-row>td{padding:0 !important;}
 const _raw = localStorage.getItem('folio_demo_state') ||
              localStorage.getItem('folioview_demo_state') ||
              localStorage.getItem('portfolio_demo_state');
-let state = JSON.parse(_raw || 'null') || { transactions: [], prices: {}, priceMeta: {}, portfolios: [], dividends: [], budget: { entries: [], categoryBudgets: {} } };
+let state = JSON.parse(_raw || 'null') || { transactions: [], prices: {}, priceMeta: {}, portfolios: [], dividends: [], budget: { entries: [], categoryBudgets: {} }, amitAdjustments: [], splitAdjustments: [] };
 // Migrate: if loaded from old key, immediately re-save under correct key
 if (_raw && !localStorage.getItem('folio_demo_state')) {
   localStorage.setItem('folio_demo_state', _raw);
@@ -3054,7 +3238,18 @@ const _privacyMaskSelector = [
   // Tax summary cards and CGT
   '#tax-summary-cards', '#cgt-summary', '.dash-card-value', '.dash-card',
   // Portfolio cards on mobile
-  '.portfolio-card-value'
+  '.portfolio-card-value',
+  // Dividends
+  '#dividend-body', '#dividend-summary',
+  // Trading Insights: last trades, pattern analysis, streak tooltip
+  '#last-five-trades', '.pattern-row', '#trade-dot-tip', '#trade-analytics-kpis',
+  '#streak-analysis',
+  // Pie card totals
+  '#pie-all-subtitle', '#pie-stock-subtitle', '#pie-crypto-subtitle',
+  // Exit Strategy
+  '#es1-result', '#es2-summary', '#es3-result', '.es-result-card', '.es-stat-row',
+  // Budget
+  '#budget-body', '#budget-kpis', '#budget-categories'
 ].join(',');
 
 function _privacyAcceptNode(node) {
@@ -3384,6 +3579,7 @@ function loadFromFile(e) {
         }
         // Apply saved UI settings from loaded state
         if (state.ui.theme) { _themeMode = state.ui.theme; applyTheme(_themeMode); }
+        try { document.body.classList.toggle('sidebar-collapsed', !!state.ui.sidebarCollapsed); } catch(_) {}
         if (state.ui.bnavMode) { _bnavMode = state.ui.bnavMode; setBnavMode(_bnavMode); }
         if (state.ui.autoPriceInterval) { _autoPriceInterval = state.ui.autoPriceInterval; setAutoPriceRefresh(_autoPriceInterval); }
         if (state.ui.autoFxInterval) { _autoFxInterval = state.ui.autoFxInterval; setAutoFxRefresh(_autoFxInterval); }
@@ -3530,9 +3726,10 @@ function switchTab(tab, el) {
   if (tab==='lifecheck') renderLifeCheck();
   if (tab==='wealth') renderWealthPlan();
   if (tab==='budget') renderBudget();
+  try { setTimeout(()=>showTipsForPage(tab), 400); } catch(_) {}
   if (tab==='terminal') renderTerminal(true);
   if (tab==='settings') renderSettings();
-  if (tab==='settings') { _renderFxSettingsStatus(); document.getElementById('frank-rate-'+(state.frankingRate===25?25:30))?.classList.add('active'); const _fxSel=document.getElementById('auto-fx-sel'); if(_fxSel && state.ui && state.ui.autoFxInterval) _fxSel.value=state.ui.autoFxInterval; }
+  if (tab==='settings') { try{_syncTipsToggle();}catch(_){} _renderFxSettingsStatus(); document.getElementById('frank-rate-'+(state.frankingRate===25?25:30))?.classList.add('active'); const _fxSel=document.getElementById('auto-fx-sel'); if(_fxSel && state.ui && state.ui.autoFxInterval) _fxSel.value=state.ui.autoFxInterval; }
   _activeSection = tab; // track for _updateMobStats
   setTimeout(_updateMobStats, 50); // re-sync stats bar after tab switch
 }
@@ -3547,7 +3744,26 @@ function computeHoldings() {
     // Same date: process buys before sells
     return (a.type==='buy'?0:1)-(b.type==='buy'?0:1);
   });
-  for (const tx of sorted) {
+  const _splitEvts = (typeof _splitEvents === 'function') ? _splitEvents() : [];
+  const _hTimeline = _splitEvts.length
+    ? [...sorted.map(t=>({_split:false,tx:t,date:t.date})), ..._splitEvts]
+        .sort((a,b)=>{ const dd=new Date(a.date)-new Date(b.date); if(dd!==0) return dd;
+          return (a._split?1:(a.tx.type==='buy'?0:2)) - (b._split?1:(b.tx.type==='buy'?0:2)); })
+    : sorted.map(t=>({_split:false,tx:t,date:t.date}));
+  for (const _hev of _hTimeline) {
+    if (_hev._split) {
+      Object.keys(h).forEach(k=>{
+        const p=k.split('|');
+        if(p[0]!==_hev.ticker) return;
+        if(_hev.portfolio && _hev.portfolio!=='all' && p[1]!==_hev.portfolio) return;
+        const hh=h[k];
+        if(hh.units<=0) return;
+        hh.units = hh.units * _hev.factor;          // same total cost spread over more units
+        hh.avgCost = hh.units>0 ? hh.totalSpent/hh.units : 0;
+      });
+      continue;
+    }
+    const tx = _hev.tx;
     const port = tx.portfolio || 'main';
     const key = tx.ticker.toUpperCase() + '|' + port;
     if (!h[key]) h[key] = {
@@ -4738,6 +4954,203 @@ function _updateSaveBadge(){
 }
 function _trackEdit(){if(_initPhase)return;_unsavedEdits++;_updateSaveBadge();}
 function notify(msg){const el=document.createElement('div');el.className='notif';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2500);}
+
+// Sticky notice: stays until dismissed, or until the condition clears
+// Clicking anywhere in a date field opens the native calendar, not just the icon
+document.addEventListener('click', function(e){
+  const t = e.target;
+  if (t && t.tagName === 'INPUT' && t.type === 'date' && typeof t.showPicker === 'function') {
+    try { t.showPicker(); } catch(_) {}
+  }
+}, true);
+
+// ── Tips & tricks: per-page hints, contextual onboarding, cycles, mutable ──
+const TIPS = {
+  dashboard: [
+    { id:'dash-first-tx', cond:()=>!(state.transactions||[]).length,
+      text:'Start by adding a transaction. Everything on this dashboard is built from your trades, so one buy is enough to bring it to life.' },
+    { id:'dash-hero-range', text:'The value chart has ranges from 1D through to ALL, and the AUD/USD/Combined toggle switches which currency you are looking at.' },
+    { id:'dash-privacy', text:'The eye icon hides every dollar figure and blurs the charts, handy if you are screen sharing or on a train.' },
+    { id:'dash-sort', text:'Investment Overview can sort by Value or by Movement, and on desktop every column header is sortable.' },
+  ],
+  portfolio: [
+    { id:'port-first-tx', cond:()=>!(state.transactions||[]).length,
+      text:'No holdings yet. Add a transaction, or use Load to import a CSV from your broker or exchange.' },
+    { id:'port-logos', text:'Load Logos fetches a logo for each ticker. You can also click a logo to set your own image.' },
+    { id:'port-multi', text:'Portfolio Settings lets you create separate portfolios, for example kids or super, that stay separate but roll up in the All view.' },
+  ],
+  history: [
+    { id:'hist-swap', text:'Swapped one coin for another? Use Log Swap. It records the disposal and the purchase together, which is what the ATO expects.' },
+    { id:'hist-fees', text:'Enter brokerage in the Fees field. It feeds into your CGT cost base, so leaving it out overstates your gains.' },
+    { id:'hist-batch', text:'Select lets you tick several transactions and delete them in one go.' },
+    { id:'hist-import', text:'Load imports CSVs from Sharesight, Navexa and the major exchanges, detecting market, currency and brokerage automatically.' },
+  ],
+  dividends: [
+    { id:'div-first', cond:()=>!(state.dividends||[]).length,
+      text:'Record dividends straight off your statements. Franking credits are calculated for you, and it takes about a minute per statement.' },
+    { id:'div-drp', text:'If a dividend was reinvested, fill in the DRP units and price. A matching buy is created so the new shares get their own 12-month CGT clock.' },
+    { id:'div-withheld', text:'For US shares, enter the tax withheld. It is generally claimable as a foreign income tax offset.' },
+    { id:'div-rate', text:'Most companies frank at 30%, but base rate entities use 25%. You can set the rate per entry.' },
+  ],
+  closed: [
+    { id:'closed-chart', text:'The realised P&L chart sits between your summary and the table, so you can see how closed trades have added up over time.' },
+  ],
+  tradeinsights: [
+    { id:'ti-tags', text:'Tag trades with a reason and an emotion when you enter them. Pattern Analysis then shows which setups actually make you money.' },
+    { id:'ti-streak', text:'Tap any dot in Streak Analysis to see that trade\u2019s ticker and result.' },
+  ],
+  pulse: [
+    { id:'pulse-risk', text:'The Risk Scan scores seven dimensions and updates itself as your portfolio changes. Expand any one to see the specific findings.' },
+    { id:'pulse-combined', text:'The allocation pie has a Combined mode that converts USD holdings so you can see true weightings across currencies.' },
+  ],
+  exit: [
+    { id:'exit-none', cond:()=>!Object.values(computeHoldings()||{}).some(h=>h.units>0.0001),
+      text:'Add some holdings first, then this page can work out exactly what to sell and at what price.' },
+    { id:'exit-recoup', text:'Recoup Your Bag answers one question: at what price, and how many units, do I sell to get my original money back and hold the rest for free?' },
+    { id:'exit-ladder', text:'Laddered Exit spreads your selling across several targets instead of trying to pick one perfect price.' },
+    { id:'exit-trim', text:'Trim to Target works out how much to sell to bring an oversized position back to the weighting you want.' },
+  ],
+  watchlist: [
+    { id:'wl-first', cond:()=>!(state.watchlist||[]).length,
+      text:'Add a ticker with a target price. Alerts trigger when prices are fetched, so you do not have to watch the market.' },
+    { id:'wl-lists', text:'You can keep several named lists, for example Crypto Targets separate from long-term ideas.' },
+  ],
+  calendar: [
+    { id:'cal-events', text:'Note ex-dividend dates, earnings and reminders here. They are saved with your JSON, not a third-party calendar.' },
+  ],
+  cgt: [
+    { id:'cgt-eligible', text:'This page flags which parcels have passed the 12-month mark, which is often worth knowing before you sell.' },
+    { id:'cgt-parcels', text:'Parcels are matched FIFO, and brokerage is included in the cost base.' },
+  ],
+  tax: [
+    { id:'tax-amit', cond:()=>!(state.amitAdjustments||[]).length,
+      text:'Hold ETFs? Your annual AMMA statement changes your cost base. Enter those two figures under Cost Base Adjustments or your CGT will be wrong.' },
+    { id:'tax-losses', text:'Enter prior-year capital losses and they are applied against this year\u2019s gains before the 50% discount, which is the ATO order.' },
+    { id:'tax-splits', text:'Had a share split or consolidation? Record it so your unit counts and per-unit cost stay correct.' },
+    { id:'tax-agent', text:'These figures are an estimate. Have a registered tax agent review a full financial year before you rely on them.' },
+  ],
+  terminal: [
+    { id:'term-refresh', text:'Each section refreshes independently, so you can pull just the data you need instead of everything at once.' },
+    { id:'term-news', text:'News works on free RSS out of the box. You can add your own free API key in Settings for richer per-ticker news.' },
+  ],
+  wealth: [
+    { id:'wealth-first', cond:()=>!(state.wealthPlan && state.wealthPlan.spend),
+      text:'Fill in your annual spending and contributions to see your FI number and the year you reach it.' },
+    { id:'wealth-bridge', text:'If you reach FI before 60, the bridge card checks whether your outside-super pot covers the years until super unlocks.' },
+    { id:'wealth-real', text:'Returns are entered after inflation, so every figure on this page is in today\u2019s dollars.' },
+  ],
+  budget: [
+    { id:'budget-first', cond:()=>!((state.budget&&state.budget.entries)||[]).length,
+      text:'Log a few income and expense entries to see your savings rate and where the money actually goes.' },
+    { id:'budget-invested', text:'The Invested figure comes from your real buy transactions, so you never have to type it twice.' },
+    { id:'budget-targets', text:'Tap any spending category to set a monthly budget target and track it with a progress bar.' },
+  ],
+  lifecheck: [
+    { id:'life-score', text:'Score each area honestly. The lowest one becomes the focus, and if everything is 4 or 5 you get a different prompt.' },
+  ],
+  wallet: [
+    { id:'wallet-safe', text:'Paste a public address only. Nothing connects to your wallet and no keys are ever involved.' },
+  ],
+  settings: [
+    { id:'set-proxy', cond:()=>!(state.customProxy||''),
+      text:'Prices slow or blocked, especially on a phone? Set up a free Cloudflare Worker under Custom Price Proxy. Takes about five minutes.' },
+    { id:'set-theme', text:'There are four themes including Terminal, and the header button cycles through them.' },
+    { id:'set-backup', text:'Save writes a JSON file containing everything. That file is your backup and it loads on any device.' },
+  ],
+};
+let _tipsQueue = [], _tipsIdx = 0, _tipsPage = null;
+function _tipsSeen(){ state.ui = state.ui || {}; state.ui.tipsSeen = state.ui.tipsSeen || {}; return state.ui.tipsSeen; }
+function _tipsEnabled(){ return !(state.ui && state.ui.tipsEnabled === false); }
+function showTipsForPage(tab){
+  closeTips(true);
+  if (!_tipsEnabled()) return;
+  const all = TIPS[tab]; if (!all || !all.length) return;
+  const seen = _tipsSeen();
+  const eligible = all.filter(t => { try { return !t.cond || t.cond(); } catch(_) { return false; } });
+  if (!eligible.length) return;
+  let queue = eligible.filter(t => !seen[t.id]);
+  if (!queue.length) { eligible.forEach(t => { delete seen[t.id]; }); queue = eligible; } // all seen, cycle again
+  _tipsQueue = queue; _tipsIdx = 0; _tipsPage = tab;
+  _renderTip();
+}
+function _renderTip(){
+  const t = _tipsQueue[_tipsIdx]; if (!t) return;
+  let p = document.getElementById('tips-panel');
+  if (!p) {
+    p = document.createElement('div'); p.id = 'tips-panel';
+    p.innerHTML = '<button class="tips-close" onclick="closeTips()" aria-label="Dismiss tip">\u2715</button>'
+      + '<div class="tips-head">Tip</div><div class="tips-msg"></div>'
+      + '<div class="tips-foot"><span class="tips-count"></span>'
+      + '<button class="tips-mute" onclick="muteTips()">Turn tips off</button>'
+      + '<span class="tips-nav"><button onclick="prevTip()" aria-label="Previous tip">\u2039</button>'
+      + '<button onclick="nextTip()" aria-label="Next tip">\u203A</button></span></div>';
+    document.body.appendChild(p);
+  }
+  p.querySelector('.tips-msg').textContent = t.text;
+  p.querySelector('.tips-count').textContent = (_tipsIdx+1) + '/' + _tipsQueue.length;
+  const btns = p.querySelectorAll('.tips-nav button');
+  if (btns[0]) btns[0].disabled = _tipsIdx === 0;
+  if (btns[1]) btns[1].disabled = _tipsIdx >= _tipsQueue.length - 1;
+  _tipsSeen()[t.id] = 1;
+  try { save(); } catch(_) {}
+}
+function nextTip(){ if (_tipsIdx < _tipsQueue.length-1) { _tipsIdx++; _renderTip(); } }
+function prevTip(){ if (_tipsIdx > 0) { _tipsIdx--; _renderTip(); } }
+function closeTips(silent){
+  const p = document.getElementById('tips-panel');
+  if (p) { try { p.remove(); } catch(_) {} }
+  if (!silent) { _tipsQueue = []; _tipsIdx = 0; }
+}
+function muteTips(){
+  state.ui = state.ui || {}; state.ui.tipsEnabled = false;
+  try { save(); } catch(_) {}
+  closeTips();
+  try { notify('Tips turned off. You can switch them back on in Settings.'); } catch(_) {}
+  try { _syncTipsToggle(); } catch(_) {}
+}
+function setTipsEnabled(on){
+  state.ui = state.ui || {}; state.ui.tipsEnabled = !!on;
+  if (on) state.ui.tipsSeen = {}; // fresh start when re-enabled
+  try { save(); } catch(_) {}
+  _syncTipsToggle();
+  if (on) { try { notify('Tips turned on'); } catch(_) {} } else closeTips();
+}
+function _syncTipsToggle(){
+  const on = _tipsEnabled();
+  const y = document.getElementById('tips-on-btn'), n = document.getElementById('tips-off-btn');
+  if (y) y.classList.toggle('active', on);
+  if (n) n.classList.toggle('active', !on);
+}
+function resetTipsSeen(){
+  state.ui = state.ui || {}; state.ui.tipsSeen = {};
+  try { save(); } catch(_) {}
+  try { notify('Tips reset, you will see them all again'); } catch(_) {}
+}
+
+function notifySticky(msg, id){
+  id = id || 'default';
+  const domId = 'notif-sticky-'+id;
+  const existing = document.getElementById(domId);
+  if (existing) { existing.querySelector('.notif-sticky-msg').textContent = msg; return; }
+  const el = document.createElement('div');
+  el.className = 'notif-sticky';
+  el.id = domId;
+  const span = document.createElement('span');
+  span.className = 'notif-sticky-msg';
+  span.textContent = msg;
+  const btn = document.createElement('button');
+  btn.className = 'notif-sticky-close';
+  btn.type = 'button';
+  btn.setAttribute('aria-label','Dismiss');
+  btn.textContent = '\u2715';
+  btn.onclick = () => { try{ el.remove(); }catch(_){} };
+  el.appendChild(span); el.appendChild(btn);
+  document.body.appendChild(el);
+}
+function clearSticky(id){
+  const el = document.getElementById('notif-sticky-'+(id||'default'));
+  if (el) { try{ el.remove(); }catch(_){} }
+}
 function fmtPriceFull(n){
   if(n===null||n===undefined||!isFinite(n)) return '—';
   const abs=Math.abs(n);
@@ -6017,7 +6430,7 @@ async function _fetchAllOriginsJson(url, timeoutMs=14000) {
   // fail fast instead of spinning forever, and tell the user what to do.
   if (window._fvFetchDeadline && Date.now() > window._fvFetchDeadline) {
     if (!window._fvBudgetNotified) { window._fvBudgetNotified = true;
-      try { notify('⚠ Price sources look blocked or very slow here. Add a Custom Proxy in Settings, or serve the file from a local/hosted server.'); } catch(_){}
+      try { notifySticky('⚠ Price sources look blocked or very slow here. Add a Custom Proxy in Settings, or serve the file from a local/hosted server.', 'prices'); } catch(_){}
     }
     throw new Error('Blocked in this environment - set a Custom Proxy in Settings, or serve the file locally.');
   }
@@ -7740,7 +8153,8 @@ function showTradeDotTip(el){
   if(tip) tip.remove();
   tip=document.createElement('div');
   tip.id='trade-dot-tip'; tip._for=el;
-  tip.textContent=el.getAttribute('data-tip')||'';
+  const _tipRaw = el.getAttribute('data-tip')||'';
+  tip.textContent = (state.ui && state.ui.privacy) ? _tipRaw.replace(/\d/g,'*') : _tipRaw;
   const PAD = 10;
   // clientWidth/Height exclude the scrollbar, unlike window.innerWidth
   const vw = document.documentElement.clientWidth || window.innerWidth;
@@ -9315,6 +9729,7 @@ async function fetchAllPrices(force = false) {
   setApiStatus('yahoo', 'loading', 'fetching...');
   setFetchButtonsLoading(true);
   window._fvFetchDeadline = Date.now() + 60000; window._fvBudgetNotified = false;
+  try { clearSticky('prices'); } catch(_) {}
   try { await _fetchFxRate(true); } catch(_) {}
   try {
   let fetched = 0, failed = 0;
@@ -9627,6 +10042,21 @@ const CRYPTO_CAT_MAP = {
 // â”€â”€ THEME â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let _themeMode = (state.ui&&state.ui.theme) || localStorage.getItem('folio_theme')||'auto';
 
+// ── Desktop sidebar collapse ──
+function toggleSidebar(){
+  const on = !document.body.classList.contains('sidebar-collapsed');
+  document.body.classList.toggle('sidebar-collapsed', on);
+  state.ui = state.ui || {}; state.ui.sidebarCollapsed = on;
+  try { save(); } catch(_) {}
+  const btn = document.getElementById('sidebar-collapse-btn');
+  if (btn) btn.setAttribute('aria-label', on ? 'Expand sidebar' : 'Collapse sidebar');
+  // charts must re-measure once the content area has finished resizing
+  setTimeout(()=>{ try{ renderDashboard(); }catch(_){} try{ renderPortfolio(); }catch(_){} }, 220);
+}
+function _restoreSidebarState(){
+  try { if (state.ui && state.ui.sidebarCollapsed) document.body.classList.add('sidebar-collapsed'); } catch(_) {}
+}
+
 function applyTheme(mode) {
   if (mode === 'terminal') {
     document.documentElement.setAttribute('data-theme', 'terminal');
@@ -9712,6 +10142,7 @@ try {
 
 // Apply on load (before initApp so no flash)
 try { applyTheme(_themeMode); } catch(_) {}
+try { _restoreSidebarState(); } catch(_) {}
 try { setTimeout(()=>{updateMobThemeBtn();updateDesktopThemeBtn();}, 0); } catch(_) {}
 setTimeout(()=>{ if(typeof setBnavMode==='function') setBnavMode(_bnavMode); },150);
 setTimeout(()=>{
@@ -10357,7 +10788,10 @@ function renderCGT() {
   });
   // Track running units per ticker to identify still-held lots
   const running = {};
-  for (const tx of allSorted) {
+  for (const _ev of _amitTimeline(allSorted)) {
+    if (_ev._split) { _splitApply(running, _ev, r => r); continue; }
+    if (_ev._amit) { _amitApply(running, _ev, r => r); continue; }
+    const tx = _ev.tx;
     const key = tx.ticker.toUpperCase() + '|' + (tx.portfolio||'main');
     if (!running[key]) running[key] = [];
     if (tx.type === 'buy') {
@@ -10390,9 +10824,10 @@ function renderCGT() {
       eligibleDate.setDate(eligibleDate.getDate()+1);
       const isEligible = now >= eligibleDate;
       const cp = state.prices[lot.ticker];
-      const pnl = cp ? (cp - lot.price) * lot.remaining : null;
-      const pct = lot.price > 0 && cp ? ((cp - lot.price) / lot.price) * 100 : null;
-      lots.push({ ...lot, heldDays, eligibleDate, isEligible, cp, pnl, pct,
+      const adjPrice = lot.price + (lot.amitPerUnit || 0); // AMIT-adjusted cost base per unit
+      const pnl = cp ? (cp - adjPrice) * lot.remaining : null;
+      const pct = adjPrice > 0 && cp ? ((cp - adjPrice) / adjPrice) * 100 : null;
+      lots.push({ ...lot, adjPrice, amitPerUnit: lot.amitPerUnit || 0, heldDays, eligibleDate, isEligible, cp, pnl, pct,
         currency: lot.currency || (lot.assetType==='crypto'?'USD':'AUD') });
     }
   }
@@ -11377,12 +11812,33 @@ function exportLedger(){
   });
   (state.dividends||[]).slice().sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(d=>{
     const fc=d.currency==='AUD'?_frankingCredit(d.amount,d.franked,d.rate):0;
+    const wh=Math.max(0, parseFloat(d.withheld)||0);
     lines.push(`${d.date} * Dividend ${d.ticker}${d.note?('  ; '+d.note):''}`);
     if(fc>0) lines.push(`    Assets:Franking Credit    ${fc.toFixed(2)} AUD  ; franked ${d.franked}% at ${(d.rate===25?25:30)}% company tax rate`);
+    if(wh>0) lines.push(`    Expenses:Tax:Foreign Withholding    ${wh.toFixed(2)} ${d.currency}  ; claimable as a foreign income tax offset`);
     lines.push(`    Assets:Cash:${d.currency}    ${d.amount.toFixed(2)} ${d.currency}`);
-    lines.push(`    Income:Dividends:${d.ticker}    ${(-(d.amount+fc)).toFixed(2)} ${d.currency}`);
+    lines.push(`    Income:Dividends:${d.ticker}    ${(-(d.amount+fc+wh)).toFixed(2)} ${d.currency}`);
     lines.push('');
   });
+
+  // Cost base adjustments: AMIT statements and returns of capital
+  (state.amitAdjustments||[]).slice().sort((a,b)=>String(a.date||_amitEffectiveDate(a.fy)).localeCompare(String(b.date||_amitEffectiveDate(b.fy)))).forEach(a=>{
+    const net=(parseFloat(a.increase)||0)-(parseFloat(a.decrease)||0);
+    if(!net) return;
+    const when=a.date||_amitEffectiveDate(a.fy);
+    const what=a.kind==='roc' ? 'Return of capital' : ('AMIT cost base adjustment FY'+a.fy);
+    lines.push(`${when} * ${what} ${a.ticker}`);
+    lines.push(`    Assets:Investments:${a.ticker}    ${net.toFixed(2)} AUD  ; cost base ${net>0?'increase':'decrease'}`);
+    lines.push(`    Equity:CostBaseAdjustments    ${(-net).toFixed(2)} AUD`);
+    lines.push('');
+  });
+  // Splits and consolidations do not change value, so they are recorded as notes
+  const _spl=(state.splitAdjustments||[]).slice().sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  if(_spl.length){
+    lines.push('; Share splits and consolidations (units rescaled, total cost base unchanged):');
+    _spl.forEach(s=>{ lines.push(`;   ${s.date}  ${s.ticker}  ${s.newUnits}-for-${s.oldUnits} ${(_splitFactor(s)>1?'split':'consolidation')}`); });
+    lines.push('');
+  }
   const blob=new Blob([lines.join('\n')],{type:'text/plain'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='folionaire.journal';
   document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},100);
@@ -11410,7 +11866,7 @@ function editDividend(id){
 }
 function cancelEditDividend(){
   editingDivId=null;
-  ['dv-ticker','dv-amount','dv-franked','dv-note'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';});
+  ['dv-ticker','dv-amount','dv-franked','dv-note','dv-withheld','dv-drp-units','dv-drp-price'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';});
   const btn=document.getElementById('dv-add-btn'); if(btn) btn.textContent='+ Add Dividend';
   const cancel=document.getElementById('dv-cancel-btn'); if(cancel) cancel.style.display='none';
 }
@@ -11433,14 +11889,27 @@ function addDividend(){
     const btn=document.getElementById('dv-add-btn'); if(btn) btn.textContent='+ Add Dividend';
     const cancel=document.getElementById('dv-cancel-btn'); if(cancel) cancel.style.display='none';
     _trackEdit(); save();
-    ['dv-ticker','dv-amount','dv-franked','dv-note'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
+    ['dv-ticker','dv-amount','dv-franked','dv-note','dv-withheld','dv-drp-units','dv-drp-price'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
     renderDividends(); notify('Dividend updated \u00b7 '+ticker); return;
   }
-  _divList().push({ id:Date.now()+Math.random(), ticker, date, amount, currency, franked:frankedPct, rate:_dvRate, portfolio, note });
+  const withheld = Math.max(0, parseFloat(document.getElementById('dv-withheld')?.value) || 0);
+  const drpUnits = Math.max(0, parseFloat(document.getElementById('dv-drp-units')?.value) || 0);
+  const drpPrice = Math.max(0, parseFloat(document.getElementById('dv-drp-price')?.value) || 0);
+  _divList().push({ id:Date.now()+Math.random(), ticker, date, amount, currency, franked:frankedPct, rate:_dvRate, withheld, portfolio, note, drpUnits: (drpUnits&&drpPrice)?drpUnits:0 });
+  // DRP: the reinvestment is a purchase, so it needs its own parcel and acquisition date
+  if (drpUnits > 0 && drpPrice > 0) {
+    state.transactions.push({
+      id: Date.now()+Math.random()+1,
+      type:'buy', ticker, units: drpUnits, price: drpPrice,
+      total: Math.round(drpUnits*drpPrice*10000)/10000,
+      date, assetType: (currency==='AUD' ? 'asx' : 'nasdaq'), currency,
+      portfolio, fees: 0, notes: 'DRP reinvestment'
+    });
+  }
   _trackEdit();
   _pushNotification('Dividend \u00b7 '+ticker+' \u00b7 '+currency+' $'+fmt(amount), ticker);
   save();
-  ['dv-ticker','dv-amount','dv-franked','dv-note'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
+  ['dv-ticker','dv-amount','dv-franked','dv-note','dv-withheld','dv-drp-units','dv-drp-price'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
   setDvRate(30);
   renderDividends();
   notify('Dividend added \u00b7 '+ticker);
@@ -11460,17 +11929,18 @@ function renderDividends(){
     if([...psel.options].some(o=>o.value===cur)) psel.value=cur; }
   const list=[..._divList()].sort((a,b)=>new Date(b.date)-new Date(a.date));
   if(!list.length){
-    body.innerHTML='<tr><td colspan="8"><div class="empty-state"><div class="icon">💰</div><p>No dividends recorded yet. Add them from your dividend statements above.</p></div></td></tr>';
+    body.innerHTML='<tr><td colspan="9"><div class="empty-state"><div class="icon">💰</div><p>No dividends recorded yet. Add them from your dividend statements above.</p></div></td></tr>';
   } else {
     body.innerHTML=list.map(d=>{
       const fc=d.currency==='AUD'?_frankingCredit(d.amount,d.franked,d.rate):0;
-      const gross=d.amount+fc;
+      const gross=d.amount+fc+(parseFloat(d.withheld)||0);
       return `<tr class="dv-row">
         <td data-label="Pay date">${_dvSelectMode?`<input type="checkbox" class="dv-check" onchange="_dvTick('${d.id}',this)"${_dvSelected.has(String(d.id))?' checked':''}> `:''}${d.date}</td>
         <td data-label="Ticker"><strong>${_escapeHtml(d.ticker)}</strong></td>
         <td data-label="Amount" style="font-weight:800;">${d.currency} $${fmt(d.amount)}</td>
         <td data-label="Franked">${d.currency==='AUD'?((d.franked||0)+'%'):'\u2014'}</td>
         <td data-label="Franking credit">${fc>0?('$'+fmt(fc)):'\u2014'}</td>
+        <td data-label="Tax withheld">${(parseFloat(d.withheld)||0)>0?('$'+fmt(d.withheld)):'\u2014'}</td>
         <td data-label="Gross">${d.currency} $${fmt(gross)}</td>
         <td data-label="Note" style="color:var(--muted);">${_escapeHtml(d.note||'')||'\u2014'}</td>
         <td data-label="" class="dv-actions"><button class="btn-ghost btn-sm" onclick="editDividend('${d.id}')">Edit</button><button class="icon-btn danger" onclick="deleteDividend('${d.id}')" title="Delete">\u2715</button></td>
@@ -11478,7 +11948,8 @@ function renderDividends(){
     }).join('');
   }
   const byCur={};
-  _divList().forEach(d=>{ const c=d.currency||'AUD'; byCur[c]=byCur[c]||{income:0,franking:0,n:0};
+  _divList().forEach(d=>{ const c=d.currency||'AUD'; byCur[c]=byCur[c]||{income:0,franking:0,withheld:0,n:0};
+    byCur[c].withheld += (parseFloat(d.withheld)||0);
     byCur[c].income+=d.amount; byCur[c].n++;
     if(c==='AUD') byCur[c].franking+=_frankingCredit(d.amount,d.franked,d.rate); });
   const sumEl=document.getElementById('dividend-summary');
@@ -11492,7 +11963,7 @@ function renderDividends(){
       <div class="dash-card" style="flex:1;min-width:140px;padding:12px 16px;">
         <div class="dash-card-title">Income (${c})</div>
         <div style="font-size:16px;font-weight:800;font-family:var(--font-mono);color:var(--green);">$${fmt(v.income)}</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${v.n} payment${v.n!==1?'s':''}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${v.n} payment${v.n!==1?'s':''}${v.withheld>0?(' \u00b7 $'+fmt(v.withheld)+' withheld'):''}</div>
       </div>`+((c==='AUD'&&v.franking>0)?`
       <div class="dash-card" style="flex:1;min-width:140px;padding:12px 16px;">
         <div class="dash-card-title">Franking Credits (AUD)</div>
@@ -11507,6 +11978,249 @@ function renderDividends(){
   }
 }
 
+
+// ── Crypto swap: one disposal + one acquisition ──
+function openSwapModal(){
+  const m=document.getElementById('swap-modal'); if(!m) return;
+  const d=document.getElementById('swp-date'); if(d && !d.value) d.value=new Date().toISOString().slice(0,10);
+  const ps=document.getElementById('swp-portfolio');
+  if(ps){
+    const ports=[{id:'main',name:'Main'},...((state.portfolios||[]).filter(p=>p.id!=='main'))];
+    ps.innerHTML=ports.map(p=>`<option value="${p.id}">${_escapeHtml(p.name||p.id)}</option>`).join('');
+  }
+  m.style.display='flex';
+}
+function closeSwapModal(){ const m=document.getElementById('swap-modal'); if(m) m.style.display='none'; }
+function saveSwap(){
+  const date=document.getElementById('swp-date').value;
+  const value=parseFloat(document.getElementById('swp-value').value);
+  const from=(document.getElementById('swp-from').value||'').trim().toUpperCase();
+  const fromUnits=parseFloat(document.getElementById('swp-from-units').value);
+  const to=(document.getElementById('swp-to').value||'').trim().toUpperCase();
+  const toUnits=parseFloat(document.getElementById('swp-to-units').value);
+  const pf=document.getElementById('swp-portfolio').value||'main';
+  if(!date){ notify('\u26A0 Enter the swap date.'); return; }
+  if(!value||value<=0){ notify('\u26A0 Enter the value at the time of the swap.'); return; }
+  if(!from||!fromUnits||fromUnits<=0){ notify('\u26A0 Enter what you gave up and how many units.'); return; }
+  if(!to||!toUnits||toUnits<=0){ notify('\u26A0 Enter what you received and how many units.'); return; }
+  const base=Date.now()+Math.random();
+  state.transactions.push({ id:base, type:'sell', ticker:from, units:fromUnits,
+    price: value/fromUnits, total: value, date, assetType:'crypto', currency:'USD',
+    portfolio:pf, fees:0, notes:'Swap to '+to, reason:'Swap' });
+  state.transactions.push({ id:base+1, type:'buy', ticker:to, units:toUnits,
+    price: value/toUnits, total: value, date, assetType:'crypto', currency:'USD',
+    portfolio:pf, fees:0, notes:'Swap from '+from });
+  _trackEdit(); save(); closeSwapModal();
+  try{ renderHistory(); }catch(_){ } try{ renderPortfolio(); }catch(_){ } try{ renderDashboard(); }catch(_){ }
+  notify('Swap recorded \u00b7 '+from+' \u2192 '+to);
+}
+
+// ── Share splits and consolidations ──
+// A split does not change your total cost base or your acquisition date; it spreads
+// the same cost over more (or fewer) units. ATO: split units keep the original
+// acquisition date, so the 12-month discount test is unaffected.
+function _splitList(){ return Array.isArray(state.splitAdjustments) ? state.splitAdjustments : (state.splitAdjustments=[]); }
+function _splitFactor(s){
+  const nw = parseFloat(s.newUnits), od = parseFloat(s.oldUnits);
+  if (!nw || !od || nw <= 0 || od <= 0) return 0;
+  return nw / od; // 2-for-1 split => 2 ; 1-for-10 consolidation => 0.1
+}
+function _splitEvents(){
+  return _splitList().map(s => ({
+    _split: true,
+    date: s.date,
+    ticker: String(s.ticker||'').toUpperCase(),
+    portfolio: s.portfolio || 'all',
+    factor: _splitFactor(s)
+  })).filter(s => s.ticker && s.date && s.factor > 0 && s.factor !== 1);
+}
+// Rescale every parcel held at that moment: more units, same total cost
+function _splitApply(running, ev, getLots){
+  Object.keys(running).filter(k => {
+    const p = k.split('|');
+    if (p[0] !== ev.ticker) return false;
+    if (ev.portfolio && ev.portfolio !== 'all' && p[1] !== ev.portfolio) return false;
+    return true;
+  }).map(k => getLots(running[k])).forEach(ls => ls.forEach(l => {
+    if (l.remaining <= 0) return;
+    l.units      = (l.units || 0) * ev.factor;
+    l.remaining  = l.remaining * ev.factor;
+    l.price      = (l.price || 0) / ev.factor;
+    if (l.feePerUnit)  l.feePerUnit  = l.feePerUnit / ev.factor;
+    if (l.amitPerUnit) l.amitPerUnit = l.amitPerUnit / ev.factor;
+  }));
+}
+function addSplitAdj(){
+  const ticker=(document.getElementById('split-ticker').value||'').trim().toUpperCase();
+  const date=document.getElementById('split-date').value;
+  const nw=parseFloat(document.getElementById('split-new').value);
+  const od=parseFloat(document.getElementById('split-old').value);
+  const pf=document.getElementById('split-portfolio').value||'all';
+  if(!ticker){ notify('\u26A0 Enter the ticker.'); return; }
+  if(!date){ notify('\u26A0 Enter the effective date.'); return; }
+  if(!nw||!od||nw<=0||od<=0){ notify('\u26A0 Enter both sides of the ratio, e.g. 2 new for 1 old.'); return; }
+  if(nw/od===1){ notify('\u26A0 That ratio changes nothing.'); return; }
+  _splitList().push({ id:Date.now()+Math.random(), ticker, date, newUnits:nw, oldUnits:od, portfolio:pf });
+  _trackEdit(); save();
+  ['split-ticker','split-new','split-old'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
+  renderTax(); try{ renderCGT(); }catch(_){ } try{ renderPortfolio(); }catch(_){ } try{ renderDashboard(); }catch(_){ }
+  notify('Split recorded \u00b7 '+ticker);
+}
+function deleteSplitAdj(id){
+  fnConfirm('Delete this split/consolidation? Your unit counts will revert.', ok=>{
+    if(!ok) return;
+    state.splitAdjustments = _splitList().filter(s=>s.id!=id);
+    _trackEdit(); save(); renderTax();
+    try{ renderCGT(); }catch(_){ } try{ renderPortfolio(); }catch(_){ } try{ renderDashboard(); }catch(_){ }
+    notify('Split deleted');
+  });
+}
+function renderSplitList(){
+  const el=document.getElementById('split-list'); if(!el) return;
+  const psel=document.getElementById('split-portfolio');
+  if(psel){
+    const cur=psel.value;
+    const ports=[{id:'all',name:'All portfolios'},{id:'main',name:'Main'},...((state.portfolios||[]).filter(p=>p.id!=='main'))];
+    psel.innerHTML=ports.map(p=>`<option value="${p.id}">${_escapeHtml(p.name||p.id)}</option>`).join('');
+    if([...psel.options].some(o=>o.value===cur)) psel.value=cur;
+  }
+  const list=[..._splitList()].sort((a,b)=> String(b.date).localeCompare(String(a.date)));
+  if(!list.length){
+    el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px 0;">No splits or consolidations recorded.</div>';
+    return;
+  }
+  el.innerHTML=list.map(s=>{
+    const f=_splitFactor(s);
+    const kind = f>1 ? 'split' : 'consolidation';
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;">
+      <span><strong>${_escapeHtml(s.ticker)}</strong> <span style="color:var(--muted);">${_escapeHtml(s.date)}${s.portfolio&&s.portfolio!=='all'?(' \u00b7 '+_escapeHtml(_portfolioName(s.portfolio))):''}</span></span>
+      <span style="display:flex;align-items:center;gap:10px;">
+        <span class="chg-badge ${f>1?'green':'red'}" style="font-size:11px;">${s.newUnits}-for-${s.oldUnits} ${kind}</span>
+        <button class="icon-btn danger" onclick="deleteSplitAdj('${s.id}')" title="Delete">\u2715</button>
+      </span>
+    </div>`;
+  }).join('');
+}
+
+// ── AMIT cost base adjustments (Australian ETFs / managed funds) ──
+// Each year an AMMA statement reports cost base increase/decrease amounts that
+// rewrite the cost base of the parcels you held when the adjustment applied.
+function _portfolioName(id){
+  if(!id || id==='all') return 'All portfolios';
+  const p=(state.portfolios||[]).find(x=>x.id===id);
+  if(p && p.name) return p.name;
+  if(id==='main') return 'Main';
+  return String(id).charAt(0).toUpperCase()+String(id).slice(1);
+}
+function _amitList(){ return Array.isArray(state.amitAdjustments) ? state.amitAdjustments : (state.amitAdjustments=[]); }
+function _amitEffectiveDate(fy){
+  const y = parseInt(String(fy).replace(/\D/g,''),10);
+  return (isNaN(y) ? 1900 : y) + '-06-30'; // FY2025 ends 30 June 2025
+}
+// Build adjustment events to interleave into the transaction timeline
+function _amitEvents(){
+  return _amitList().map(a => ({
+    _amit: true,
+    date: (a.date || _amitEffectiveDate(a.fy)),
+    ticker: String(a.ticker||'').toUpperCase(),
+    portfolio: a.portfolio || 'all',
+    net: (parseFloat(a.increase)||0) - (parseFloat(a.decrease)||0)
+  })).filter(a => a.ticker && a.net);
+}
+// Merge transactions and adjustments in date order. Same date: buys, then the
+// adjustment, then sells, so an adjustment lands on units actually held.
+function _amitTimeline(allSorted){
+  const evts = [..._amitEvents(), ..._splitEvents()];
+  if(!evts.length) return allSorted.map(t => ({ _amit:false, tx:t, date:t.date }));
+  return [...allSorted.map(t => ({ _amit:false, tx:t, date:t.date })), ...evts]
+    .sort((a,b)=>{
+      const dd = new Date(a.date) - new Date(b.date);
+      if (dd !== 0) return dd;
+      // same date: buys, then splits, then AMIT, then sells
+      const rank = x => x._split ? 1 : x._amit ? 2 : (x.tx.type === 'buy' ? 0 : 3);
+      return rank(a) - rank(b);
+    });
+}
+// Spread the net adjustment per-unit across every parcel still held at that moment
+function _amitApply(running, ev, getLots){
+  const lotArrays = Object.keys(running).filter(k => {
+    const parts = k.split('|');
+    if (parts[0] !== ev.ticker) return false;
+    if (ev.portfolio && ev.portfolio !== 'all' && parts[1] !== ev.portfolio) return false;
+    return true;
+  }).map(k => getLots(running[k]));
+  let totalUnits = 0;
+  lotArrays.forEach(ls => ls.forEach(l => { if (l.remaining > 0) totalUnits += l.remaining; }));
+  if (totalUnits <= 0) return;
+  const perUnit = ev.net / totalUnits;
+  lotArrays.forEach(ls => ls.forEach(l => { if (l.remaining > 0) l.amitPerUnit = (l.amitPerUnit||0) + perUnit; }));
+}
+function _amitKindChanged(){
+  const k=document.getElementById('amit-kind')?.value||'amit';
+  const fyW=document.getElementById('amit-fy-wrap'), dW=document.getElementById('amit-date-wrap');
+  const incW=document.getElementById('amit-inc')?.closest('.fld-group');
+  if(fyW) fyW.style.display = k==='roc' ? 'none' : '';
+  if(dW)  dW.style.display  = k==='roc' ? '' : 'none';
+  if(incW) incW.style.display = k==='roc' ? 'none' : ''; // return of capital only reduces
+}
+function addAmitAdj(){
+  const kind=document.getElementById('amit-kind')?.value||'amit';
+  const ticker=(document.getElementById('amit-ticker').value||'').trim().toUpperCase();
+  const fy=(document.getElementById('amit-fy').value||'').trim();
+  const rocDate=document.getElementById('amit-date')?.value||'';
+  const inc=parseFloat(document.getElementById('amit-inc').value)||0;
+  const dec=parseFloat(document.getElementById('amit-dec').value)||0;
+  const pf=document.getElementById('amit-portfolio').value||'all';
+  if(!ticker){ notify('\u26A0 Enter the ticker.'); return; }
+  if(kind==='roc'){
+    if(!rocDate){ notify('\u26A0 Enter the payment date.'); return; }
+    if(!dec){ notify('\u26A0 Enter the return of capital amount.'); return; }
+  } else {
+    if(!/^\d{4}$/.test(fy.replace(/\D/g,'').slice(0,4))){ notify('\u26A0 Enter the financial year, e.g. 2025.'); return; }
+    if(!inc && !dec){ notify('\u26A0 Enter a cost base increase or decrease.'); return; }
+  }
+  _amitList().push({ id:Date.now()+Math.random(), kind, ticker,
+    fy: kind==='roc' ? '' : fy.replace(/\D/g,'').slice(0,4),
+    date: kind==='roc' ? rocDate : '',
+    increase: kind==='roc' ? 0 : inc, decrease:dec, portfolio:pf });
+  _trackEdit(); save();
+  ['amit-ticker','amit-inc','amit-dec'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
+  renderTax(); try{ renderCGT(); }catch(_){ }
+  notify('AMIT adjustment added \u00b7 '+ticker);
+}
+function deleteAmitAdj(id){
+  fnConfirm('Delete this AMIT adjustment?', ok=>{
+    if(!ok) return;
+    state.amitAdjustments = _amitList().filter(a=>a.id!=id);
+    _trackEdit(); save(); renderTax(); try{ renderCGT(); }catch(_){ }
+    notify('Adjustment deleted');
+  });
+}
+function renderAmitList(){
+  const el=document.getElementById('amit-list'); if(!el) return;
+  const psel=document.getElementById('amit-portfolio');
+  if(psel){
+    const cur=psel.value;
+    const ports=[{id:'all',name:'All portfolios'},{id:'main',name:'Main'},...((state.portfolios||[]).filter(p=>p.id!=='main'))];
+    psel.innerHTML=ports.map(p=>`<option value="${p.id}">${_escapeHtml(p.name||p.id)}</option>`).join('');
+    if([...psel.options].some(o=>o.value===cur)) psel.value=cur;
+  }
+  const list=[..._amitList()].sort((a,b)=> String(b.fy).localeCompare(String(a.fy)) || String(a.ticker).localeCompare(String(b.ticker)));
+  if(!list.length){
+    el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px 0;">No AMIT adjustments recorded. Add them from your annual AMMA statements.</div>';
+    return;
+  }
+  el.innerHTML = list.map(a=>{
+    const net=(parseFloat(a.increase)||0)-(parseFloat(a.decrease)||0);
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;">
+      <span><strong>${_escapeHtml(a.ticker)}</strong> <span style="color:var(--muted);">${a.kind==='roc'?('Return of capital \u00b7 '+_escapeHtml(a.date||'')):('AMIT statement \u00b7 FY'+_escapeHtml(String(a.fy)))}${a.portfolio&&a.portfolio!=='all'?(' \u00b7 '+_escapeHtml(_portfolioName(a.portfolio))):''}</span></span>
+      <span style="display:flex;align-items:center;gap:10px;">
+        <span class="chg-badge ${net>=0?'green':'red'}" style="font-size:11px;">${net>=0?'+':'-'}$${fmt(Math.abs(net))}</span>
+        <button class="icon-btn danger" onclick="deleteAmitAdj('${a.id}')" title="Delete">\u2715</button>
+      </span>
+    </div>`;
+  }).join('');
+}
 
 // ── CGT helpers: ATO-aligned 12-month test and loss-ordering aggregation ──
 // ATO: the asset must be held for at least 12 months BEFORE the CGT event, and the
@@ -11555,6 +12269,8 @@ function setCarriedLoss(v){
 
 function renderTax() {
   try { renderDividends(); } catch(_) {}
+  try { renderAmitList(); } catch(_) {}
+  try { renderSplitList(); } catch(_) {}
   try {
     const _clEl = document.getElementById('tax-carried-loss');
     if (_clEl && document.activeElement !== _clEl) _clEl.value = _carriedLoss() ? _carriedLoss() : '';
@@ -11564,6 +12280,11 @@ function renderTax() {
       _fkEl.innerHTML = _fkTotal > 5000
         ? '\u26A0 Franking credits total $'+fmt(_fkTotal)+'. Above $5,000 the ATO 45-day holding rule applies, so credits on shares held less than 45 days at risk may not be claimable. Worth checking with your tax agent.'
         : (_fkTotal > 0 ? 'Franking credits $'+fmt(_fkTotal)+' this dataset. Under the $5,000 small-shareholder threshold the 45-day holding rule generally does not apply.' : '');
+      const _whTotal = (state.dividends||[]).reduce((s,d)=> s + (parseFloat(d.withheld)||0), 0);
+      if (_whTotal > 0) {
+        _fkEl.innerHTML += (_fkEl.innerHTML ? '<br>' : '')
+          + 'Foreign tax withheld $'+fmt(_whTotal)+'. This is generally claimable as a foreign income tax offset, and the gross figure (cash plus withholding) is the assessable amount.';
+      }
     }
   } catch(_) {}
   const sel = document.getElementById('tax-year-select');
@@ -11597,7 +12318,10 @@ function renderTax() {
   const running = {};
   const taxEvents = [];
 
-  for (const tx of allSorted) {
+  for (const _ev of _amitTimeline(allSorted)) {
+    if (_ev._split) { _splitApply(running, _ev, r => r.lots); continue; }
+    if (_ev._amit) { _amitApply(running, _ev, r => r.lots); continue; }
+    const tx = _ev.tx;
     const key = tx.ticker.toUpperCase()+'|'+(tx.portfolio||'main');
     if (!running[key]) running[key] = { lots: [] };
     if (tx.type === 'buy') {
@@ -11613,7 +12337,7 @@ function renderTax() {
         if (lot.remaining <= 0) continue;
         const used = Math.min(lot.remaining, toSell);
         // ATO cost base includes incidental costs: apportioned buy brokerage
-        costBasis += used * lot.price + used * (lot.feePerUnit || 0);
+        costBasis += used * lot.price + used * (lot.feePerUnit || 0) + used * (lot.amitPerUnit || 0);
         if (_cgtHeld12Months(lot.date, tx.date)) discountableUnits += used;
         lot.remaining -= used;
         toSell -= used;
@@ -12913,5 +13637,25 @@ function saveSectorEdit() {
   </div>
 </div>
 
+
+<div id="swap-modal" style="display:none;position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:20px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.45);max-height:90vh;overflow-y:auto;">
+    <div style="font-weight:800;font-family:var(--font-head);font-size:14px;margin-bottom:4px;">Log a Crypto Swap</div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Swapping one coin for another is a disposal for CGT. This records a sell of what you gave up and a buy of what you received, at the same market value.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div><label class="fld-label">Date</label><input type="date" id="swp-date" style="width:100%;"></div>
+      <div><label class="fld-label">Value at swap (USD) <span class="wp-info" data-tip="The market value of the swap. This is your sale proceeds on the coin given up and your cost base on the coin received." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="swp-value" step="any" min="0" placeholder="0.00" style="width:100%;"></div>
+      <div><label class="fld-label">Gave up (ticker)</label><input type="text" id="swp-from" placeholder="BTC" style="width:100%;text-transform:uppercase;"></div>
+      <div><label class="fld-label">Units given up</label><input type="number" id="swp-from-units" step="any" min="0" style="width:100%;"></div>
+      <div><label class="fld-label">Received (ticker)</label><input type="text" id="swp-to" placeholder="ETH" style="width:100%;text-transform:uppercase;"></div>
+      <div><label class="fld-label">Units received</label><input type="number" id="swp-to-units" step="any" min="0" style="width:100%;"></div>
+      <div style="grid-column:1/-1;"><label class="fld-label">Portfolio</label><select id="swp-portfolio" style="width:100%;"></select></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
+      <button class="btn-ghost" onclick="closeSwapModal()">Cancel</button>
+      <button class="btn" onclick="saveSwap()">Record Swap</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>

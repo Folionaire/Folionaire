@@ -614,6 +614,13 @@ input,.form-group select,.form-group textarea{width:100%;background:var(--bg);bo
 .empty-state .icon{font-size:34px;margin-bottom:11px;}
 .notif{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:9px 16px;font-family:var(--font-mono);font-size:12px;z-index:9000;animation:fadeIn .2s ease;pointer-events:none;}
 
+
+/* Demo build: the floating buy pill is persistent, so notices sit above it */
+.notif-sticky{bottom:124px !important;}
+@media(max-width:768px){
+  #tips-panel{bottom:124px !important;}
+  .notif-sticky{bottom:124px !important;}
+}
 /* Tips panel */
 #tips-panel{position:fixed;bottom:22px;right:22px;width:320px;max-width:calc(100vw - 44px);
   background:var(--surface);border:1px solid var(--accent);border-radius:12px;
@@ -5064,6 +5071,14 @@ function _tipsEnabled(){ return !(state.ui && state.ui.tipsEnabled === false); }
 function showTipsForPage(tab){
   closeTips(true);
   if (!_tipsEnabled()) return;
+  // On narrow screens tips and sticky warnings occupy the same strip, so let the
+  // warning have it. The tip will surface on the next page change once it is gone.
+  if (window.innerWidth <= 768 && document.querySelector('.notif-sticky')) return;
+  // Never show a tip underneath a full-screen overlay (demo buy prompt, modals)
+  const _ovl = document.getElementById('demo-buy-overlay');
+  if (_ovl && _ovl.style.display && _ovl.style.display !== 'none') return;
+  // A one-shot skip so a scheduled overlay (demo buy prompt) is not covered by a tip
+  if (window._tipsSuppressOnce) { window._tipsSuppressOnce = false; return; }
   const all = TIPS[tab]; if (!all || !all.length) return;
   const seen = _tipsSeen();
   const eligible = all.filter(t => { try { return !t.cond || t.cond(); } catch(_) { return false; } });
@@ -13444,7 +13459,7 @@ function saveSectorEdit() {
     + '<div style="text-align:center;font-size:10px;color:var(--muted);margin-top:8px;">Free updates for the life of v1 · full source code · works offline</div></div>';
   document.body.appendChild(ov);
   window.demoBuy = function(){ ov.style.display='flex'; };
-  ov.addEventListener('click', e=>{ if(e.target===ov) ov.style.display='none'; });
+  ov.addEventListener('click', e=>{ if(e.target===ov){ ov.style.display='none'; try{ if(typeof showTipsForPage==='function' && typeof _activeSection!=='undefined') setTimeout(()=>showTipsForPage(_activeSection), 350); }catch(_){ } } });
 
   /* ── Floating demo pill ── */
   const pill = document.createElement('button');
@@ -13542,7 +13557,7 @@ function saveSectorEdit() {
   }
 
   /* ── First-visit nudge (once per session) ── */
-  try{ if(!sessionStorage.getItem('fv_demo_seen')){ sessionStorage.setItem('fv_demo_seen','1'); setTimeout(window.demoBuy, 1200); } }catch(e){}
+  try{ if(!sessionStorage.getItem('fv_demo_seen')){ sessionStorage.setItem('fv_demo_seen','1'); window._tipsSuppressOnce = true; setTimeout(window.demoBuy, 1200); } }catch(e){}
 })();
 </script>
 

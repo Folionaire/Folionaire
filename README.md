@@ -41,12 +41,15 @@ The whole app is one HTML file. Open it in any browser on any device, no install
 - JSON backup that restores everything, CSV export, and Plain Text Accounting ledger export for hledger and beancount
 - CSV import with column auto-detection for Sharesight, Navexa, Binance, Coinbase, CoinGecko, CoinMarketCap, Crypto.com and generic broker exports
 - Watchlists with price alerts and reminders
-- News and sentiment terminal, free RSS out of the box, with optional free API keys for more sources
+- News and sentiment terminal, free RSS out of the box, optional free API keys for more
 - Crypto wallet scanner from a public address (BTC, ETH, SOL, BNB, POL)
-- Four themes including Terminal, Light and Dark
+- Four themes including Terminal, light and dark
 - Privacy mode that hides every figure and blurs charts
-- Free updates for the life of v1. Existing owners can upgrade to v2 onwards for A$10
-- Full source code included. Works offline
+- Five CGT parcel methods, a one-page tax report and debt recycling tracking
+- Folder Sync: write straight to a file in your own Dropbox or OneDrive folder, no account or server
+- Optional TradingView market widgets, off by default and never fed your holdings
+- Free updates for the life of v1. v2 onwards is a A$10 upgrade for existing owners
+- Full source code in the file. Works offline
 
 ## What it does not do
 Being straight about the gaps so nobody finds out the hard way:

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Folionaire v1.1 - Live Demo</title>
+<title>Folionaire v1.1.1 - Live Demo</title>
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4096 4096"><circle cx="2048" cy="2048" r="2048" fill="%23f0b429"/><defs><mask id="fnhat" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="%230a0c10" mask="url(%23fnhat)"/></g></svg>'>
 
 
@@ -292,6 +292,24 @@ tbody tr:hover{background:var(--surface2);}
 .tradingview-widget-container{border-radius:10px;overflow:hidden;}
 .tradingview-widget-container__widget{border-radius:10px;overflow:hidden;}
 /* Tax page: numbered steps so the order of operations is obvious */
+.imp-group-label{font-family:var(--font-head);font-size:10px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1.1px;color:var(--accent);margin-bottom:8px;}
+.imp-opts{display:flex;flex-direction:column;gap:7px;}
+.imp-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border2);
+  border-radius:10px;background:var(--surface2);cursor:pointer;transition:border-color .15s;}
+.imp-opt:hover{border-color:var(--accent);}
+/* Tick boxes were inheriting the text-field rule, so they stretched to fill their
+   row. Sized here instead, once, for every one of them. */
+input[type="checkbox"],input[type="radio"]{
+  width:16px;height:16px;min-width:16px;margin:0;padding:0;
+  accent-color:var(--accent);cursor:pointer;vertical-align:middle;flex-shrink:0;}
+.imp-opt input[type="radio"]{width:16px;height:16px;min-width:16px;flex:0 0 16px;
+  margin:2px 0 0 0;padding:0;accent-color:var(--accent);cursor:pointer;}
+.imp-opt span{flex:1 1 auto;}
+.imp-opt span{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.imp-opt strong{font-size:12.5px;font-weight:700;color:var(--text);}
+.imp-opt small{font-size:10.5px;color:var(--muted);line-height:1.5;}
+.imp-opt:has(input:checked){border-color:var(--accent);background:rgba(240,180,41,.08);}
 .tax-step{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;margin-bottom:22px;}
 .tax-step-num{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);
   color:var(--accent);font-family:var(--font-head);font-weight:900;font-size:14px;
@@ -404,6 +422,13 @@ tbody tr:hover{background:var(--surface2);}
 .cgt-cmp-help{font-weight:400;font-size:10px;color:var(--muted);line-height:1.5;}
 .cgt-cmp-val{font-weight:800;white-space:nowrap;}
 .bgoal-extra{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);font-size:11px;color:var(--muted);}
+.upc-annual{margin-top:12px;padding-top:11px;border-top:1px solid var(--border2);}
+.upc-annual-head{font-family:var(--font-head);font-size:10px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1.1px;color:var(--accent);margin-bottom:6px;text-align:center;}
+.upc-annual-vals{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;
+  font-family:var(--font-mono);font-size:13px;}
+.upc-annual-vals strong{font-weight:800;}
+.upc-annual-sub{font-size:10px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.5;}
 .upc-list{display:flex;flex-direction:column;gap:2px;}
 .upc-row{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);}
 .upc-row:last-child{border-bottom:none;}
@@ -443,7 +468,7 @@ tbody tr:hover{background:var(--surface2);}
 
 
 /* Dividend controls */
-#sec-dividends select,#dv-edit-modal select,#amit-portfolio,#split-portfolio,#amit-kind,#swp-portfolio,#cgt-method-sel,#bt-recur,#cat-manage-modal select,#dr-edit-modal select,#wl-edit-modal select{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
+#sec-dividends select,#dv-edit-modal select,#amit-portfolio,#split-portfolio,#amit-kind,#swp-portfolio,#cgt-method-sel,#bt-recur,#bem-recur,#cat-manage-modal select,#dr-edit-modal select,#wl-edit-modal select{background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;}
 #sec-dividends td:last-child{white-space:nowrap;}
 #sec-dividends td:last-child .btn-ghost{margin-right:12px;}
 #sec-dividends .dv-check{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;margin-right:4px;}
@@ -491,7 +516,7 @@ tbody tr:hover{background:var(--surface2);}
 input[type="date"]::-webkit-calendar-picker-indicator{opacity:.75;cursor:pointer;}
 input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
 input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
-input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:9px 11px;font-family:var(--font-mono);font-size:13px;outline:none;transition:border .15s;border-radius:8px;}
+input:not([type="radio"]):not([type="checkbox"]),.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:9px 11px;font-family:var(--font-mono);font-size:13px;outline:none;transition:border .15s;border-radius:8px;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
 .form-group textarea{resize:vertical;min-height:68px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
@@ -1612,7 +1637,7 @@ tr.tx-detail-row>td{padding:0 !important;}
 <div id="fn-splash" style="position:fixed;inset:0;z-index:2147483000;background:#0a0c10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .45s ease;">
   <svg width="94" height="94" viewBox="0 0 4096 4096" style="animation:fnPulse 1.6s ease-in-out infinite;" aria-hidden="true"><circle cx="2048" cy="2048" r="2048" fill="#f0b429"/><defs><mask id="fnhatSplash" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="#0a0c10" mask="url(#fnhatSplash)"/></g></svg>
   <div style="font-family:'Roboto',sans-serif;font-weight:800;font-size:30px;letter-spacing:-0.5px;color:#f0f2f6;">FOLIO<span style="color:#f0b429;">NAIRE</span></div>
-  <div style="font-family:'DM Mono',monospace,monospace;font-size:11px;color:#8b90a0;letter-spacing:3px;">V1.1</div>
+  <div style="font-family:'DM Mono',monospace,monospace;font-size:11px;color:#8b90a0;letter-spacing:3px;">V1.1.1</div>
 </div>
 <style>@keyframes fnPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.06);opacity:.85;}}</style>
 <script>(function(){var s=document.getElementById('fn-splash');if(!s)return;setTimeout(function(){s.style.opacity='0';setTimeout(function(){try{s.remove();}catch(e){}},500);},2000);})();</script>
@@ -1626,7 +1651,7 @@ tr.tx-detail-row>td{padding:0 !important;}
     <a onclick="switchTab('dashboard',document.querySelector('.sidebar-tab[data-tab=dashboard]'))" style="cursor:pointer;text-decoration:none;">
       <div style="display:flex;align-items:center;gap:8px;">
         <svg class="folio-mark" viewBox="0 0 4096 4096" fill="none" aria-hidden="true"><circle cx="2048" cy="2048" r="2048" fill="#f0b429"/><defs><mask id="fnhat1" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="#0a0c10" mask="url(#fnhat1)"/></g></svg>
-        <div class="logo" style="font-size:22px;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:5px;vertical-align:middle;">v1.1</span></div>
+        <div class="logo" style="font-size:22px;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:5px;vertical-align:middle;">v1.1.1</span></div>
       </div>
       <div class="sidebar-quick-actions">
         <button id="desktop-theme-cycle" onclick="event.stopPropagation();cycleThemeDesktop()" title="Cycle theme" aria-label="Cycle theme" style="border:1px solid var(--border2);background:var(--surface2);border-radius:4px;cursor:pointer;padding:4px 9px;font-size:14px;color:var(--text);transition:all .15s;min-width:34px;display:inline-flex;align-items:center;justify-content:center;"></button>
@@ -1721,7 +1746,7 @@ tr.tx-detail-row>td{padding:0 !important;}
   </div>
 
   <footer style="text-align:center;padding:14px 10px 16px;font-size:10px;color:var(--muted);font-family:var(--font-mono);border-top:1px solid var(--border);flex-shrink:0;">
-    <a href="https://folionaire.gumroad.com/l/folionaire" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;">© <span id="footer-year"></span> Folionaire v1.1</a>
+    <a href="https://folionaire.gumroad.com/l/folionaire" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;">© <span id="footer-year"></span> Folionaire v1.1.1</a>
   </footer>
 
 </div>
@@ -1730,7 +1755,7 @@ tr.tx-detail-row>td{padding:0 !important;}
   <button id="mob-menu-btn" onclick="toggleMobMenu()" style="display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--text);flex-shrink:0;" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="3" width="22" height="2.5" rx="1.2" fill="currentColor"/><rect y="10" width="22" height="2.5" rx="1.2" fill="currentColor"/><rect y="17" width="22" height="2.5" rx="1.2" fill="currentColor"/></svg></button>
   <div class="logo-wrap">
     <svg width="34" height="34" viewBox="0 0 4096 4096" fill="none" aria-hidden="true"><circle cx="2048" cy="2048" r="2048" fill="#f0b429"/><defs><mask id="fnhat2" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="#0a0c10" mask="url(#fnhat2)"/></g></svg>
-    <div class="logo" style="white-space:nowrap;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:4px;vertical-align:middle;">v1.1</span></div>
+    <div class="logo" style="white-space:nowrap;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:4px;vertical-align:middle;">v1.1.1</span></div>
   </div>
   <div class="mob-header-actions" aria-label="Mobile header actions">
     <button id="mob-header-theme-btn" onclick="cycleThemeDesktop()" title="Cycle theme" aria-label="Cycle theme"></button>
@@ -1792,7 +1817,7 @@ tr.tx-detail-row>td{padding:0 !important;}
     <div class="mob-drawer-logo" style="display:flex;align-items:center;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:10px;">
         <svg width="28" height="28" viewBox="0 0 4096 4096" fill="none" aria-hidden="true"><circle cx="2048" cy="2048" r="2048" fill="#f0b429"/><defs><mask id="fnhat3" maskUnits="userSpaceOnUse" x="0" y="0" width="4096" height="4096"><ellipse cx="2048" cy="2225" rx="1170" ry="335" fill="white"/><ellipse cx="2048" cy="2050" rx="1080" ry="280" fill="black"/><path d="M2778 1070 L2772 1101 L2766 1133 L2760 1164 L2754 1195 L2748 1227 L2742 1258 L2736 1289 L2731 1321 L2726 1352 L2721 1383 L2716 1415 L2711 1446 L2707 1477 L2703 1509 L2699 1540 L2695 1571 L2692 1603 L2689 1634 L2686 1665 L2684 1697 L2682 1728 L2679 1759 L2678 1791 L2676 1822 L2674 1853 L2673 1885 L2672 1916 L2670 1947 L2669 1979 L2668 2010 L1428 2010 L1428 2010 L1427 1979 L1426 1947 L1424 1916 L1423 1885 L1422 1853 L1420 1822 L1418 1791 L1417 1759 L1414 1728 L1412 1697 L1410 1665 L1407 1634 L1404 1603 L1401 1571 L1397 1540 L1393 1509 L1389 1477 L1385 1446 L1380 1415 L1375 1383 L1370 1352 L1365 1321 L1360 1289 L1354 1258 L1348 1227 L1342 1195 L1336 1164 L1330 1133 L1324 1101 L1318 1070 Z" fill="white"/><ellipse cx="2048" cy="1080" rx="730" ry="120" fill="white"/><rect x="1368" y="1950" width="1360" height="165" fill="black"/></mask></defs><g transform="matrix(1.15176 -0.16187 0.16187 1.15176 -671.4 351.9)"><rect x="0" y="0" width="4096" height="4096" fill="#0a0c10" mask="url(#fnhat3)"/></g></svg>
-        <span class="logo" style="font-size:24px;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:5px;vertical-align:middle;">v1.1</span></span>
+        <span class="logo" style="font-size:24px;">FOLIO<span>NAIRE</span><span data-privacy-skip="1" style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:0;font-family:var(--font-mono);margin-left:5px;vertical-align:middle;">v1.1.1</span></span>
       </div>
       <button onclick="toggleMobMenu()" style="background:none;border:none;cursor:pointer;color:var(--text);padding:6px;font-size:20px;line-height:1;" aria-label="Close">✕</button>
     </div>
@@ -2476,12 +2501,21 @@ tr.tx-detail-row>td{padding:0 !important;}
       <div style="max-width:660px;margin:0 auto;font-size:11.5px;color:var(--muted);line-height:1.7;">
         Which parcels have passed 12 months and qualify for the 50% discount. Cost base includes brokerage and any AMIT or return-of-capital adjustments.
         <span id="cgt-method-note"></span>
+        <div id="cgt-price-warning" style="display:none;font-size:11px;color:var(--accent);line-height:1.6;margin-top:8px;"></div>
       </div>
     </div>
-    <div class="cgt-tabs" style="display:flex;gap:6px;margin-bottom:16px;">
+    <div class="cgt-tabs" style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
       <button class="range-btn active" id="cgt-tab-eligible" onclick="setCgtTab('eligible',this)">Eligible (50% Discount)</button>
       <button class="range-btn" id="cgt-tab-upcoming" onclick="setCgtTab('upcoming',this)">Upcoming (&lt;1 Year)</button>
+      <div class="input-clear-wrap" style="position:relative;margin-left:auto;min-width:190px;">
+        <input type="text" id="cgt-search" placeholder="Search ticker" oninput="renderCGT()"
+               style="width:100%;font-size:12px;padding:7px 30px 7px 11px;text-transform:uppercase;">
+        <button type="button" onclick="clearCgtSearch()" title="Clear"
+          style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;
+                 color:var(--muted);cursor:pointer;font-size:15px;line-height:1;padding:2px 5px;">&times;</button>
+      </div>
     </div>
+    <div id="cgt-search-note" style="font-size:11px;color:var(--muted);margin-bottom:12px;display:none;"></div>
     <div id="cgt-summary" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;"></div>
     <div class="table-scroll" id="cgt-scroll">
       <table id="cgt-table">
@@ -2550,6 +2584,7 @@ tr.tx-detail-row>td{padding:0 !important;}
         <div class="tax-step-title">Your position for the year</div>
         <div class="tax-step-sub">Realised gains and losses from closed positions, after adjustments.</div>
         <div id="tax-summary-cards" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;"></div>
+        <div id="tax-loss-note" style="font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:12px;display:none;"></div>
         <div id="tax-franking-note" style="font-size:11px;color:var(--muted);margin-bottom:14px;"></div>
         <button class="btn" onclick="openTaxReport()" style="display:inline-flex;align-items:center;gap:8px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
@@ -2725,6 +2760,17 @@ tr.tx-detail-row>td{padding:0 !important;}
       </div>
       <div style="position:relative;height:200px;max-width:260px;margin:0 auto 16px;"><canvas id="es1-chart"></canvas></div>
       <div id="es1-result"></div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border2);">
+        <div style="text-align:center;margin-bottom:12px;">
+          <div style="font-family:var(--font-head);font-weight:800;font-size:13px;color:var(--text);">Then what about the units you keep?</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:3px;">Once your original money is back, the rest is riding free. Here is where it would need to go, and where you might step off.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;align-items:end;margin-bottom:14px;">
+          <div class="fld-group"><label class="fld-label">Trailing stop % <span class="wp-info" data-tip="How far below the current price you would exit the remainder. A stop is a plan, not an order: nothing is placed for you." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="es1-stop" value="20" min="1" max="90" step="1" oninput="esRecoupCalc()" style="width:100%;"></div>
+          <div class="fld-group"><label class="fld-label">Total return goal (X) <span class="wp-info" data-tip="Total money back as a multiple of what you originally put in, counting the recouped amount and the remainder together." onclick="showTradeDotTip(this)">i</span></label><input type="number" id="es1-goal" value="2" min="1.1" step="0.1" oninput="esRecoupCalc()" style="width:100%;"></div>
+        </div>
+        <div id="es1-remainder"></div>
+      </div>
     </div>
 <div class="chart-card" style="margin-bottom:0;">
       <div style="text-align:center;margin-bottom:14px;">
@@ -2830,7 +2876,8 @@ tr.tx-detail-row>td{padding:0 !important;}
       <button class="mob-spark-btn" id="bp-period-year" onclick="setBudgetPeriod('year',this)" style="font-size:11px;padding:6px 16px;">Yearly</button>
     </div>
 
-    <div id="budget-kpis" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;"></div>
+    <div id="budget-kpis" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;"></div>
+    <div id="budget-kpi-note" style="font-size:11px;color:var(--muted);line-height:1.6;text-align:center;margin:0 auto 16px;max-width:660px;"></div>
 
     <div class="chart-card" style="margin-bottom:16px;">
       <div class="chart-card-header budget-chart-header">
@@ -2906,6 +2953,10 @@ tr.tx-detail-row>td{padding:0 !important;}
 
     
 
+    <div style="text-align:center;margin-bottom:12px;margin-top:24px;">
+      <div class="chart-title">Everything You Have Logged</div>
+      <div class="chart-subtitle">Every income and expense entry, newest first. Recurring entries show once as the template you can edit, and the ↻ marks them.</div>
+    </div>
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;align-items:center;">
       <span id="bt-sel-count" style="font-size:11px;color:var(--muted);display:none;"></span>
       <button class="btn-ghost btn-sm" id="bt-select-btn" onclick="toggleBtSelect()">☑ Select</button>
@@ -3092,6 +3143,22 @@ tr.tx-detail-row>td{padding:0 !important;}
         </div>
       </div>
       <div class="dash-card" style="padding:20px;">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px;">Solana RPC <span style="font-weight:400;color:var(--muted);">(optional)</span></div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:10px;">
+          The public Solana endpoints rate limit browsers hard, which is why a wallet scan sometimes returns the SOL balance and nothing else. Paste your own RPC URL here and it becomes the first choice, with the public endpoints as fallback.
+          <br><br>
+          Free tiers from <strong style="color:var(--text);">Helius</strong>, <strong style="color:var(--text);">QuickNode</strong> or <strong style="color:var(--text);">Alchemy</strong> are far more than enough for checking your own wallet. Sign up, create a Solana mainnet endpoint, and paste the full HTTPS URL.
+          Your URL stays in this file on your device and is never sent anywhere except Solana itself.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <input type="text" id="sol-rpc-input" placeholder="https://mainnet.helius-rpc.com/?api-key=..." style="flex:1;min-width:200px;font-size:11px;">
+          <button class="btn btn-sm" onclick="saveSolRpc()">Save</button>
+          <button class="btn-ghost btn-sm" onclick="testSolRpc()">Test</button>
+          <button class="btn-ghost btn-sm" onclick="clearSolRpc()">Clear</button>
+        </div>
+        <div id="sol-rpc-status" style="font-size:11px;font-family:var(--font-mono);margin-top:10px;line-height:1.6;"></div>
+      </div>
+      <div class="dash-card" style="padding:20px;">
         <div>
           <div style="font-weight:700;font-size:13px;margin-bottom:6px;">Custom Price Proxy <span style="font-weight:400;color:var(--muted);">(optional)</span></div>
           <div style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:8px;">If price fetching is slow or blocked - most common when opening the file directly on a phone - you can route requests through your own free Cloudflare Worker. It becomes the first-choice route, with the built-in free proxies as fallback. Copy the Worker code below, deploy it on Cloudflare (steps included, free tier is plenty), then paste its URL here.</div>
@@ -3124,7 +3191,7 @@ tr.tx-detail-row>td{padding:0 !important;}
       <div class="dash-card" style="padding:20px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
           <div style="font-weight:700;font-size:13px;">Updates</div>
-          <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">Current: v1.1</span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">Current: v1.1.1</span>
         </div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">
           Your purchase includes free updates for the life of v1 - every v1.x release with fixes and new features. Major versions (v2 onwards) are a separate A$10 upgrade for existing owners.
@@ -3140,7 +3207,7 @@ tr.tx-detail-row>td{padding:0 !important;}
       <div class="dash-card" style="padding:20px;">
         <div style="font-weight:700;font-size:13px;margin-bottom:6px;">About</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.8;">
-          <a href="https://folionaire.gumroad.com/l/folionaire" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:none;">Folionaire v1.1</a> - Personal portfolio tracker<br>
+          <a href="https://folionaire.gumroad.com/l/folionaire" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:none;">Folionaire v1.1.1</a> - Personal portfolio tracker<br>
           <br>
           <strong style="color:var(--text);">Not financial or tax advice</strong><br>
           Folionaire is a personal tracking and information tool only - it is not financial, investment, or tax advice. The CGT and tax figures are estimates based on general Australian rules and may not reflect your circumstances. <strong>Before you rely on any of these figures, have a registered tax agent review one full financial year of output against your own records.</strong> What is applied: your chosen parcel method (FIFO, LIFO, minimise gain, maximise gain or minimise tax), the 12-month discount test with the acquisition day excluded, brokerage in the cost base, capital losses offset before the 50% discount, prior-year losses, AMIT cost base adjustments, returns of capital, share splits and consolidations, DRP parcels with their own acquisition date, foreign withholding tax, and deductible interest on recorded debt recycling. What is not: broker-specific parcel selection, foreign-currency conversion at transaction-date rates (USD sales are shown separately and still need converting), enforcement of the 45-day franking rule, mergers, demergers and takeovers, and anything specific to trusts, SMSFs or businesses.<br>
@@ -3240,17 +3307,37 @@ tr.tx-detail-row>td{padding:0 !important;}
         <label>Emotion</label>
         <select id="f-emotion">
           <option value="">Select emotion</option>
-          <option value="Calm">Calm</option>
-          <option value="Confident">Confident</option>
-          <option value="Defeated">Defeated</option>
-          <option value="Excited">Excited</option>
-          <option value="Fearful">Fearful</option>
-          <option value="FOMO">FOMO</option>
-          <option value="Frustrated">Frustrated</option>
-          <option value="Greedy">Greedy</option>
-          <option value="Patient">Patient</option>
-          <option value="Revenge trade">Revenge trade</option>
-          <option value="Uncertain">Uncertain</option>
+          <optgroup label="Steady">
+            <option value="Calm">Calm</option>
+            <option value="Confident">Confident</option>
+            <option value="Content">Content</option>
+            <option value="Disciplined">Disciplined</option>
+            <option value="Patient">Patient</option>
+            <option value="Indifferent">Indifferent</option>
+          </optgroup>
+          <optgroup label="Positive">
+            <option value="Happy">Happy</option>
+            <option value="Relieved">Relieved</option>
+            <option value="Vindicated">Vindicated</option>
+            <option value="Optimistic">Optimistic</option>
+            <option value="Excited">Excited</option>
+          </optgroup>
+          <optgroup label="Pressured">
+            <option value="Anxious">Anxious</option>
+            <option value="Fearful">Fearful</option>
+            <option value="FOMO">FOMO</option>
+            <option value="Impatient">Impatient</option>
+            <option value="Uncertain">Uncertain</option>
+            <option value="Second-guessing">Second-guessing</option>
+          </optgroup>
+          <optgroup label="Warning signs">
+            <option value="Greedy">Greedy</option>
+            <option value="Overconfident">Overconfident</option>
+            <option value="Frustrated">Frustrated</option>
+            <option value="Defeated">Defeated</option>
+            <option value="Revenge trade">Revenge trade</option>
+            <option value="Bored">Bored</option>
+          </optgroup>
         </select>
       </div>
     </div>
@@ -3271,8 +3358,16 @@ tr.tx-detail-row>td{padding:0 !important;}
         <option value="Portfolio diversification">Portfolio diversification</option>
         <option value="Product adoption">Product adoption</option>
         <option value="Profit taking">Profit taking</option>
+        <option value="Recouped original stake">Recouped original stake</option>
+        <option value="Rebalancing">Rebalancing</option>
         <option value="Revenue growth">Revenue growth</option>
         <option value="Risk management exit">Risk management exit</option>
+        <option value="Stop loss hit">Stop loss hit</option>
+        <option value="Target price hit">Target price hit</option>
+        <option value="Thesis broken">Thesis broken</option>
+        <option value="Tax loss harvesting">Tax loss harvesting</option>
+        <option value="Needed the cash">Needed the cash</option>
+        <option value="Held 12 months for discount">Held 12 months for discount</option>
         <option value="Sector trend">Sector trend</option>
         <option value="Speculation">Speculation</option>
         <option value="Technical setup">Technical setup</option>
@@ -3336,7 +3431,7 @@ tr.tx-detail-row>td{padding:0 !important;}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>/*DEMO SEED*/try{localStorage.setItem('folio_demo_state', "{\"transactions\":[{\"id\":1001,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VAS\",\"units\":50,\"price\":88.0,\"total\":4400.0,\"date\":\"2024-02-15\",\"fees\":9.5,\"emotion\":\"Patient\",\"reason\":\"Portfolio diversification\",\"notes\":\"Core ETF, monthly DCA\"},{\"id\":1002,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VAS\",\"units\":30,\"price\":92.4,\"total\":2772.0,\"date\":\"2024-08-10\",\"fees\":9.5,\"emotion\":\"Calm\",\"reason\":\"DCA (Down cost Average)\",\"notes\":\"\"},{\"id\":1003,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VGS\",\"units\":40,\"price\":110.2,\"total\":4408.0,\"date\":\"2024-03-05\",\"fees\":9.5,\"emotion\":\"Confident\",\"reason\":\"Portfolio diversification\",\"notes\":\"Global exposure\"},{\"id\":1004,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"CBA\",\"units\":20,\"price\":105.0,\"total\":2100.0,\"date\":\"2024-01-20\",\"fees\":10.0,\"emotion\":\"Confident\",\"reason\":\"Dividend yield\",\"notes\":\"Franking credits\"},{\"id\":1005,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"CBA\",\"units\":10,\"price\":118.5,\"total\":1185.0,\"date\":\"2024-09-12\",\"fees\":0,\"emotion\":\"Calm\",\"reason\":\"Dividend yield\",\"notes\":\"\"},{\"id\":1006,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"BHP\",\"units\":60,\"price\":45.1,\"total\":2706.0,\"date\":\"2024-04-18\",\"fees\":10.0,\"emotion\":\"Uncertain\",\"reason\":\"Sector trend\",\"notes\":\"Iron ore cycle\"},{\"id\":1007,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"AAPL\",\"units\":15,\"price\":180.0,\"total\":2700.0,\"date\":\"2024-02-28\",\"fees\":5.0,\"emotion\":\"Confident\",\"reason\":\"Fundamentals\",\"notes\":\"\"},{\"id\":1008,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"NVDA\",\"units\":12,\"price\":90.0,\"total\":1080.0,\"date\":\"2024-03-15\",\"fees\":5.0,\"emotion\":\"Excited\",\"reason\":\"Earnings growth\",\"notes\":\"AI tailwind\"},{\"id\":1009,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"NVDA\",\"units\":8,\"price\":118.0,\"total\":944.0,\"date\":\"2024-10-02\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Momentum\",\"notes\":\"Chased the breakout\"},{\"id\":1010,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"TSLA\",\"units\":20,\"price\":240.0,\"total\":4800.0,\"date\":\"2024-05-06\",\"fees\":5.0,\"emotion\":\"Excited\",\"reason\":\"Speculation\",\"notes\":\"\"},{\"id\":1011,\"type\":\"sell\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"TSLA\",\"units\":10,\"price\":250.0,\"total\":2500.0,\"date\":\"2025-01-15\",\"fees\":5.0,\"emotion\":\"Greedy\",\"reason\":\"Profit taking\",\"notes\":\"Trimmed half\"},{\"id\":1012,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"BTC\",\"units\":0.15,\"price\":42000.0,\"total\":6300.0,\"date\":\"2024-01-10\",\"fees\":0,\"emotion\":\"Confident\",\"reason\":\"Macro theme\",\"notes\":\"Digital gold thesis\"},{\"id\":1013,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"BTC\",\"units\":0.05,\"price\":61000.0,\"total\":3050.0,\"date\":\"2024-11-20\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Momentum\",\"notes\":\"\"},{\"id\":1014,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"ETH\",\"units\":2.0,\"price\":2300.0,\"total\":4600.0,\"date\":\"2024-02-05\",\"fees\":0,\"emotion\":\"Confident\",\"reason\":\"Product adoption\",\"notes\":\"\"},{\"id\":1015,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"SOL\",\"units\":40,\"price\":95.0,\"total\":3800.0,\"date\":\"2024-03-22\",\"fees\":2.0,\"emotion\":\"Excited\",\"reason\":\"Speculation\",\"notes\":\"\"},{\"id\":1016,\"type\":\"sell\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"SOL\",\"units\":40,\"price\":175.0,\"total\":7000.0,\"date\":\"2025-03-10\",\"fees\":0,\"emotion\":\"Confident\",\"reason\":\"Profit taking\",\"notes\":\"Closed for +$3,200, my best trade\"},{\"id\":1017,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"PYPL\",\"units\":25,\"price\":75.0,\"total\":1875.0,\"date\":\"2024-02-12\",\"fees\":5.0,\"emotion\":\"Confident\",\"reason\":\"Valuation\",\"notes\":\"Thought it was cheap\"},{\"id\":1018,\"type\":\"sell\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"PYPL\",\"units\":25,\"price\":62.0,\"total\":1550.0,\"date\":\"2024-12-05\",\"fees\":0,\"emotion\":\"Defeated\",\"reason\":\"Risk management exit\",\"notes\":\"Cut the loss, thesis broke\"},{\"id\":1019,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"DOGE\",\"units\":5000,\"price\":0.16,\"total\":800.0,\"date\":\"2024-11-15\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Speculation\",\"notes\":\"Meme punt (small)\"}],\"prices\":{\"VAS\":98.2,\"VGS\":132.4,\"CBA\":128.1,\"BHP\":43.5,\"NDQ\":43.0,\"A200\":138.6,\"DHHF\":35.1,\"AAPL\":226.0,\"NVDA\":138.5,\"TSLA\":255.0,\"PYPL\":63.0,\"BTC\":69000.0,\"ETH\":3450.0,\"SOL\":168.0,\"LINK\":14.5,\"DOGE\":0.14},\"priceMeta\":{\"VAS\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Vanguard Australian Shares ETF\",\"chgPct24h\":0.42,\"prevClose\":97.7893},\"VGS\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Vanguard MSCI Intl Shares ETF\",\"chgPct24h\":1.06,\"prevClose\":131.0113},\"CBA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Commonwealth Bank of Australia\",\"chgPct24h\":-1.2,\"prevClose\":129.6559},\"BHP\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BHP Group Ltd\",\"chgPct24h\":-0.55,\"prevClose\":43.7406},\"NDQ\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares Nasdaq 100 ETF\",\"chgPct24h\":0.67,\"prevClose\":42.7138},\"A200\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares Australia 200 ETF\",\"chgPct24h\":-0.23,\"prevClose\":138.9195},\"DHHF\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares DHHF Diversified ETF\",\"chgPct24h\":0.31,\"prevClose\":34.9915},\"AAPL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Apple Inc\",\"chgPct24h\":0.88,\"prevClose\":224.0285},\"NVDA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"NVIDIA Corporation\",\"chgPct24h\":2.14,\"prevClose\":135.5982},\"TSLA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Tesla Inc\",\"chgPct24h\":-1.35,\"prevClose\":258.4896},\"PYPL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"PayPal Holdings Inc\",\"chgPct24h\":-0.4,\"prevClose\":63.253},\"BTC\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Bitcoin\",\"chgPct24h\":-0.84,\"prevClose\":69584.5099},\"ETH\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Ethereum\",\"chgPct24h\":-0.33,\"prevClose\":3461.4227},\"SOL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Solana\",\"chgPct24h\":2.32,\"prevClose\":164.1908},\"LINK\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Chainlink\",\"chgPct24h\":-0.4,\"prevClose\":14.5582},\"DOGE\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Dogecoin\",\"chgPct24h\":3.1,\"prevClose\":0.1358}},\"priceChanges\":{\"VAS\":{\"d1\":0.42,\"d7\":0.46,\"d30\":-4.68,\"d60\":10.13,\"d90\":-11.38},\"VGS\":{\"d1\":1.06,\"d7\":2.8,\"d30\":0.05,\"d60\":-10.03,\"d90\":10.37},\"CBA\":{\"d1\":-1.2,\"d7\":-4.21,\"d30\":1.54,\"d60\":-9.62,\"d90\":-10.46},\"BHP\":{\"d1\":-0.55,\"d7\":-0.98,\"d30\":10.19,\"d60\":-7.79,\"d90\":-3.84},\"NDQ\":{\"d1\":0.67,\"d7\":2.48,\"d30\":12.85,\"d60\":7.62,\"d90\":4.83},\"A200\":{\"d1\":-0.23,\"d7\":2.42,\"d30\":-6.98,\"d60\":17.19,\"d90\":-0.52},\"DHHF\":{\"d1\":0.31,\"d7\":-0.66,\"d30\":-5.41,\"d60\":-1.51,\"d90\":25.81},\"AAPL\":{\"d1\":0.88,\"d7\":0.66,\"d30\":4.8,\"d60\":9.72,\"d90\":3.62},\"NVDA\":{\"d1\":2.14,\"d7\":5.02,\"d30\":-6.62,\"d60\":-9.97,\"d90\":-4.7},\"TSLA\":{\"d1\":-1.35,\"d7\":-1.3,\"d30\":1.41,\"d60\":-1.32,\"d90\":14.28},\"PYPL\":{\"d1\":-0.4,\"d7\":-0.53,\"d30\":-1.41,\"d60\":15.01,\"d90\":19.95},\"BTC\":{\"d1\":-0.84,\"d7\":-2.46,\"d30\":4.64,\"d60\":5.86,\"d90\":28.76},\"ETH\":{\"d1\":-0.33,\"d7\":0.99,\"d30\":-1.67,\"d60\":21.33,\"d90\":-9.1},\"SOL\":{\"d1\":2.32,\"d7\":4.73,\"d30\":8.66,\"d60\":-6.83,\"d90\":9.45},\"LINK\":{\"d1\":-0.4,\"d7\":-2.6,\"d30\":6.7,\"d60\":14.0,\"d90\":13.65},\"DOGE\":{\"d1\":3.1,\"d7\":8.58,\"d30\":-1.1,\"d60\":11.64,\"d90\":14.72}},\"logoOverrides\":{},\"logoCache\":{},\"portfolios\":[{\"id\":\"main\",\"name\":\"My Portfolio\",\"emoji\":\"\\ud83d\\udc64\"}],\"watchlists\":[{\"id\":\"default\",\"name\":\"Watchlist\"},{\"id\":\"crypto-targets\",\"name\":\"Crypto Targets\"},{\"id\":\"life-check\",\"name\":\"Life Check\"}],\"watchlist\":[{\"id\":2001,\"ticker\":\"BTC\",\"assetType\":\"crypto\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"lte\",\"target\":60000,\"remindOn\":\"2025-07-01\",\"notes\":\"Add on a dip toward 60k\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2002,\"ticker\":\"AAPL\",\"assetType\":\"nasdaq\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"lte\",\"target\":200,\"remindOn\":\"\",\"notes\":\"Load more under $200\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2003,\"ticker\":\"NVDA\",\"assetType\":\"nasdaq\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":160,\"remindOn\":\"\",\"notes\":\"Trim if it runs to 160\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2004,\"ticker\":\"ETH\",\"assetType\":\"crypto\",\"listId\":\"crypto-targets\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":4000,\"remindOn\":\"\",\"notes\":\"Take partial profit at 4k\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2005,\"ticker\":\"SOL\",\"assetType\":\"crypto\",\"listId\":\"crypto-targets\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":220,\"remindOn\":\"\",\"notes\":\"Re-entry / profit watch\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2006,\"ticker\":\"CBA\",\"assetType\":\"asx\",\"listId\":\"default\",\"currency\":\"AUD\",\"condition\":\"gte\",\"target\":null,\"remindOn\":\"2025-08-14\",\"notes\":\"Ex-dividend date reminder\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2007,\"ticker\":\"HEALTH\",\"assetType\":\"life\",\"listId\":\"life-check\",\"currency\":\"\",\"condition\":\"gte\",\"target\":null,\"remindOn\":\"2025-05-01\",\"notes\":\"Read 20 minutes each morning\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"lifecheck\",\"lifeCheckId\":3001,\"lifeArea\":\"Personal Development\",\"lifeHorizon\":\"Short Term\"}],\"calendarEvents\":{\"2025-02-12\":[{\"text\":\"CBA half-year results\",\"createdAt\":1717200000000}],\"2025-04-30\":[{\"text\":\"Review portfolio & rebalance\",\"createdAt\":1717200000000}],\"2025-07-31\":[{\"text\":\"NVDA earnings, watch guidance\",\"createdAt\":1717200000000}],\"2025-08-14\":[{\"text\":\"CBA ex-dividend date\",\"createdAt\":1717200000000},{\"text\":\"Reinvest dividend into VAS\",\"createdAt\":1717200000000}]},\"notifications\":[{\"id\":4001,\"ts\":1717196400000,\"ticker\":\"SOL\",\"msg\":\"SOL closed for +$3,200 realised profit\",\"read\":false},{\"id\":4002,\"ts\":1717027200000,\"ticker\":\"BTC\",\"msg\":\"Bought 0.05 BTC @ $61,000\",\"read\":true},{\"id\":4003,\"ts\":1716768000000,\"ticker\":\"PYPL\",\"msg\":\"PYPL position closed -$325 (risk exit)\",\"read\":true},{\"id\":4004,\"ts\":1716595200000,\"ticker\":\"NVDA\",\"msg\":\"NVDA up 2.1% today\",\"read\":true}],\"lifeCheck\":{\"entries\":[{\"id\":3001,\"ts\":1717200000000,\"scores\":{\"Health\":3,\"Wealth\":4,\"Career\":2,\"Relationships\":5,\"Personal Development\":1},\"lowest\":\"Personal Development\",\"tiedLowest\":[\"Personal Development\"],\"selectedAreas\":[\"Personal Development\",\"Career\"],\"why\":{\"Personal Development\":\"Not carving out time to learn new skills.\",\"Career\":\"Feeling a bit plateaued in the current role.\"},\"plans\":{},\"actionDates\":{},\"actions\":[{\"area\":\"Personal Development\",\"horizon\":\"short\",\"label\":\"Short Term\",\"text\":\"Read 20 minutes each morning\",\"date\":\"2025-05-01\"},{\"area\":\"Career\",\"horizon\":\"mid\",\"label\":\"Mid Term\",\"text\":\"Complete a professional certification\",\"date\":\"2025-09-01\"}]}]},\"valueSnapshots\":[],\"newsApi\":{\"provider\":\"marketaux\",\"keys\":{\"marketaux\":\"\",\"finnhub\":\"\",\"alphavantage\":\"\"},\"enabled\":false},\"ui\":{\"privacy\":false,\"bellHistoryMax\":10,\"tipsEnabled\":true},\"dividends\":[{\"ticker\":\"VAS\",\"date\":\"2025-01-08\",\"amount\":412.5,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Quarterly distribution\",\"id\":1735000000000,\"rate\":30,\"withheld\":0},{\"ticker\":\"VAS\",\"date\":\"2024-10-07\",\"amount\":388.2,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Quarterly distribution\",\"id\":1735000000137,\"rate\":30,\"withheld\":0},{\"ticker\":\"CBA\",\"date\":\"2025-03-28\",\"amount\":525.0,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Interim dividend\",\"id\":1735000000274,\"rate\":30,\"withheld\":0},{\"ticker\":\"CBA\",\"date\":\"2024-09-27\",\"amount\":615.0,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Final dividend\",\"id\":1735000000411,\"rate\":30,\"withheld\":0},{\"ticker\":\"BHP\",\"date\":\"2025-03-20\",\"amount\":298.4,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Interim dividend\",\"id\":1735000000548,\"rate\":30,\"withheld\":0},{\"ticker\":\"DHHF\",\"date\":\"2025-01-15\",\"amount\":176.8,\"currency\":\"AUD\",\"franked\":72,\"portfolio\":\"main\",\"note\":\"Quarterly distribution (partly franked)\",\"id\":1735000000685,\"rate\":30,\"withheld\":0},{\"ticker\":\"VGS\",\"date\":\"2025-01-10\",\"amount\":142.3,\"currency\":\"AUD\",\"franked\":0,\"portfolio\":\"main\",\"note\":\"Distribution (unfranked, intl)\",\"id\":1735000000822,\"rate\":30,\"withheld\":0},{\"ticker\":\"AAPL\",\"date\":\"2025-02-13\",\"amount\":12.4,\"currency\":\"USD\",\"franked\":0,\"portfolio\":\"main\",\"note\":\"Quarterly dividend\",\"id\":1735000001233,\"rate\":30,\"withheld\":2.19}],\"budget\":{\"entries\":[{\"id\":1735500000031,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2026-06-02\",\"note\":\"Dinner out\"},{\"id\":1735500000030,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":46.4,\"currency\":\"AUD\",\"date\":\"2026-06-03\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000029,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2026-06-04\",\"note\":\"Electricity\"},{\"id\":1735500000028,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":119.5,\"currency\":\"AUD\",\"date\":\"2026-06-06\",\"note\":\"Woolworths\"},{\"id\":1735500000026,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":45.2,\"currency\":\"AUD\",\"date\":\"2026-06-10\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000025,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":116.0,\"currency\":\"AUD\",\"date\":\"2026-06-13\",\"note\":\"Woolworths\"},{\"id\":1735500000027,\"type\":\"expense\",\"category\":\"Subscriptions\",\"amount\":42.97,\"currency\":\"AUD\",\"date\":\"2026-06-13\",\"note\":\"Streaming + Spotify\",\"recur\":\"monthly\",\"recurUntil\":\"\"},{\"id\":1735500000024,\"type\":\"income\",\"category\":\"Salary\",\"amount\":2450.0,\"currency\":\"AUD\",\"date\":\"2026-06-14\",\"note\":\"Pay run\",\"recur\":\"fortnightly\",\"recurUntil\":\"\"},{\"id\":1735500000023,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2026-06-16\",\"note\":\"Dinner out\"},{\"id\":1735500000022,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":44.0,\"currency\":\"AUD\",\"date\":\"2026-06-17\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000021,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":112.5,\"currency\":\"AUD\",\"date\":\"2026-06-20\",\"note\":\"Woolworths\"},{\"id\":1735500000035,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":61.5,\"currency\":\"AUD\",\"date\":\"2026-06-20\",\"note\":\"Lunch\"},{\"id\":1735500000020,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":42.8,\"currency\":\"AUD\",\"date\":\"2026-06-24\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000019,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2026-06-25\",\"note\":\"Electricity\"},{\"id\":1735500000018,\"type\":\"expense\",\"category\":\"Housing\",\"amount\":1850.0,\"currency\":\"AUD\",\"date\":\"2026-06-26\",\"note\":\"Rent\",\"recur\":\"monthly\",\"recurUntil\":\"\"},{\"id\":1735500000017,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":109.0,\"currency\":\"AUD\",\"date\":\"2026-06-27\",\"note\":\"Woolworths\"},{\"id\":1735500000014,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2026-06-30\",\"note\":\"Dinner out\"},{\"id\":1735500000013,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":41.6,\"currency\":\"AUD\",\"date\":\"2026-07-01\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000015,\"type\":\"income\",\"category\":\"Side Income\",\"amount\":320.0,\"currency\":\"AUD\",\"date\":\"2026-07-03\",\"note\":\"Freelance invoice\"},{\"id\":1735500000012,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":105.5,\"currency\":\"AUD\",\"date\":\"2026-07-04\",\"note\":\"Woolworths\"},{\"id\":1735500000034,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":96.0,\"currency\":\"AUD\",\"date\":\"2026-07-04\",\"note\":\"Dinner out\"},{\"id\":1735500000010,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":40.4,\"currency\":\"AUD\",\"date\":\"2026-07-08\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000009,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":102.0,\"currency\":\"AUD\",\"date\":\"2026-07-11\",\"note\":\"Woolworths\"},{\"id\":1735500000007,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2026-07-14\",\"note\":\"Dinner out\"},{\"id\":1735500000006,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":39.2,\"currency\":\"AUD\",\"date\":\"2026-07-15\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000005,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2026-07-16\",\"note\":\"Electricity\"},{\"id\":1735500000004,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":98.5,\"currency\":\"AUD\",\"date\":\"2026-07-18\",\"note\":\"Woolworths\"},{\"id\":1735500000033,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":52.9,\"currency\":\"AUD\",\"date\":\"2026-07-18\",\"note\":\"Lunch\"},{\"id\":1735500000003,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":38.0,\"currency\":\"AUD\",\"date\":\"2026-07-22\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000001,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":95.0,\"currency\":\"AUD\",\"date\":\"2026-07-25\",\"note\":\"Woolworths\"},{\"id\":1735500000032,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":78.4,\"currency\":\"AUD\",\"date\":\"2026-07-25\",\"note\":\"Dinner out\"},{\"id\":1736100000001,\"type\":\"expense\",\"category\":\"Other\",\"amount\":2480.0,\"currency\":\"AUD\",\"date\":\"2026-07-24\",\"note\":\"Replacement windows\",\"oneOff\":true,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000002,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":168.9,\"currency\":\"AUD\",\"date\":\"2026-08-13\",\"note\":\"Quarterly water bill\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000003,\"type\":\"income\",\"category\":\"Side Income\",\"amount\":540.0,\"currency\":\"AUD\",\"date\":\"2026-08-07\",\"note\":\"Invoice due\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000100,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":22.5,\"currency\":\"AUD\",\"date\":\"2026-08-01\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000101,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":27.0,\"currency\":\"AUD\",\"date\":\"2026-07-25\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000102,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":18.0,\"currency\":\"AUD\",\"date\":\"2026-07-18\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000103,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":24.5,\"currency\":\"AUD\",\"date\":\"2026-07-11\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"}],\"categoryBudgets\":{\"Groceries\":450,\"Entertainment\":200,\"Transport\":180,\"Restaurants\":250,\"Coffee\":100},\"overallBudget\":3200,\"customCats\":[\"Coffee\"]},\"wealthPlan\":{\"age\":34,\"spend\":62000,\"extra\":35400,\"superBal\":96500,\"contrib\":1400,\"superContrib\":950,\"ret\":5,\"swr\":4},\"cgtCarriedLoss\":1850,\"amitAdjustments\":[{\"id\":1735900000001,\"kind\":\"amit\",\"ticker\":\"VAS\",\"fy\":\"2025\",\"date\":\"\",\"increase\":142.8,\"decrease\":0,\"portfolio\":\"all\"},{\"id\":1735900000002,\"kind\":\"amit\",\"ticker\":\"DHHF\",\"fy\":\"2025\",\"date\":\"\",\"increase\":0,\"decrease\":86.4,\"portfolio\":\"all\"},{\"id\":1735900000003,\"kind\":\"roc\",\"ticker\":\"VGS\",\"fy\":\"\",\"date\":\"2025-02-20\",\"increase\":0,\"decrease\":54.0,\"portfolio\":\"all\"}],\"splitAdjustments\":[{\"id\":1736300000001,\"ticker\":\"NDQ\",\"date\":\"2025-03-14\",\"newUnits\":2,\"oldUnits\":1,\"portfolio\":\"all\"}],\"debtRecycling\":{\"loan\":540000,\"rate\":6.14,\"mtr\":39,\"events\":[{\"id\":1736200000001,\"amount\":25000,\"date\":\"2024-08-15\",\"note\":\"Split 1, into VAS\"},{\"id\":1736200000002,\"amount\":18000,\"date\":\"2025-02-10\",\"note\":\"Split 2, into VGS\"}]},\"cgtMethod\":\"fifo\",\"agePension\":{\"status\":\"couple\",\"homeowner\":true,\"startAge\":67,\"lower\":470000,\"upper\":1045500,\"maxYear\":44855,\"taper\":3},\"concessional\":{\"cap\":30000,\"unused\":48000,\"thisYear\":11400,\"tsbLimit\":500000}}");}catch(e){}</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>/*DEMO SEED*/try{localStorage.setItem('folio_demo_state', "{\"transactions\":[{\"id\":1001,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VAS\",\"units\":50,\"price\":88.0,\"total\":4400.0,\"date\":\"2025-07-15\",\"fees\":9.5,\"emotion\":\"Patient\",\"reason\":\"Portfolio diversification\",\"notes\":\"Core ETF, monthly DCA\"},{\"id\":1002,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VAS\",\"units\":30,\"price\":92.4,\"total\":2772.0,\"date\":\"2026-01-10\",\"fees\":9.5,\"emotion\":\"Calm\",\"reason\":\"DCA (Down cost Average)\",\"notes\":\"\"},{\"id\":1003,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"VGS\",\"units\":40,\"price\":110.2,\"total\":4408.0,\"date\":\"2025-08-05\",\"fees\":9.5,\"emotion\":\"Confident\",\"reason\":\"Portfolio diversification\",\"notes\":\"Global exposure\"},{\"id\":1004,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"CBA\",\"units\":20,\"price\":105.0,\"total\":2100.0,\"date\":\"2025-06-20\",\"fees\":10.0,\"emotion\":\"Confident\",\"reason\":\"Dividend yield\",\"notes\":\"Franking credits\"},{\"id\":1005,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"CBA\",\"units\":10,\"price\":118.5,\"total\":1185.0,\"date\":\"2026-02-12\",\"fees\":0,\"emotion\":\"Calm\",\"reason\":\"Dividend yield\",\"notes\":\"\"},{\"id\":1006,\"type\":\"buy\",\"assetType\":\"asx\",\"currency\":\"AUD\",\"portfolio\":\"main\",\"ticker\":\"BHP\",\"units\":60,\"price\":45.1,\"total\":2706.0,\"date\":\"2025-09-18\",\"fees\":10.0,\"emotion\":\"Uncertain\",\"reason\":\"Sector trend\",\"notes\":\"Iron ore cycle\"},{\"id\":1007,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"AAPL\",\"units\":15,\"price\":180.0,\"total\":2700.0,\"date\":\"2025-07-28\",\"fees\":5.0,\"emotion\":\"Confident\",\"reason\":\"Fundamentals\",\"notes\":\"\"},{\"id\":1008,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"NVDA\",\"units\":12,\"price\":90.0,\"total\":1080.0,\"date\":\"2025-08-15\",\"fees\":5.0,\"emotion\":\"Excited\",\"reason\":\"Earnings growth\",\"notes\":\"AI tailwind\"},{\"id\":1009,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"NVDA\",\"units\":8,\"price\":118.0,\"total\":944.0,\"date\":\"2026-03-02\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Momentum\",\"notes\":\"Chased the breakout\"},{\"id\":1010,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"TSLA\",\"units\":20,\"price\":240.0,\"total\":4800.0,\"date\":\"2025-10-06\",\"fees\":5.0,\"emotion\":\"Excited\",\"reason\":\"Speculation\",\"notes\":\"\"},{\"id\":1011,\"type\":\"sell\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"TSLA\",\"units\":10,\"price\":250.0,\"total\":2500.0,\"date\":\"2026-06-15\",\"fees\":5.0,\"emotion\":\"Happy\",\"reason\":\"Recouped original stake\",\"notes\":\"Trimmed half\"},{\"id\":1012,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"BTC\",\"units\":0.15,\"price\":42000.0,\"total\":6300.0,\"date\":\"2025-06-10\",\"fees\":0,\"emotion\":\"Confident\",\"reason\":\"Macro theme\",\"notes\":\"Digital gold thesis\"},{\"id\":1013,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"BTC\",\"units\":0.05,\"price\":61000.0,\"total\":3050.0,\"date\":\"2026-04-20\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Momentum\",\"notes\":\"\"},{\"id\":1014,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"ETH\",\"units\":2.0,\"price\":2300.0,\"total\":4600.0,\"date\":\"2025-07-05\",\"fees\":0,\"emotion\":\"Confident\",\"reason\":\"Product adoption\",\"notes\":\"\"},{\"id\":1015,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"SOL\",\"units\":40,\"price\":95.0,\"total\":3800.0,\"date\":\"2025-08-22\",\"fees\":2.0,\"emotion\":\"Excited\",\"reason\":\"Speculation\",\"notes\":\"\"},{\"id\":1016,\"type\":\"sell\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"SOL\",\"units\":40,\"price\":175.0,\"total\":7000.0,\"date\":\"2026-08-10\",\"fees\":0,\"emotion\":\"Relieved\",\"reason\":\"Target price hit\",\"notes\":\"Closed for +$3,200, my best trade\"},{\"id\":1017,\"type\":\"buy\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"PYPL\",\"units\":25,\"price\":75.0,\"total\":1875.0,\"date\":\"2025-07-12\",\"fees\":5.0,\"emotion\":\"Confident\",\"reason\":\"Valuation\",\"notes\":\"Thought it was cheap\"},{\"id\":1018,\"type\":\"sell\",\"assetType\":\"nasdaq\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"PYPL\",\"units\":25,\"price\":62.0,\"total\":1550.0,\"date\":\"2026-05-05\",\"fees\":0,\"emotion\":\"Vindicated\",\"reason\":\"Profit taking\",\"notes\":\"Cut the loss, thesis broke\"},{\"id\":1019,\"type\":\"buy\",\"assetType\":\"crypto\",\"currency\":\"USD\",\"portfolio\":\"main\",\"ticker\":\"DOGE\",\"units\":5000,\"price\":0.16,\"total\":800.0,\"date\":\"2026-04-15\",\"fees\":0,\"emotion\":\"FOMO\",\"reason\":\"Speculation\",\"notes\":\"Meme punt (small)\"}],\"prices\":{\"VAS\":98.2,\"VGS\":132.4,\"CBA\":128.1,\"BHP\":43.5,\"NDQ\":43.0,\"A200\":138.6,\"DHHF\":35.1,\"AAPL\":226.0,\"NVDA\":138.5,\"TSLA\":255.0,\"PYPL\":63.0,\"BTC\":69000.0,\"ETH\":3450.0,\"SOL\":168.0,\"LINK\":14.5,\"DOGE\":0.14},\"priceMeta\":{\"VAS\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Vanguard Australian Shares ETF\",\"chgPct24h\":0.42,\"prevClose\":97.7893},\"VGS\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Vanguard MSCI Intl Shares ETF\",\"chgPct24h\":1.06,\"prevClose\":131.0113},\"CBA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Commonwealth Bank of Australia\",\"chgPct24h\":-1.2,\"prevClose\":129.6559},\"BHP\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BHP Group Ltd\",\"chgPct24h\":-0.55,\"prevClose\":43.7406},\"NDQ\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares Nasdaq 100 ETF\",\"chgPct24h\":0.67,\"prevClose\":42.7138},\"A200\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares Australia 200 ETF\",\"chgPct24h\":-0.23,\"prevClose\":138.9195},\"DHHF\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"BetaShares DHHF Diversified ETF\",\"chgPct24h\":0.31,\"prevClose\":34.9915},\"AAPL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Apple Inc\",\"chgPct24h\":0.88,\"prevClose\":224.0285},\"NVDA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"NVIDIA Corporation\",\"chgPct24h\":2.14,\"prevClose\":135.5982},\"TSLA\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Tesla Inc\",\"chgPct24h\":-1.35,\"prevClose\":258.4896},\"PYPL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"PayPal Holdings Inc\",\"chgPct24h\":-0.4,\"prevClose\":63.253},\"BTC\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Bitcoin\",\"chgPct24h\":-0.84,\"prevClose\":69584.5099},\"ETH\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Ethereum\",\"chgPct24h\":-0.33,\"prevClose\":3461.4227},\"SOL\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Solana\",\"chgPct24h\":2.32,\"prevClose\":164.1908},\"LINK\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Chainlink\",\"chgPct24h\":-0.4,\"prevClose\":14.5582},\"DOGE\":{\"auto\":true,\"fetched\":1717200000000,\"source\":\"demo\",\"companyName\":\"Dogecoin\",\"chgPct24h\":3.1,\"prevClose\":0.1358}},\"priceChanges\":{\"VAS\":{\"d1\":0.42,\"d7\":0.46,\"d30\":-4.68,\"d60\":10.13,\"d90\":-11.38},\"VGS\":{\"d1\":1.06,\"d7\":2.8,\"d30\":0.05,\"d60\":-10.03,\"d90\":10.37},\"CBA\":{\"d1\":-1.2,\"d7\":-4.21,\"d30\":1.54,\"d60\":-9.62,\"d90\":-10.46},\"BHP\":{\"d1\":-0.55,\"d7\":-0.98,\"d30\":10.19,\"d60\":-7.79,\"d90\":-3.84},\"NDQ\":{\"d1\":0.67,\"d7\":2.48,\"d30\":12.85,\"d60\":7.62,\"d90\":4.83},\"A200\":{\"d1\":-0.23,\"d7\":2.42,\"d30\":-6.98,\"d60\":17.19,\"d90\":-0.52},\"DHHF\":{\"d1\":0.31,\"d7\":-0.66,\"d30\":-5.41,\"d60\":-1.51,\"d90\":25.81},\"AAPL\":{\"d1\":0.88,\"d7\":0.66,\"d30\":4.8,\"d60\":9.72,\"d90\":3.62},\"NVDA\":{\"d1\":2.14,\"d7\":5.02,\"d30\":-6.62,\"d60\":-9.97,\"d90\":-4.7},\"TSLA\":{\"d1\":-1.35,\"d7\":-1.3,\"d30\":1.41,\"d60\":-1.32,\"d90\":14.28},\"PYPL\":{\"d1\":-0.4,\"d7\":-0.53,\"d30\":-1.41,\"d60\":15.01,\"d90\":19.95},\"BTC\":{\"d1\":-0.84,\"d7\":-2.46,\"d30\":4.64,\"d60\":5.86,\"d90\":28.76},\"ETH\":{\"d1\":-0.33,\"d7\":0.99,\"d30\":-1.67,\"d60\":21.33,\"d90\":-9.1},\"SOL\":{\"d1\":2.32,\"d7\":4.73,\"d30\":8.66,\"d60\":-6.83,\"d90\":9.45},\"LINK\":{\"d1\":-0.4,\"d7\":-2.6,\"d30\":6.7,\"d60\":14.0,\"d90\":13.65},\"DOGE\":{\"d1\":3.1,\"d7\":8.58,\"d30\":-1.1,\"d60\":11.64,\"d90\":14.72}},\"logoOverrides\":{},\"logoCache\":{},\"portfolios\":[{\"id\":\"main\",\"name\":\"My Portfolio\",\"emoji\":\"\\ud83d\\udc64\"}],\"watchlists\":[{\"id\":\"default\",\"name\":\"Watchlist\"},{\"id\":\"crypto-targets\",\"name\":\"Crypto Targets\"},{\"id\":\"life-check\",\"name\":\"Life Check\"}],\"watchlist\":[{\"id\":2001,\"ticker\":\"BTC\",\"assetType\":\"crypto\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"lte\",\"target\":60000,\"remindOn\":\"2025-07-01\",\"notes\":\"Add on a dip toward 60k\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2002,\"ticker\":\"AAPL\",\"assetType\":\"nasdaq\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"lte\",\"target\":200,\"remindOn\":\"\",\"notes\":\"Load more under $200\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2003,\"ticker\":\"NVDA\",\"assetType\":\"nasdaq\",\"listId\":\"default\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":160,\"remindOn\":\"\",\"notes\":\"Trim if it runs to 160\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2004,\"ticker\":\"ETH\",\"assetType\":\"crypto\",\"listId\":\"crypto-targets\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":4000,\"remindOn\":\"\",\"notes\":\"Take partial profit at 4k\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2005,\"ticker\":\"SOL\",\"assetType\":\"crypto\",\"listId\":\"crypto-targets\",\"currency\":\"USD\",\"condition\":\"gte\",\"target\":220,\"remindOn\":\"\",\"notes\":\"Re-entry / profit watch\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2006,\"ticker\":\"CBA\",\"assetType\":\"asx\",\"listId\":\"default\",\"currency\":\"AUD\",\"condition\":\"gte\",\"target\":null,\"remindOn\":\"2025-08-14\",\"notes\":\"Ex-dividend date reminder\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"\"},{\"id\":2007,\"ticker\":\"HEALTH\",\"assetType\":\"life\",\"listId\":\"life-check\",\"currency\":\"\",\"condition\":\"gte\",\"target\":null,\"remindOn\":\"2025-05-01\",\"notes\":\"Read 20 minutes each morning\",\"createdAt\":1717200000000,\"triggered\":false,\"reminded\":false,\"source\":\"lifecheck\",\"lifeCheckId\":3001,\"lifeArea\":\"Personal Development\",\"lifeHorizon\":\"Short Term\"}],\"calendarEvents\":{\"2025-02-12\":[{\"text\":\"CBA half-year results\",\"createdAt\":1717200000000}],\"2025-04-30\":[{\"text\":\"Review portfolio & rebalance\",\"createdAt\":1717200000000}],\"2025-07-31\":[{\"text\":\"NVDA earnings, watch guidance\",\"createdAt\":1717200000000}],\"2025-08-14\":[{\"text\":\"CBA ex-dividend date\",\"createdAt\":1717200000000},{\"text\":\"Reinvest dividend into VAS\",\"createdAt\":1717200000000}]},\"notifications\":[{\"id\":4001,\"ts\":1717196400000,\"ticker\":\"SOL\",\"msg\":\"SOL closed for +$3,200 realised profit\",\"read\":false},{\"id\":4002,\"ts\":1717027200000,\"ticker\":\"BTC\",\"msg\":\"Bought 0.05 BTC @ $61,000\",\"read\":true},{\"id\":4003,\"ts\":1716768000000,\"ticker\":\"PYPL\",\"msg\":\"PYPL position closed -$325 (risk exit)\",\"read\":true},{\"id\":4004,\"ts\":1716595200000,\"ticker\":\"NVDA\",\"msg\":\"NVDA up 2.1% today\",\"read\":true}],\"lifeCheck\":{\"entries\":[{\"id\":3001,\"ts\":1717200000000,\"scores\":{\"Health\":3,\"Wealth\":4,\"Career\":2,\"Relationships\":5,\"Personal Development\":1},\"lowest\":\"Personal Development\",\"tiedLowest\":[\"Personal Development\"],\"selectedAreas\":[\"Personal Development\",\"Career\"],\"why\":{\"Personal Development\":\"Not carving out time to learn new skills.\",\"Career\":\"Feeling a bit plateaued in the current role.\"},\"plans\":{},\"actionDates\":{},\"actions\":[{\"area\":\"Personal Development\",\"horizon\":\"short\",\"label\":\"Short Term\",\"text\":\"Read 20 minutes each morning\",\"date\":\"2025-05-01\"},{\"area\":\"Career\",\"horizon\":\"mid\",\"label\":\"Mid Term\",\"text\":\"Complete a professional certification\",\"date\":\"2025-09-01\"}]}]},\"valueSnapshots\":[],\"newsApi\":{\"provider\":\"marketaux\",\"keys\":{\"marketaux\":\"\",\"finnhub\":\"\",\"alphavantage\":\"\"},\"enabled\":false},\"ui\":{\"privacy\":false,\"bellHistoryMax\":10,\"tipsEnabled\":true},\"dividends\":[{\"ticker\":\"VAS\",\"date\":\"2026-06-08\",\"amount\":412.5,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Quarterly distribution\",\"id\":1735000000000,\"rate\":30,\"withheld\":0},{\"ticker\":\"VAS\",\"date\":\"2026-03-07\",\"amount\":388.2,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Quarterly distribution\",\"id\":1735000000137,\"rate\":30,\"withheld\":0},{\"ticker\":\"CBA\",\"date\":\"2026-08-28\",\"amount\":525.0,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Interim dividend\",\"id\":1735000000274,\"rate\":30,\"withheld\":0},{\"ticker\":\"CBA\",\"date\":\"2026-02-27\",\"amount\":615.0,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Final dividend\",\"id\":1735000000411,\"rate\":30,\"withheld\":0},{\"ticker\":\"BHP\",\"date\":\"2026-08-20\",\"amount\":298.4,\"currency\":\"AUD\",\"franked\":100,\"portfolio\":\"main\",\"note\":\"Interim dividend\",\"id\":1735000000548,\"rate\":30,\"withheld\":0},{\"ticker\":\"DHHF\",\"date\":\"2026-06-15\",\"amount\":176.8,\"currency\":\"AUD\",\"franked\":72,\"portfolio\":\"main\",\"note\":\"Quarterly distribution (partly franked)\",\"id\":1735000000685,\"rate\":30,\"withheld\":0},{\"ticker\":\"VGS\",\"date\":\"2026-06-10\",\"amount\":142.3,\"currency\":\"AUD\",\"franked\":0,\"portfolio\":\"main\",\"note\":\"Distribution (unfranked, intl)\",\"id\":1735000000822,\"rate\":30,\"withheld\":0},{\"ticker\":\"AAPL\",\"date\":\"2026-07-13\",\"amount\":12.4,\"currency\":\"USD\",\"franked\":0,\"portfolio\":\"main\",\"note\":\"Quarterly dividend\",\"id\":1735000001233,\"rate\":30,\"withheld\":2.19}],\"budget\":{\"entries\":[{\"id\":1735500000031,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2027-11-02\",\"note\":\"Dinner out\"},{\"id\":1735500000030,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":46.4,\"currency\":\"AUD\",\"date\":\"2027-11-03\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000029,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2027-11-04\",\"note\":\"Electricity\"},{\"id\":1735500000028,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":119.5,\"currency\":\"AUD\",\"date\":\"2027-11-06\",\"note\":\"Woolworths\"},{\"id\":1735500000026,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":45.2,\"currency\":\"AUD\",\"date\":\"2027-11-10\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000025,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":116.0,\"currency\":\"AUD\",\"date\":\"2027-11-13\",\"note\":\"Woolworths\"},{\"id\":1735500000027,\"type\":\"expense\",\"category\":\"Subscriptions\",\"amount\":42.97,\"currency\":\"AUD\",\"date\":\"2027-11-13\",\"note\":\"Streaming + Spotify\",\"recur\":\"monthly\",\"recurUntil\":\"\"},{\"id\":1735500000024,\"type\":\"income\",\"category\":\"Salary\",\"amount\":2450.0,\"currency\":\"AUD\",\"date\":\"2027-11-14\",\"note\":\"Pay run\",\"recur\":\"fortnightly\",\"recurUntil\":\"\"},{\"id\":1735500000023,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2027-11-16\",\"note\":\"Dinner out\"},{\"id\":1735500000022,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":44.0,\"currency\":\"AUD\",\"date\":\"2027-11-17\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000021,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":112.5,\"currency\":\"AUD\",\"date\":\"2027-11-20\",\"note\":\"Woolworths\"},{\"id\":1735500000035,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":61.5,\"currency\":\"AUD\",\"date\":\"2027-11-20\",\"note\":\"Lunch\"},{\"id\":1735500000020,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":42.8,\"currency\":\"AUD\",\"date\":\"2027-11-24\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000019,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2027-11-25\",\"note\":\"Electricity\"},{\"id\":1735500000018,\"type\":\"expense\",\"category\":\"Housing\",\"amount\":1850.0,\"currency\":\"AUD\",\"date\":\"2027-11-26\",\"note\":\"Rent\",\"recur\":\"monthly\",\"recurUntil\":\"\"},{\"id\":1735500000017,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":109.0,\"currency\":\"AUD\",\"date\":\"2027-11-27\",\"note\":\"Woolworths\"},{\"id\":1735500000014,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2027-11-30\",\"note\":\"Dinner out\"},{\"id\":1735500000013,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":41.6,\"currency\":\"AUD\",\"date\":\"2027-12-01\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000015,\"type\":\"income\",\"category\":\"Side Income\",\"amount\":320.0,\"currency\":\"AUD\",\"date\":\"2027-12-03\",\"note\":\"Freelance invoice\"},{\"id\":1735500000012,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":105.5,\"currency\":\"AUD\",\"date\":\"2027-12-04\",\"note\":\"Woolworths\"},{\"id\":1735500000034,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":96.0,\"currency\":\"AUD\",\"date\":\"2027-12-04\",\"note\":\"Dinner out\"},{\"id\":1735500000010,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":40.4,\"currency\":\"AUD\",\"date\":\"2027-12-08\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000009,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":102.0,\"currency\":\"AUD\",\"date\":\"2027-12-11\",\"note\":\"Woolworths\"},{\"id\":1735500000007,\"type\":\"expense\",\"category\":\"Entertainment\",\"amount\":65.0,\"currency\":\"AUD\",\"date\":\"2027-12-14\",\"note\":\"Dinner out\"},{\"id\":1735500000006,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":39.2,\"currency\":\"AUD\",\"date\":\"2027-12-15\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000005,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":142.3,\"currency\":\"AUD\",\"date\":\"2027-12-16\",\"note\":\"Electricity\"},{\"id\":1735500000004,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":98.5,\"currency\":\"AUD\",\"date\":\"2027-12-18\",\"note\":\"Woolworths\"},{\"id\":1735500000033,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":52.9,\"currency\":\"AUD\",\"date\":\"2027-12-18\",\"note\":\"Lunch\"},{\"id\":1735500000003,\"type\":\"expense\",\"category\":\"Transport\",\"amount\":38.0,\"currency\":\"AUD\",\"date\":\"2027-12-22\",\"note\":\"Fuel + tolls\"},{\"id\":1735500000001,\"type\":\"expense\",\"category\":\"Groceries\",\"amount\":95.0,\"currency\":\"AUD\",\"date\":\"2027-12-25\",\"note\":\"Woolworths\"},{\"id\":1735500000032,\"type\":\"expense\",\"category\":\"Restaurants\",\"amount\":78.4,\"currency\":\"AUD\",\"date\":\"2027-12-25\",\"note\":\"Dinner out\"},{\"id\":1736100000001,\"type\":\"expense\",\"category\":\"Other\",\"amount\":2480.0,\"currency\":\"AUD\",\"date\":\"2027-12-24\",\"note\":\"Replacement windows\",\"oneOff\":true,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000002,\"type\":\"expense\",\"category\":\"Utilities\",\"amount\":168.9,\"currency\":\"AUD\",\"date\":\"2028-01-13\",\"note\":\"Quarterly water bill\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000003,\"type\":\"income\",\"category\":\"Side Income\",\"amount\":540.0,\"currency\":\"AUD\",\"date\":\"2028-01-07\",\"note\":\"Invoice due\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000100,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":22.5,\"currency\":\"AUD\",\"date\":\"2028-01-01\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000101,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":27.0,\"currency\":\"AUD\",\"date\":\"2027-12-25\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000102,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":18.0,\"currency\":\"AUD\",\"date\":\"2027-12-18\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"},{\"id\":1736100000103,\"type\":\"expense\",\"category\":\"Coffee\",\"amount\":24.5,\"currency\":\"AUD\",\"date\":\"2027-12-11\",\"note\":\"Flat whites\",\"oneOff\":false,\"recur\":\"\",\"recurUntil\":\"\"}],\"categoryBudgets\":{\"Groceries\":450,\"Entertainment\":200,\"Transport\":180,\"Restaurants\":250,\"Coffee\":100},\"overallBudget\":3200,\"customCats\":[\"Coffee\"]},\"wealthPlan\":{\"age\":34,\"spend\":62000,\"extra\":35400,\"superBal\":96500,\"contrib\":1400,\"superContrib\":950,\"ret\":5,\"swr\":4},\"cgtCarriedLoss\":1850,\"amitAdjustments\":[{\"id\":1735900000001,\"kind\":\"amit\",\"ticker\":\"VAS\",\"fy\":\"2025\",\"date\":\"\",\"increase\":142.8,\"decrease\":0,\"portfolio\":\"all\"},{\"id\":1735900000002,\"kind\":\"amit\",\"ticker\":\"DHHF\",\"fy\":\"2025\",\"date\":\"\",\"increase\":0,\"decrease\":86.4,\"portfolio\":\"all\"},{\"id\":1735900000003,\"kind\":\"roc\",\"ticker\":\"VGS\",\"fy\":\"\",\"date\":\"2026-07-20\",\"increase\":0,\"decrease\":54.0,\"portfolio\":\"all\"}],\"splitAdjustments\":[{\"id\":1736300000001,\"ticker\":\"NDQ\",\"date\":\"2026-08-14\",\"newUnits\":2,\"oldUnits\":1,\"portfolio\":\"all\"}],\"debtRecycling\":{\"loan\":540000,\"rate\":6.14,\"mtr\":39,\"events\":[{\"id\":1736200000001,\"amount\":25000,\"date\":\"2026-01-15\",\"note\":\"Split 1, into VAS\"},{\"id\":1736200000002,\"amount\":18000,\"date\":\"2026-07-10\",\"note\":\"Split 2, into VGS\"}]},\"cgtMethod\":\"fifo\",\"agePension\":{\"status\":\"couple\",\"homeowner\":true,\"startAge\":67,\"lower\":470000,\"upper\":1045500,\"maxYear\":44855,\"taper\":3},\"concessional\":{\"cap\":30000,\"unused\":48000,\"thisYear\":11400,\"tsbLimit\":500000},\"fx\":{\"audusd\":0.655,\"ts\":1786668333980}}");}catch(e){}</script>
 <script>
 /* ── Sandbox-safe fetch: some environments (webviews, sandboxed previews) proxy
    fetch via postMessage and can't clone AbortSignal. Detect that failure and
@@ -3889,15 +3984,16 @@ function loadCryptoCsv(text) {
     });
   }
   if (!txs.length) { alert('No valid transactions found.'); return; }
-  const choice = state.transactions.length>0
-    ? confirm(`Import ${txs.length} crypto transactions?\n\nOK = Merge with existing\nCancel = Replace all`)
-    : true;
-  if (choice === null) return;
-  if (choice) { state.transactions = [...state.transactions, ...txs]; }
-  else { state.transactions = txs; state.prices={}; state.priceMeta={}; }
-  save();
-  setTimeout(fetchStockPeriodChanges, 1200);
-  renderPortfolio(); notify('₿ Loaded '+txs.length+' crypto transactions');
+  askImportOptions(txs, { label:'CoinMarketCap', onConfirm: o => {
+    if (o.replace) { state.transactions = txs; state.prices={}; state.priceMeta={}; }
+    else { state.transactions = [...state.transactions, ...txs]; }
+    save();
+    setTimeout(fetchStockPeriodChanges, 1200);
+    renderPortfolioTabs && renderPortfolioTabs();
+    renderPortfolioDropdown && renderPortfolioDropdown();
+    renderPortfolio(); renderHistory && renderHistory();
+    notify('₿ Loaded '+txs.length+' crypto transactions');
+  }});
 }
 
 // ── Load / Import menu ─────────────────────────────────────────────
@@ -3933,6 +4029,77 @@ function _impDate(raw){
   const d = new Date(raw); if(!isNaN(d.getTime())) return d.toISOString().slice(0,10);
   return new Date().toISOString().slice(0,10);
 }
+
+
+// ── One import dialog for every CSV path ──
+// Asks where the rows should land and whether to add or replace, instead of the
+// old browser confirm that only offered merge or replace.
+let _impPending = null;
+function askImportOptions(txs, opts){
+  opts = opts || {};
+  _impPending = { txs, onConfirm: opts.onConfirm, label: opts.label || 'CSV' };
+  const ports = (state.portfolios||[]).filter(p=>p && p.id);
+  const fileHasPortfolios = new Set(txs.map(t=>t.portfolio||'main')).size > 1
+    || (txs.length && txs[0].portfolio && txs[0].portfolio !== 'main');
+  // Nothing to ask if there is one portfolio, no portfolio data and no existing rows
+  if (ports.length <= 1 && !fileHasPortfolios && !state.transactions.length){
+    _impPending = null;
+    opts.onConfirm && opts.onConfirm({ dest:'__keep__', replace:true });
+    return;
+  }
+  const c = document.getElementById('imp-dest-count');
+  if (c) c.textContent = txs.length + ' transaction' + (txs.length===1?'':'s') + ' from ' + (opts.label||'CSV') + '.';
+  const dest = document.getElementById('imp-dest-options');
+  if (dest){
+    let html = '';
+    if (fileHasPortfolios){
+      html += `<label class="imp-opt"><input type="radio" name="imp-dest" value="__keep__" checked>
+        <span><strong>Keep the portfolios in the file</strong><small>The file already says which portfolio each row belongs to</small></span></label>`;
+    }
+    ports.forEach((p,i)=>{
+      const checked = (!fileHasPortfolios && i===0) ? ' checked' : '';
+      html += `<label class="imp-opt"><input type="radio" name="imp-dest" value="${p.id}"${checked}>
+        <span><strong>${_escapeHtml(p.name||p.id)}</strong><small>Put every row into this portfolio</small></span></label>`;
+    });
+    dest.innerHTML = html;
+  }
+  const mode = document.getElementById('imp-mode-options');
+  if (mode){
+    const has = state.transactions.length;
+    mode.innerHTML =
+      `<label class="imp-opt"><input type="radio" name="imp-mode" value="add"${has?' checked':''}>
+        <span><strong>Add to what you already have</strong><small>${has? ('Keeps your '+has+' existing transactions, skipping any duplicates') : 'Nothing here yet, so this is the same as replacing'}</small></span></label>
+       <label class="imp-opt"><input type="radio" name="imp-mode" value="replace"${has?'':' checked'}>
+        <span><strong>Replace everything</strong><small>Deletes your current transactions first. Cannot be undone.</small></span></label>`;
+  }
+  const m = document.getElementById('import-dest-modal');
+  if (m) m.style.display = 'flex';
+}
+function cancelImportDest(){
+  _impPending = null;
+  const m=document.getElementById('import-dest-modal'); if(m) m.style.display='none';
+  try{ notify('Import cancelled'); }catch(_){ }
+}
+function confirmImportDest(){
+  const p=_impPending; _impPending=null;
+  const m=document.getElementById('import-dest-modal'); if(m) m.style.display='none';
+  if(!p) return;
+  const destEl = document.querySelector('input[name="imp-dest"]:checked');
+  const modeEl = document.querySelector('input[name="imp-mode"]:checked');
+  const dest = destEl ? destEl.value : '__keep__';
+  const replace = modeEl ? (modeEl.value === 'replace') : false;
+  const commit = () => {
+    if (dest !== '__keep__') p.txs.forEach(t => { t.portfolio = dest; });
+    p.onConfirm && p.onConfirm({ dest, replace });
+  };
+  if (replace && state.transactions.length){
+    fnConfirm('Replace all ' + state.transactions.length + ' existing transactions? This cannot be undone.',
+      ok => { if (ok) commit(); else notify('Import cancelled'); });
+    return;
+  }
+  commit();
+}
+
 // Smart importer: auto-detects columns from most crypto platform exports.
 function importGenericCsv(text, platform){
   text = String(text||'').replace(/^\uFEFF/,'').trim();
@@ -4014,35 +4181,45 @@ function importGenericCsv(text, platform){
       type, assetType, currency, ticker:sym,
       units: amt, price: Math.round(price*1e8)/1e8, total: Math.round(total*1e4)/1e4,
       fees: Math.round(fees*100)/100,
-      date: _impDate(iDate>=0 ? c[iDate] : ''), portfolio:'main',
+      date: _impDate(iDate>=0 ? c[iDate] : ''), portfolio: 'main',
       notes: isSnapshot ? (platform+' snapshot - set real buy date for CGT') : platform
     });
   }
   if(!txs.length){ alert('No valid transactions found in this CSV.'); return; }
-  if (isSnapshot) {
-    const okSnap = confirm(
-      'This looks like a holdings snapshot, not a trade history.\n\n'
-      + 'It has no date or buy/sell columns, so Folionaire will import '+txs.length+' holdings as single buys dated today'
-      + (iCostPrice>=0 ? ', using the average buy price column for cost.' : '.')
-      + '\n\nThat means CGT dates and the 12-month discount will NOT be correct, and you may need to fix the market/currency on US holdings.\n\n'
-      + 'For full history, export your TRADES/transactions instead if your platform offers it.\n\nImport anyway?');
-    if (!okSnap) return;
+  askImportOptions(txs, { label: platform, onConfirm: o => _finishImport(txs, platform, isSnapshot, iCostPrice, o.replace) });
+}
+
+let _snapshotAcknowledged = false;
+// Commit stage, split out so the portfolio picker can call it after the user chooses
+function _finishImport(txs, platform, isSnapshot, iCostPrice, replace){
+  if (isSnapshot && !_snapshotAcknowledged) {
+    fnConfirm('This looks like a holdings snapshot, not a trade history. It has no date or buy/sell '
+      + 'columns, so ' + txs.length + ' holdings will be imported as single buys dated today'
+      + ((iCostPrice!=null && iCostPrice>=0) ? ', using the average buy price column for cost. ' : '. ')
+      + 'CGT dates and the 12-month discount will not be correct. Import anyway?',
+      ok => {
+        if (!ok) { notify('Import cancelled'); return; }
+        _snapshotAcknowledged = true;
+        _finishImport(txs, platform, isSnapshot, iCostPrice, replace);
+        _snapshotAcknowledged = false;
+      });
+    return;
   }
-  const merge = state.transactions.length>0
-    ? confirm(`Import ${txs.length} transactions from ${platform}?\n\nOK = Merge with existing\nCancel = Replace all`)
-    : true;
-  if(merge) state.transactions = [...state.transactions, ...txs];
-  else { state.transactions = txs; state.prices={}; state.priceMeta={}; }
+  const dest = txs.length ? (txs[0].portfolio || 'main') : 'main';
+  const destName = ((state.portfolios||[]).find(p=>p.id===dest)||{}).name || dest;
+  if (replace) { state.transactions = txs; state.prices={}; state.priceMeta={}; }
+  else { state.transactions = [...state.transactions, ...txs]; }
   save();
   renderPortfolioTabs && renderPortfolioTabs();
   renderPortfolioDropdown && renderPortfolioDropdown();
   renderPortfolio && renderPortfolio();
   renderHistory && renderHistory();
   if(document.getElementById('sec-dashboard') && document.getElementById('sec-dashboard').classList.contains('active')) renderDashboard && renderDashboard();
-  notify && notify('📥 Imported '+txs.length+' transactions from '+platform);
+  notify && notify('📥 Imported '+txs.length+' into '+destName);
   if(typeof fetchAllPrices==='function') setTimeout(()=>fetchAllPrices(true), 500);
 }
 
+let _jsonLoadConfirmed = false;
 function loadFromFile(e) {
   const file = e.target.files[0]; if (!file) return;
   const r = new FileReader();
@@ -4052,6 +4229,26 @@ function loadFromFile(e) {
       if (file.name.endsWith('.csv') || text.startsWith('Date,') || text.startsWith('date,')) {
         loadFromCSV(text);
       } else {
+        // A JSON file is a full backup: it restores portfolios, dividends, budget and
+        // settings as well, so there is no destination to pick. It does replace what
+        // you have though, so confirm before touching anything.
+        if (!_jsonLoadConfirmed && state.transactions && state.transactions.length) {
+          let peek = null;
+          try { peek = JSON.parse(text); } catch(_) {}
+          if (peek && peek.transactions) {
+            const nPort = (peek.portfolios||[]).length || 1;
+            fnConfirm('This is a full backup, so it restores everything: '
+              + peek.transactions.length + ' transactions across ' + nPort + ' portfolio'
+              + (nPort===1?'':'s') + ', plus dividends, budget and settings. Your current '
+              + state.transactions.length + ' transactions will be replaced. Continue?',
+              ok => {
+                if (!ok) { notify('Load cancelled'); return; }
+                _jsonLoadConfirmed = true;
+                try { r.onload(ev); } finally { _jsonLoadConfirmed = false; }
+              });
+            return;
+          }
+        }
         const loaded = JSON.parse(text);
         if (!loaded.transactions) throw new Error();
         loaded.transactions.forEach(tx => {
@@ -4180,14 +4377,29 @@ function loadFromCSV(text) {
     notify(`📂 Loaded ${txs.length} transactions from CSV`);
   };
 
-  if (state.transactions.length > 0) {
-    const choice = confirm(`Import ${txs.length} transactions from CSV?\n\nOK = Merge with existing\nCancel = Replace all`);
-    if (choice === null) return;
-    doLoad(!choice);
-  } else {
-    doLoad(true);
-  }
+  askImportOptions(txs, { label: 'CSV', onConfirm: o => doLoad(o.replace) });
 }
+// ── Blank CSV template ──
+// The same columns exportCSV writes, so a file filled in from this imports cleanly.
+// Example rows carry a delete-me note in a visible column rather than a comment
+// line, because a comment line would just fail to parse.
+function downloadCsvTemplate(){
+  const hdr = ['Date','Type','AssetType','Currency','Ticker','Units','Price','Total','Portfolio','Notes','Fees','Emotion','Reason'];
+  const examples = [
+    ['2024-03-15','BUY','asx','AUD','VAS','80','92.40','7392.00','main','EXAMPLE ROW - delete me','9.50','',''],
+    ['2024-06-11','BUY','nasdaq','USD','AAPL','15','187.30','2809.50','main','EXAMPLE ROW - delete me','4.95','',''],
+    ['2025-01-20','SELL','asx','AUD','VAS','30','101.10','3033.00','main','EXAMPLE ROW - delete me','9.50','','Rebalancing']
+  ];
+  const csv = [hdr.join(','), ...examples.map(r=>r.join(','))].join('\n');
+  try{
+    const blob = new Blob([csv], { type:'text/csv' });
+    const a = Object.assign(document.createElement('a'), {
+      href: URL.createObjectURL(blob), download: 'folionaire-import-template.csv' });
+    a.click(); URL.revokeObjectURL(a.href);
+    notify('Template downloaded. Replace the example rows with your own.');
+  }catch(_){ notify('\u26A0 Could not create the template file.'); }
+}
+
 function exportCSV() {
   const hdr = ['Date','Type','AssetType','Currency','Ticker','Units','Price','Total','Portfolio','Notes','Fees','Emotion','Reason'];
   const rows = [...state.transactions].sort((a,b)=>new Date(a.date)-new Date(b.date))
@@ -4232,7 +4444,7 @@ function switchTab(tab, el) {
   if (tab==='terminal') { try{ renderTvWidgets(); }catch(_){} }
   if (tab==='terminal') renderTerminal(true);
   if (tab==='settings') renderSettings();
-  if (tab==='settings') { try{_syncTipsToggle();}catch(_){} try{_syncTvToggle();}catch(_){} try{_renderSyncStatus();}catch(_){} try{_syncAutoDark();}catch(_){} _renderFxSettingsStatus(); document.getElementById('frank-rate-'+(state.frankingRate===25?25:30))?.classList.add('active'); const _fxSel=document.getElementById('auto-fx-sel'); if(_fxSel && state.ui && state.ui.autoFxInterval) _fxSel.value=state.ui.autoFxInterval; }
+  if (tab==='settings') { try{_syncTipsToggle();}catch(_){} try{_syncTvToggle();}catch(_){} try{_renderSolRpcStatus();}catch(_){} try{_renderSyncStatus();}catch(_){} try{_syncAutoDark();}catch(_){} _renderFxSettingsStatus(); document.getElementById('frank-rate-'+(state.frankingRate===25?25:30))?.classList.add('active'); const _fxSel=document.getElementById('auto-fx-sel'); if(_fxSel && state.ui && state.ui.autoFxInterval) _fxSel.value=state.ui.autoFxInterval; }
   _activeSection = tab; // track for _updateMobStats
   setTimeout(_updateMobStats, 50); // re-sync stats bar after tab switch
 }
@@ -5268,6 +5480,24 @@ function jumpToMonth(year, month) {
   renderCalendar();
 }
 
+function setCalCurr(curr, btn){
+  if (curr === 'ALL' && !_fx()){
+    if (btn) btn.classList.add('fx-loading');
+    _fetchFxRate(true).then(fx => {
+      if (btn) btn.classList.remove('fx-loading');
+      if (!fx){ notify('\u26A0 Could not load the FX rate. Try Fetch Prices first.'); return; }
+      window._calCurr = 'ALL';
+      state.ui = state.ui || {}; state.ui.calCurr = 'ALL';
+      try{ save(); }catch(_){ }
+      renderCalendar();
+    });
+    return;
+  }
+  window._calCurr = curr;
+  state.ui = state.ui || {}; state.ui.calCurr = curr;
+  try{ save(); }catch(_){ }
+  renderCalendar();
+}
 function renderCalendar(){
   const now=new Date();
   const td=new Date(now.getFullYear(),now.getMonth()+calOffset,1);
@@ -5300,15 +5530,47 @@ function renderCalendar(){
   const calLabel = document.getElementById('cal-month-label');
   if (calLabel) calLabel.textContent = monthStr;
   const monthTxs=state.transactions.filter(tx=>{const d=new Date(tx.date+'T00:00:00');return d.getFullYear()===year&&d.getMonth()===month;}).sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const mInvested = monthTxs.filter(t=>t.type==='buy').reduce((s,t)=>s+(t.total||0),0);
-  const mSold = monthTxs.filter(t=>t.type==='sell').reduce((s,t)=>s+(t.total||0),0);
+  // Split by currency. Adding AUD and USD totals together produced a number that
+  // meant nothing, which is what the old single figure was doing.
+  const _calCur = t => (t.currency || (t.assetType === 'crypto' ? 'USD' : 'AUD'));
+  const _sumCur = (arr, cur) => arr.filter(t => _calCur(t) === cur).reduce((s,t)=>s+(t.total||0),0);
+  const buys  = monthTxs.filter(t=>t.type==='buy');
+  const sells = monthTxs.filter(t=>t.type==='sell');
+  const mInvAUD = _sumCur(buys,'AUD'),  mInvUSD = _sumCur(buys,'USD');
+  const mSoldAUD = _sumCur(sells,'AUD'), mSoldUSD = _sumCur(sells,'USD');
+  if (window._calCurr == null) window._calCurr = (state.ui && state.ui.calCurr) || 'AUD';
+  const _calMode = window._calCurr;
+  const _fxOk = !!_fx();
+  // In combined mode convert USD across at the stored rate
+  const _comb = (a,u) => a + (_fxOk ? (usdToAud(u) || 0) : 0);
+  function _calLines(aud, usd, sign, cls){
+    const one = (v,c) => `<div style="font-size:15px;font-weight:800;font-family:var(--font-mono);" class="${cls}">`
+      + `${sign}$${fmt(Math.abs(v))}<span style="font-size:10px;color:var(--muted);font-weight:400;"> ${c}</span></div>`;
+    if (_calMode === 'AUD') return one(aud,'AUD');
+    if (_calMode === 'USD') return one(usd,'USD');
+    return one(_comb(aud,usd), '\u2248 AUD');
+  }
+  // One line beneath the pills. The currency is already on each figure, so this
+  // only needs to explain conversion when there is any.
+  const _calNote = _calMode === 'ALL'
+    ? (_fxOk
+        ? ('USD converted at ' + _fxNoteStr())
+        : 'No FX rate loaded yet, so USD activity is not included. Run Fetch Prices.')
+    : ('Showing ' + _calMode + ' transactions only');
+
   const monthTradePnl = computeSellTradeAnalytics().filter(t=>t.date&&t.date.startsWith(monthKey)).reduce((s,t)=>s+t.pnl,0);
   document.getElementById('calendar-container').innerHTML=`
     <div class="dashboard-analytics" style="margin-top:0;">
       <div class="dash-card"><div class="dash-card-title">Monthly P&amp;L</div><div class="dash-card-value ${monthTradePnl>=0?'green':'red'}">${monthTradePnl>=0?'+$':'-$'}${fmt(Math.abs(monthTradePnl))}</div><div class="dash-card-sub">Realised from sells this month</div></div>
-      <div class="dash-card"><div class="dash-card-title">Invested</div><div class="dash-card-value red">-$${fmt(mInvested)}</div><div class="dash-card-sub">Buy value this month</div></div>
-      <div class="dash-card"><div class="dash-card-title">Sold</div><div class="dash-card-value green">+$${fmt(mSold)}</div><div class="dash-card-sub">Sell value this month</div></div>
+      <div class="dash-card"><div class="dash-card-title">Invested</div>${_calLines(mInvAUD,mInvUSD,'-','red')}<div class="dash-card-sub">Buy value this month</div></div>
+      <div class="dash-card"><div class="dash-card-title">Sold</div>${_calLines(mSoldAUD,mSoldUSD,'+','green')}<div class="dash-card-sub">Sell value this month</div></div>
     </div>
+    <div style="display:flex;justify-content:center;gap:6px;margin:12px 0 4px;flex-wrap:wrap;">
+      <button class="mob-spark-btn${_calMode==='AUD'?' active':''}" id="cal-curr-AUD" onclick="setCalCurr('AUD',this)" style="font-size:11px;padding:6px 16px;">AUD</button>
+      <button class="mob-spark-btn${_calMode==='USD'?' active':''}" id="cal-curr-USD" onclick="setCalCurr('USD',this)" style="font-size:11px;padding:6px 16px;">USD</button>
+      <button class="mob-spark-btn${_calMode==='ALL'?' active':''}" id="cal-curr-ALL" onclick="setCalCurr('ALL',this)" style="font-size:11px;padding:6px 16px;">≈ Combined</button>
+    </div>
+    <div style="text-align:center;font-size:10px;color:var(--muted);margin:4px 0 12px;line-height:1.5;">${_calNote}</div>
     <div class="cal-note-form">
       <input type="date" id="cal-note-date" value="${defaultEventDate}" style="min-width:150px;">
       <input id="cal-note-text" placeholder="Add market event or note for a day" style="flex:1;min-width:220px;">
@@ -5471,8 +5733,8 @@ function _markSaved(){
 // data loss even though the JSON backup is untouched. Say so plainly.
 function _maybeUpgradeNotice(){
   try{
-    if (localStorage.getItem('folio_seen_v11')) return;
-    localStorage.setItem('folio_seen_v11','1');
+    if (localStorage.getItem('folio_seen_v111')) return;
+    localStorage.setItem('folio_seen_v111','1');
     const empty = !(state.transactions||[]).length
       && !(state.dividends||[]).length
       && !((state.budget&&state.budget.entries)||[]).length;
@@ -5514,6 +5776,41 @@ function _updateSaveBadge(){
 function _trackEdit(){if(_initPhase)return;_unsavedEdits++;_unsavedDirty=true;_updateSaveBadge();try{_queueAutoSync();}catch(_){}}
 function notify(msg){const el=document.createElement('div');el.className='notif';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2500);}
 
+
+// ── Slow-price warning, gated so it cannot nag ──
+// Suppressed for 24 hours once dismissed, and worded differently when a custom
+// proxy is configured, since "add a proxy" is useless advice if you already have one.
+function _priceWarnSnoozed(){
+  try{ const t = state.ui && state.ui.priceWarnSnooze; return !!(t && Date.now() < t); }catch(_){ return false; }
+}
+function snoozePriceWarn(){
+  state.ui = state.ui || {};
+  state.ui.priceWarnSnooze = Date.now() + 24*60*60*1000;
+  try{ save(); }catch(_){ }
+  try{ clearSticky('prices'); }catch(_){ }
+  try{ notify('Hidden for 24 hours. Prices will keep trying in the background.'); }catch(_){ }
+}
+function _priceWarn(){
+  if (_priceWarnSnoozed()) return;
+  const hasProxy = !!(state.customProxy || '').trim();
+  const msg = hasProxy
+    ? '\u26A0 Prices are slow right now. Your custom proxy did not respond in time, so it may be waking up, rate limited, or the ticker is not on that source. It will keep retrying.'
+    : '\u26A0 Price sources look blocked or very slow here. Add a Custom Proxy in Settings, or serve the file from a local or hosted server.';
+  try{
+    notifySticky(msg, 'prices');
+    // Add a snooze control to the notice so it can be silenced for a day
+    const el = document.getElementById('notif-sticky-prices');
+    if (el && !el.querySelector('.notif-snooze')){
+      const b = document.createElement('button');
+      b.className = 'notif-snooze';
+      b.textContent = 'Hide for 24h';
+      b.style.cssText = 'display:block;margin-top:8px;background:none;border:none;padding:0;'
+        + 'color:var(--accent);font-family:var(--font-mono);font-size:10px;cursor:pointer;text-decoration:underline;';
+      b.onclick = snoozePriceWarn;
+      el.appendChild(b);
+    }
+  }catch(_){ }
+}
 // Sticky notice: stays until dismissed, or until the condition clears
 // Clicking anywhere in a date field opens the native calendar, not just the icon
 document.addEventListener('click', function(e){
@@ -7054,12 +7351,15 @@ async function _fetchAllOriginsJson(url, timeoutMs=14000) {
   const cached = _fetchCache.get(url);
   if (cached && (Date.now() - cached.ts < _FETCH_CACHE_TTL)) return cached.data;
   // Overall fetch budget: when every route is blocked (e.g. file:// on mobile),
-  // fail fast instead of spinning forever, and tell the user what to do.
+  // stop spinning. The warning only fires if NOTHING has succeeded this run: a big
+  // portfolio can legitimately take minutes, and saying "blocked" while prices are
+  // arriving is worse than saying nothing.
   if (window._fvFetchDeadline && Date.now() > window._fvFetchDeadline) {
-    if (!window._fvBudgetNotified) { window._fvBudgetNotified = true;
-      try { notifySticky('⚠ Price sources look blocked or very slow here. Add a Custom Proxy in Settings, or serve the file from a local/hosted server.', 'prices'); } catch(_){}
+    if (!window._fvBudgetNotified && !(window._fvOkCount > 0)) {
+      window._fvBudgetNotified = true;
+      try { _priceWarn(); } catch(_){}
     }
-    throw new Error('Blocked in this environment - set a Custom Proxy in Settings, or serve the file locally.');
+    throw new Error('Price sources are not responding. Set a Custom Proxy in Settings, or serve the file locally.');
   }
 
   await _fetchSlot();
@@ -7071,6 +7371,7 @@ async function _fetchAllOriginsJson(url, timeoutMs=14000) {
       if (dr.ok) {
         const data = await dr.json();
         _fetchCache.set(url, { data, ts: Date.now() });
+        window._fvOkCount = (window._fvOkCount || 0) + 1;
         return data;
       }
       lastErr = `Direct fetch failed (${dr.status})`;
@@ -7109,6 +7410,9 @@ async function _fetchAllOriginsJson(url, timeoutMs=14000) {
           _fetchCache.set(url, { data, ts: Date.now() });
           window._fvProxyGood = proxy.name;
           window._fvProxyFails[proxy.name] = 0;
+          window._fvOkCount = (window._fvOkCount || 0) + 1;
+          // Prices are flowing again, so any warning on screen is stale
+          if (window._fvBudgetNotified) { window._fvBudgetNotified = false; try{ clearSticky('prices'); }catch(_){ } }
           return data;
         } catch(e) {
           lastErr = `${proxy.name} proxy ${e?.name === 'TimeoutError' ? 'timed out' : 'failed'}${e?.message ? ': ' + e.message : ''}`;
@@ -9118,12 +9422,30 @@ function refreshPerformers() {
   const holdings = computeHoldings();
   const tickers  = Object.keys(holdings).filter(k => holdings[k].units > 0.0001);
 
-  // Current holdings P&L
+  // Realised gains on positions that are only PARTLY sold. Without this a position
+  // you took profit on but still hold shows only its unrealised slice, and never
+  // appears under All-Time either because it is not closed.
+  const realisedOpen = {};
+  try {
+    (_buildTaxEvents() || []).forEach(ev => {
+      const key = (ev.ticker||'').toUpperCase() + '|' + (ev.portfolio||'main');
+      if (!holdings[key] || holdings[key].units <= 0.0001) return;  // fully closed is handled below
+      const g = Number(ev.grossGain);
+      if (!isFinite(g)) return;
+      realisedOpen[key] = (realisedOpen[key] || 0) + g;
+    });
+  } catch(_) { }
+
+  // Current holdings P&L, unrealised plus anything already banked on the same position
   window._perfCurrent = tickers.map(k => {
     const h=holdings[k], cp=state.prices[h.ticker];
-    const pnl=cp?(cp-h.avgCost)*h.units:0;
-    const pct=(cp&&h.avgCost>0)?((cp-h.avgCost)/h.avgCost)*100:0;
-    return {ticker:h.ticker, pnl, pct, assetType:h.assetType, portfolio:h.portfolio||'main', closed:false, priced:!!cp};
+    const unreal=cp?(cp-h.avgCost)*h.units:0;
+    const banked=realisedOpen[k]||0;
+    const pnl=unreal+banked;
+    const cost=h.avgCost*h.units;
+    const pct=(cost>0 && (cp||banked))?(pnl/cost)*100:0;
+    return {ticker:h.ticker, pnl, pct, unreal, banked,
+            assetType:h.assetType, portfolio:h.portfolio||'main', closed:false, priced:!!cp};
   }).sort((a,b)=>b.pnl-a.pnl);
 
   // All-time closed positions
@@ -10732,8 +11054,13 @@ async function fetchAllPrices(force = false) {
   setApiStatus('coingecko', 'loading', 'fetching...');
   setApiStatus('yahoo', 'loading', 'fetching...');
   setFetchButtonsLoading(true);
-  window._fvFetchDeadline = Date.now() + 60000; window._fvBudgetNotified = false;
+  // 5 minutes: long enough that a large portfolio on a slow proxy finishes first
+  window._fvFetchDeadline = Date.now() + 300000;
+  window._fvBudgetNotified = false;
+  window._fvOkCount = 0;
   try { clearSticky('prices'); } catch(_) {}
+  // A run that gets going again means the last warning is stale
+  try { if (state.ui && state.ui.priceWarnSnooze && Date.now() > state.ui.priceWarnSnooze) delete state.ui.priceWarnSnooze; } catch(_) {}
   try { await _fetchFxRate(true); } catch(_) {}
   try {
   let fetched = 0, failed = 0;
@@ -11813,6 +12140,13 @@ function _applySort(arr,sort) {
   });
 }
 function _sortIcon(prefix,sort,col) { return col===sort.col?(sort.dir===1?'\u2191':'\u2193'):''; }
+function clearCgtSearch(){
+  const el=document.getElementById('cgt-search');
+  if(el){ el.value=''; renderCGT(); }
+}
+function _cgtSearchTerm(){
+  return (document.getElementById('cgt-search')?.value || '').trim().toUpperCase();
+}
 function setCgtTab(tab, btn) {
   _cgtTab = tab;
   document.querySelectorAll('#sec-cgt .range-btn').forEach(b => b.classList.remove('active'));
@@ -11821,6 +12155,22 @@ function setCgtTab(tab, btn) {
 }
 
 function renderCGT() {
+  // Say when figures are $0 because prices are missing, rather than implying no gain
+  try {
+    const _unpriced = Object.values(computeHoldings())
+      .filter(h => h.units > 0.0001 && !state.prices[(h.ticker||'').toUpperCase()]);
+    const _warn = document.getElementById('cgt-price-warning');
+    if (_warn) {
+      _warn.innerHTML = _unpriced.length
+        ? '\u26A0 ' + _unpriced.length + ' holding' + (_unpriced.length===1?'':'s')
+          + ' (' + _unpriced.slice(0,4).map(h=>_escapeHtml(h.ticker)).join(', ')
+          + (_unpriced.length>4?' and more':'') + ') '
+          + (_unpriced.length===1?'has':'have') + ' no current price, so their unrealised gain shows as $0 here. '
+          + 'Fetch prices, or check the ticker is one Yahoo Finance carries.'
+        : '';
+      _warn.style.display = _unpriced.length ? '' : 'none';
+    }
+  } catch(_) {}
   try {
     const _mn = document.getElementById('cgt-method-note');
     if (_mn) _mn.innerHTML = ' Which parcels a sale actually consumes is decided by your '
@@ -11889,7 +12239,20 @@ function renderCGT() {
 
   const eligible = lots.filter(l => l.isEligible).sort((a,b) => b.pnl - a.pnl);
   const upcoming = lots.filter(l => !l.isEligible).sort((a,b) => a.eligibleDate - b.eligibleDate);
-  const shown = _cgtTab === 'eligible' ? eligible : upcoming;
+  const _q = _cgtSearchTerm();
+  const _all = _cgtTab === 'eligible' ? eligible : upcoming;
+  const shown = _q ? _all.filter(l => (l.ticker||'').toUpperCase().includes(_q)) : _all;
+  const _noteEl = document.getElementById('cgt-search-note');
+  if (_noteEl){
+    if (_q){
+      _noteEl.style.display = '';
+      _noteEl.innerHTML = shown.length
+        ? 'Showing ' + shown.length + ' of ' + _all.length + ' parcels matching <strong style="color:var(--text);">'
+          + _escapeHtml(_q) + '</strong>. The totals below still cover your whole portfolio.'
+        : 'No parcels matching <strong style="color:var(--text);">' + _escapeHtml(_q) + '</strong> in this tab. '
+          + 'Try the other tab, since a parcel sits in one or the other depending on whether it has passed 12 months.';
+    } else { _noteEl.style.display = 'none'; _noteEl.innerHTML = ''; }
+  }
 
   // Summary - split AUD/USD
   const eligAUD = eligible.filter(l => (l.currency||'AUD')==='AUD');
@@ -12043,7 +12406,9 @@ function _settingsRefreshFx(){
 function _renderFxSettingsStatus(){
   const st=document.getElementById('fx-rate-status'); if(!st) return;
   const fx=_fx();
-  st.innerHTML = fx ? ('1 USD = '+fx.toFixed(4)+' AUD<br>'+_fxNoteStrHtml()) : 'Not loaded yet \u2014 fetch prices once, or refresh below.';
+  st.innerHTML = (fx && fx.audusd > 0)
+    ? ('1 USD = ' + (1/fx.audusd).toFixed(4) + ' AUD<br>' + _fxNoteStrHtml())
+    : 'Not loaded yet, fetch prices once or refresh below.';
 }
 function setFrankingRate(rate, el){
   state.frankingRate = rate;
@@ -12556,6 +12921,43 @@ function renderWealthPlan(fill){
 // Stored as a single template with a recurrence, then expanded into virtual
 // occurrences at render time. Keeps state small and avoids drift.
 const BUDGET_RECUR = { '':'One time', weekly:'Weekly', fortnightly:'Fortnightly', monthly:'Monthly', quarterly:'Quarterly', yearly:'Yearly' };
+// Annualised value of your standing commitments. Derived from the rules rather than
+// by expanding occurrences, so it costs nothing and does not depend on the horizon.
+const RECUR_PER_YEAR = { weekly:52, fortnightly:26, monthly:12, quarterly:4, yearly:1 };
+function _recurringAnnual(){
+  const out = { income:0, expense:0, items:[] };
+  (_budgetList()||[]).forEach(e=>{
+    const per = RECUR_PER_YEAR[e.recur];
+    if(!per) return;                                  // one-off entries are not commitments
+    // An entry that stops within the year is not a full year of commitment
+    if(e.recurUntil){
+      const end=new Date(e.recurUntil+'T00:00:00');
+      if(!isNaN(end) && end < new Date()) return;      // already finished
+    }
+    const annual = _entryAUD(e.amount, e.currency) * per;
+    if(e.type==='income') out.income += annual; else out.expense += annual;
+    out.items.push({ label:e.category, note:e.note||'', type:e.type, annual, recur:e.recur });
+  });
+  out.net = out.income - out.expense;
+  out.count = out.items.length;
+  return out;
+}
+function _annualSummaryHtml(){
+  const a=_recurringAnnual();
+  if(!a.count) return '';
+  const bits=[];
+  if(a.income  > 0.004) bits.push('<span><strong style="color:var(--green);">$'+fmt(a.income)+'</strong> income</span>');
+  if(a.expense > 0.004) bits.push('<span><strong style="color:var(--red);">$'+fmt(a.expense)+'</strong> expenses</span>');
+  if(a.income > 0.004 && a.expense > 0.004)
+    bits.push('<span><strong style="color:'+(a.net>=0?'var(--green)':'var(--red)')+';">'
+      + (a.net>=0?'+':'-') + '$'+fmt(Math.abs(a.net))+'</strong> net</span>');
+  return '<div class="upc-annual">'
+    + '<div class="upc-annual-head">Standing commitments, per year</div>'
+    + '<div class="upc-annual-vals wp-mask">'+bits.join('')+'</div>'
+    + '<div class="upc-annual-sub">From ' + a.count + ' recurring entr' + (a.count===1?'y':'ies')
+    + '. This is the rate they run at, whatever window you are looking through.</div>'
+    + '</div>';
+}
 // The i-th occurrence measured from the original date, so a bill on the 31st
 // clamps to 28 Feb but returns to the 31st in March rather than drifting.
 function _recurNth(anchor, recur, i){
@@ -12570,20 +12972,33 @@ function _recurNth(anchor, recur, i){
   const lastDay = new Date(yr, mo+1, 0).getDate();
   return new Date(yr, mo, Math.min(day, lastDay), 0, 0, 0, 0);
 }
+// Work scales with entries multiplied by horizon, so cap the total occurrences
+// generated per render. 30 weekly entries over 10 years would otherwise be about
+// 15,000 objects on every redraw.
+const RECUR_MAX_TOTAL = 4000;
 function _expandRecurring(entries, fromDate, toDate){
   const out = [];
+  window._recurTruncated = false;
+  // Fair share per entry rather than one global budget consumed in array order.
+  // A single budget would leave later entries with nothing at all, including their
+  // current-period occurrences, which would quietly make the KPIs wrong.
+  const recurCount = (entries||[]).filter(e => e.recur && BUDGET_RECUR[e.recur]).length || 1;
+  const perEntryCap = Math.max(36, Math.floor(RECUR_MAX_TOTAL / recurCount));
   (entries||[]).forEach(e => {
     if (!e.recur || !BUDGET_RECUR[e.recur]) { out.push(e); return; }
     const anchor = new Date(e.date + 'T00:00:00');
     if (isNaN(anchor)) { out.push(e); return; }
     const hardEnd = e.recurUntil ? new Date(e.recurUntil + 'T00:00:00') : null;
     const stop = (hardEnd && hardEnd < toDate) ? hardEnd : toDate;
-    for (let i = 0; i < 800; i++) {
+    let kept = 0;
+    for (let i = 0; i < 1200; i++) {
       const d = _recurNth(anchor, e.recur, i);
       if (!d || d > stop) break;
       if (d >= fromDate) {
+        if (kept >= perEntryCap) { window._recurTruncated = true; break; }
         const iso = _localDateKey(d);
         out.push(Object.assign({}, e, { date: iso, _isOccurrence: iso !== e.date }));
+        kept++;
       }
     }
   });
@@ -12673,6 +13088,12 @@ function _budgetState(){ state.budget = state.budget || { entries: [], categoryB
 function _budgetList(){ return _budgetState().entries; }
 let _btType='expense', _bemType='expense', _btEditId=null;
 let _btOneOff=false;
+let _bemOneOff=false;
+function setBemOneOff(on){
+  _bemOneOff=!!on;
+  document.getElementById('bem-oneoff-no')?.classList.toggle('active', !on);
+  document.getElementById('bem-oneoff-yes')?.classList.toggle('active', !!on);
+}
 function setBtOneOff(on){
   _btOneOff=!!on;
   document.getElementById('bt-oneoff-no')?.classList.toggle('active', !on);
@@ -12704,7 +13125,9 @@ function _drawBudgetTrendPie(income, expense, invested){
   const remaining = Math.max(0, income-expense-invested);
   const overspent = Math.max(0, (expense+invested)-income);
   const parts = [['Expenses',expense,'#ef4444'],['Invested',invested,cssVar('--accent')],['Income',remaining,'#22c55e']];
-  if (overspent>0) parts.push(['Overspent',overspent,'#f59e0b']);
+  // With no income recorded for the period there is nothing to overspend against,
+  // so calling it Overspent is misleading. Name it for what it actually is.
+  if (overspent>0) parts.push([income>0 ? 'Overspent' : 'Not covered by logged income', overspent, '#f59e0b']);
   const labels=parts.map(p=>p[0]), vals=parts.map(p=>p[1]), colors=parts.map(p=>p[2]);
   const total = income>0 ? income : vals.reduce((a,b)=>a+b,0);
   const centerPlugin={ id:'btrendCenter', beforeDraw(chart){
@@ -12807,6 +13230,9 @@ function editBudgetEntry(id){
   document.getElementById('bem-currency').value=e.currency;
   document.getElementById('bem-date').value=e.date;
   document.getElementById('bem-note').value=e.note||'';
+  const rc=document.getElementById('bem-recur');   if(rc) rc.value = e.recur || '';
+  const ru=document.getElementById('bem-recur-until'); if(ru) ru.value = e.recurUntil || '';
+  setBemOneOff(!!e.oneOff);
   _btEditId=id;
   document.getElementById('bt-edit-modal').style.display='flex';
 }
@@ -12820,7 +13246,10 @@ function saveBudgetModal(){
     category:document.getElementById('bem-category').value,
     amount, currency:document.getElementById('bem-currency').value||'AUD',
     date:document.getElementById('bem-date').value,
-    note:(document.getElementById('bem-note').value||'').trim()
+    note:(document.getElementById('bem-note').value||'').trim(),
+    recur:(document.getElementById('bem-recur')?.value)||'',
+    recurUntil:(document.getElementById('bem-recur-until')?.value)||'',
+    oneOff:_bemOneOff
   });
   _trackEdit(); save(); closeBudgetModal(); renderBudget(); notify('Entry updated');
 }
@@ -12898,7 +13327,12 @@ function renderBudget(){
   const entriesRaw = _budgetList();
   // Expand recurrences across a window wide enough for the chart history and the forecast
   const _winFrom = new Date(curStart); _winFrom.setDate(_winFrom.getDate() - days*14);
-  const _winTo   = new Date(now);      _winTo.setDate(_winTo.getDate() + Math.max(days*3, 400));
+  // Forward horizon is user-controlled. Expanding recurrences forever would be
+  // unbounded work, so it extends on request instead.
+  window._upcMonths = window._upcMonths || 12;
+  const _winTo   = new Date(now);
+  _winTo.setMonth(_winTo.getMonth() + window._upcMonths);
+  if (_winTo < new Date(now.getTime() + days*3*86400000)) _winTo.setTime(now.getTime() + days*3*86400000);
   const entries = _expandRecurring(entriesRaw, _winFrom, _winTo);
   const inRange = (d) => { const dt=new Date(d+'T00:00:00'); return dt>=curStart && dt<=now; };
   const curEntries = entries.filter(e=>inRange(e.date));
@@ -12914,6 +13348,26 @@ function renderBudget(){
   const net = income - expense;
   const savingsRate = income>0 ? ((income-expense)/income*100) : null;
 
+  // The commonest confusion: entries dated ahead sit in Scheduled Ahead and do not
+  // count until their date arrives. Say so rather than leaving zeros unexplained.
+  // Declared out here because the note element is rendered after this block.
+  const _periodWord = (period==='week'?'week':period==='fortnight'?'fortnight':period==='year'?'year':'month');
+  let _kpiNote = '';
+  {
+    if ((upIncome > 0.004 || upExpense > 0.004) && income < 0.004 && expense < 0.004) {
+      _kpiNote = 'Nothing has landed in this ' + _periodWord + ' yet. You have '
+        + (upIncome>0.004 ? ('$'+fmt(upIncome)+' income') : '')
+        + (upIncome>0.004 && upExpense>0.004 ? ' and ' : '')
+        + (upExpense>0.004 ? ('$'+fmt(upExpense)+' expenses') : '')
+        + ' dated ahead, which counts once those dates arrive. See Scheduled Ahead below.';
+    } else if (upIncome > 0.004 || upExpense > 0.004) {
+      _kpiNote = 'Plus '
+        + (upIncome>0.004 ? ('$'+fmt(upIncome)+' income') : '')
+        + (upIncome>0.004 && upExpense>0.004 ? ' and ' : '')
+        + (upExpense>0.004 ? ('$'+fmt(upExpense)+' expenses') : '')
+        + ' dated ahead, not counted until then.';
+    }
+  }
   const kpis = document.getElementById('budget-kpis');
   if (kpis){
     kpis.innerHTML = [
@@ -12933,6 +13387,18 @@ function renderBudget(){
         <div class="dash-card-title">Savings Rate</div>
         <div style="font-size:16px;font-weight:800;font-family:var(--font-mono);color:${savingsRate==null?'var(--muted)':savingsRate>=0?'var(--green)':'var(--red)'};">${savingsRate==null?'\u2014':savingsRate.toFixed(1)+'%'}</div>
       </div>`;
+  }
+  // Note under the boxes: what is scheduled ahead, and where Invested comes from
+  const kpiNoteEl = document.getElementById('budget-kpi-note');
+  if (kpiNoteEl){
+    const bits = [];
+    if (_kpiNote) bits.push(_kpiNote);
+    if (invested > 0.004) bits.push('Invested is taken from your actual buy transactions in this '
+      + (period==='week'?'week':period==='fortnight'?'fortnight':period==='year'?'year':'month')
+      + ', not from anything you type here.');
+    kpiNoteEl.innerHTML = bits.length
+      ? bits.map(b=>'<div style="margin-bottom:3px;">' + b + '</div>').join('')
+      : '';
   }
 
   // chart: N periods, paged via prev/next (bar view) or single-period allocation (pie view)
@@ -13064,7 +13530,8 @@ function setBudgetCatView(v){
   if(wrap) wrap.style.maxWidth = v==='donut' ? '340px' : '100%';
   renderBudget();
 }
-const BUDGET_CAT_PALETTE = ['#4ade80','#38bdf8','#f97316','#a78bfa','#f472b6','#facc15','#22d3ee','#fb7185','#34d399','#c084fc'];
+// Expenses only, so no greens: a green slice in a spending chart reads as income.
+const BUDGET_CAT_PALETTE = ['#f87171','#fb923c','#f472b6','#facc15','#fb7185','#e879f9','#f0b429','#ef4444','#c084fc','#fdba74'];
 function _drawBudgetCatChart(catList, totalSpend){
   const canvas=document.getElementById('budget-cat-chart'); if(!canvas || typeof Chart==='undefined') return;
   if(window._budgetCatChart){ try{window._budgetCatChart.destroy();}catch(_){ } window._budgetCatChart=null; }
@@ -13145,61 +13612,117 @@ function _renderUpcoming(list, expTotal, incTotal){
     ? '<button class="btn-ghost btn-sm" style="margin-top:8px;width:100%;" onclick="toggleUpcomingAll()">'
       + (showAll ? 'Show less' : ('Show all '+list.length)) + '</button>'
     : '';
+  const months = window._upcMonths || 12;
+  const horizon = '<div style="display:flex;align-items:center;justify-content:center;gap:10px;'
+    + 'margin-top:10px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap;">'
+    + '<span style="font-size:10px;color:var(--muted);">Looking ahead ' + months + ' month' + (months===1?'':'s')
+      + (window._recurTruncated ? ', list capped for speed. The yearly figure below still covers everything.' : '') + '</span>'
+    + (months < 120 ? '<button class="btn-ghost btn-sm" onclick="extendUpcoming(12)">Look further ahead</button>' : '')
+    + (months > 12 ? '<button class="btn-ghost btn-sm" onclick="extendUpcoming(-12)">Less</button>' : '')
+    + '</div>';
   el.innerHTML = '<div class="chart-card" style="margin-bottom:16px;">'
     + '<div style="display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:10px;">'
     + '<div style="text-align:center;"><div class="chart-title">Scheduled Ahead</div>'
-    + '<div class="chart-subtitle">Dated in the future, so not counted as spent yet</div></div>'
+    + '<div class="chart-subtitle">Dated in the future, so not counted yet. Green is income, warm colours are expenses.</div></div>'
     + '<div style="position:absolute;right:0;display:flex;gap:6px;">'
     + '<button class="mob-spark-btn' + (window._upcView!=='bar'?' active':'') + '" onclick="setUpcomingView(\'donut\')" style="font-size:10px;padding:6px 12px;">\u25d4 Pie</button>'
     + '<button class="mob-spark-btn' + (window._upcView==='bar'?' active':'') + '" onclick="setUpcomingView(\'bar\')" style="font-size:10px;padding:6px 12px;">\u25a4 Bars</button>'
     + '</div></div>'
     + '<div id="upc-chart-wrap" style="position:relative;height:230px;'+(window._upcView==='bar'?'':'max-width:320px;')+'margin:0 auto 14px;"><canvas id="upc-chart"></canvas></div>'
-    + '<div class="upc-list">'+rows+'</div>' + more
+    + '<div class="upc-list">'+rows+'</div>' + more + horizon
     + '<div class="upc-tot wp-mask">'
     + (expTotal>0.004?('<span>Expenses ahead: <strong style="color:var(--red);">$'+fmt(expTotal)+'</strong></span>'):'')
     + (incTotal>0.004?('<span>Income ahead: <strong style="color:var(--green);">$'+fmt(incTotal)+'</strong></span>'):'')
-    + '</div></div>';
+    + '</div>'
+    + _annualSummaryHtml()
+    + '</div>';
   _drawUpcomingChart(list);
 }
 function toggleUpcomingAll(){ window._upcShowAll = !window._upcShowAll; renderBudget(); }
+function extendUpcoming(delta){
+  window._upcMonths = Math.max(3, Math.min(120, (window._upcMonths||12) + delta));
+  renderBudget();
+  try{ notify('Now showing the next ' + window._upcMonths + ' months'); }catch(_){ }
+}
 function setUpcomingView(v){ window._upcView = v; renderBudget(); }
 function _drawUpcomingChart(list){
   const canvas=document.getElementById('upc-chart'); if(!canvas || typeof Chart==='undefined') return;
   if(window._upcChart){ try{window._upcChart.destroy();}catch(_){ } window._upcChart=null; }
   try{ Chart.getChart && Chart.getChart(canvas)?.destroy(); }catch(_){ }
-  const byCat={};
-  list.filter(e=>e.type==='expense').forEach(e=>{ byCat[e.category]=(byCat[e.category]||0)+_entryAUD(e.amount,e.currency); });
-  const pairs=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
-  if(!pairs.length) return;
-  const labels=pairs.map(p=>p[0]), vals=pairs.map(p=>p[1]);
-  const colors=pairs.map((_,i)=>BUDGET_CAT_PALETTE[i%BUDGET_CAT_PALETTE.length]);
-  const total=vals.reduce((s,v)=>s+v,0);
+
+  const expByCat={}, incByCat={};
+  (list||[]).forEach(e=>{
+    const aud=_entryAUD(e.amount,e.currency);
+    if(e.type==='income') incByCat[e.category]=(incByCat[e.category]||0)+aud;
+    else                  expByCat[e.category]=(expByCat[e.category]||0)+aud;
+  });
+  const expPairs=Object.entries(expByCat).sort((a,b)=>b[1]-a[1]);
+  const incPairs=Object.entries(incByCat).sort((a,b)=>b[1]-a[1]);
   const ctx=canvas.getContext('2d');
+
   try{
     if(window._upcView==='bar'){
+      // Bars show everything that is coming, income and expenses, coloured by
+      // what they are rather than by an arbitrary category palette.
+      const rows=[...incPairs.map(p=>({label:p[0],value:p[1],type:'income'})),
+                  ...expPairs.map(p=>({label:p[0],value:p[1],type:'expense'}))]
+                 .sort((a,b)=>b.value-a.value);
+      if(!rows.length) return;
       window._upcChart=new Chart(ctx,{ type:'bar',
-        data:{ labels, datasets:[{ data:vals, backgroundColor:colors, borderRadius:6, maxBarThickness:48 }] },
+        data:{ labels:rows.map(r=>r.label),
+               datasets:[{ data:rows.map(r=>r.value),
+                 backgroundColor:rows.map(r=>r.type==='income'?'#34d399':'#f87171'),
+                 borderRadius:6, maxBarThickness:46 }] },
         options:{ responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>' $'+fmt(c.parsed.y) } } },
-          scales:{ x:{ grid:{display:false}, ticks:{ color:chartTick(), font:{size:10}, autoSkip:false, maxRotation:42,
-                     callback:function(v){ const l=this.getLabelForValue(v)||''; return l.length>11?l.slice(0,10)+'\u2026':l; } } },
-                   y:{ grid:{ color:chartGridSoft() }, ticks:{ color:chartTick(), font:{size:10}, callback:v=>'$'+fmt(v) } } } } });
-    } else {
-      const centre={ id:'upcCentre', beforeDraw(ch){ const {ctx:cx, chartArea}=ch; if(!chartArea) return;
-        const x=(chartArea.left+chartArea.right)/2, y=(chartArea.top+chartArea.bottom)/2;
-        const innerR=Math.min(chartArea.right-chartArea.left, chartArea.bottom-chartArea.top)/2*0.6;
-        cx.save(); cx.textAlign='center'; cx.textBaseline='middle';
-        const fs=_fitCenterFont(cx,'$'+fmt(total),800,20,11,innerR*1.7);
-        cx.fillStyle=cssVar('--text'); cx.font=`800 ${fs}px DM Mono,monospace`;
-        cx.fillText('$'+fmt(total), x, y-2);
-        cx.font='600 10px DM Mono,monospace'; cx.fillStyle=cssVar('--muted');
-        cx.fillText('scheduled', x, y+fs*0.8); cx.restore(); } };
-      window._upcChart=new Chart(ctx,{ type:'doughnut',
-        data:{ labels, datasets:[{ data:vals, backgroundColor:colors, borderColor:cssVar('--surface'), borderWidth:2 }] },
-        options:{ responsive:true, maintainAspectRatio:false, cutout:'66%',
-          plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>' '+c.label+': $'+fmt(c.parsed)+' ('+(c.parsed/total*100).toFixed(0)+'%)' } } } },
-        plugins:[centre] });
+          plugins:{ legend:{display:false},
+            tooltip:{ callbacks:{ label:c=>{
+              const r=rows[c.dataIndex];
+              return ' '+(r.type==='income'?'Income':'Expense')+': $'+fmt(r.value);
+            } } } },
+          scales:{ x:{ grid:{display:false},
+                       ticks:{ color:chartTick(), font:{size:10}, autoSkip:false, maxRotation:42,
+                         callback:function(v){ const l=this.getLabelForValue(v)||''; return l.length>11?l.slice(0,10)+'\u2026':l; } } },
+                   y:{ grid:{ color:chartGridSoft() },
+                       ticks:{ color:chartTick(), font:{size:10}, callback:v=>'$'+fmt(v) } } } } });
+      return;
     }
+
+    // Both income and expenses, coloured by type so you can tell them apart at a
+    // glance. Greens are money coming in, warm tones are money going out.
+    const INC_PALETTE = ['#34d399','#4ade80','#22c55e','#86efac','#2dd4bf','#5eead4'];
+    const EXP_PALETTE = ['#f87171','#fb923c','#f472b6','#facc15','#fb7185','#e879f9','#f0b429','#ef4444','#c084fc','#fdba74'];
+    const slices = [
+      ...incPairs.map((p,i)=>({label:p[0], value:p[1], type:'income',  colour:INC_PALETTE[i%INC_PALETTE.length]})),
+      ...expPairs.map((p,i)=>({label:p[0], value:p[1], type:'expense', colour:EXP_PALETTE[i%EXP_PALETTE.length]}))
+    ];
+    if(!slices.length) return;
+    const incTot = incPairs.reduce((s,p)=>s+p[1],0);
+    const expTot = expPairs.reduce((s,p)=>s+p[1],0);
+    const net = incTot - expTot;
+    const labels = slices.map(s=>s.label);
+    const vals   = slices.map(s=>s.value);
+    const colors = slices.map(s=>s.colour);
+    const total  = vals.reduce((s,v)=>s+v,0);
+    const centre={ id:'upcCentre', beforeDraw(ch){ const {ctx:cx, chartArea}=ch; if(!chartArea) return;
+      const x=(chartArea.left+chartArea.right)/2, y=(chartArea.top+chartArea.bottom)/2;
+      const innerR=Math.min(chartArea.right-chartArea.left, chartArea.bottom-chartArea.top)/2*0.6;
+      cx.save(); cx.textAlign='center'; cx.textBaseline='middle';
+      const netTxt=(net>=0?'+$':'-$')+fmt(Math.abs(net));
+      const fs=_fitCenterFont(cx,netTxt,800,20,11,innerR*1.7);
+      cx.fillStyle=(net>=0)?'#34d399':'#f87171'; cx.font=`800 ${fs}px DM Mono,monospace`;
+      cx.fillText(netTxt, x, y-2);
+      cx.font='600 10px DM Mono,monospace'; cx.fillStyle=cssVar('--muted');
+      cx.fillText('net ahead', x, y+fs*0.8); cx.restore(); } };
+    window._upcChart=new Chart(ctx,{ type:'doughnut',
+      data:{ labels, datasets:[{ data:vals, backgroundColor:colors, borderColor:cssVar('--surface'), borderWidth:2 }] },
+      options:{ responsive:true, maintainAspectRatio:false, cutout:'66%',
+        plugins:{ legend:{display:false},
+          tooltip:{ callbacks:{ label:c=>{
+            const s=slices[c.dataIndex];
+            return ' ' + (s.type==='income'?'Income':'Expense') + ' \u00b7 ' + s.label
+              + ': $' + fmt(c.parsed) + ' (' + (c.parsed/total*100).toFixed(0) + '%)';
+          } } } } },
+      plugins:[centre] });
   }catch(e){ console.error('Folionaire: upcoming chart failed', e); }
 }
 function _renderBudgetGoal(period, totalSpend, oneOffTotal, upcomingExpense){
@@ -13353,6 +13876,7 @@ function esRecoupCalc(){
   const targetPrice = h.avgCost * mult;
   const unitsToSell = h.units / mult;
   const unitsKept = h.units - unitsToSell;
+  const originalCost = h.avgCost * h.units;
   const keptValueAtTarget = unitsKept * targetPrice;
   _esDrawRecoupChart(h, mult, unitsToSell, unitsKept, keptValueAtTarget);
   const cp = h.currentPrice;
@@ -13366,6 +13890,56 @@ function esRecoupCalc(){
     <div class="es-stat-row"><span class="es-label">Current price</span><span class="es-val">${cp!=null ? (h.currency+' $'+fmtPriceFull(cp)) : 'No price yet'}</span></div>
     <div class="es-stat-row"><span class="es-label">${reached?'Status':'Distance to target'}</span><span class="es-val ${reached?'chg-badge green':(pctToGo!=null?'':'')}" style="${reached?'font-size:11px;':''}">${reached ? '\u2713 Target reached' : (pctToGo!=null ? pctToGo.toFixed(1)+'% to go' : '\u2014')}</span></div>
   </div>`;
+  try { _esRemainderPlan(h, mult, unitsKept, originalCost, h.units); } catch(e){ console.error('Folionaire: remainder plan failed', e); }
+}
+
+
+// What the units you keep would need to do, once the original stake is back.
+// Kept units carry no net cost after the recoup, so every dollar here is upside.
+function _esRemainderPlan(h, mult, unitsKept, originalCost, totalUnits){
+  const el = document.getElementById('es1-remainder'); if(!el) return;
+  const cp = h.currentPrice;
+  const stopPct = Math.max(1, Math.min(90, parseFloat(document.getElementById('es1-stop')?.value) || 20));
+  const goalX   = Math.max(1.1, parseFloat(document.getElementById('es1-goal')?.value) || 2);
+  const _negligible = totalUnits > 0 && unitsKept < totalUnits * 0.001;
+  if (!(unitsKept > 0) || !(originalCost > 0) || _negligible){
+    el.innerHTML = '<div style="font-size:12px;color:var(--muted);text-align:center;padding:8px 0;">'
+      + 'At this multiple you would be selling the whole position, so there is nothing left riding.</div>';
+    return;
+  }
+  const sellPrice = h.avgCost * mult;
+  // Total return goal: recoup gives back 1x, so the remainder must supply the rest
+  const needFromRest = Math.max(0, (goalX - 1) * originalCost);
+  const priceForGoal = needFromRest / unitsKept;
+  // Doubling the remainder from the price you sold at
+  const priceDouble  = sellPrice * 2;
+  const totalIfDouble = originalCost + unitsKept * priceDouble;
+  // Trailing stop measured from the current price, or from the sell price if unpriced
+  const stopBase  = (cp != null && cp > 0) ? cp : sellPrice;
+  const stopPrice = stopBase * (1 - stopPct/100);
+  const stopTotal = originalCost + unitsKept * stopPrice;
+  const stopX     = stopTotal / originalCost;
+  const row = (label, value, sub, colour) =>
+    '<div class="es-stat-row"><span class="es-label">' + label
+    + (sub ? '<br><span style="font-size:10px;color:var(--muted);">'+sub+'</span>' : '')
+    + '</span><span class="es-val"' + (colour?(' style="color:'+colour+';"'):'') + '>' + value + '</span></div>';
+  el.innerHTML = '<div class="es-result-card">'
+    + row('Units still riding', fmtUnits(unitsKept), 'Net cost zero once you have recouped')
+    + row('For ' + goalX + 'x total back',
+          h.currency + ' $' + fmtPriceFull(priceForGoal),
+          'The remainder needs this price. ' + (cp!=null&&cp>0 ? (((priceForGoal-cp)/cp*100).toFixed(0) + '% from here') : 'No current price'),
+          'var(--accent)')
+    + row('If the remainder doubles',
+          h.currency + ' $' + fmtPriceFull(priceDouble),
+          'That is $' + fmt(totalIfDouble) + ' back in total, or ' + (totalIfDouble/originalCost).toFixed(2) + 'x')
+    + row('Stop at ' + stopPct + '% below ' + ((cp!=null&&cp>0)?'today':'your sell price'),
+          h.currency + ' $' + fmtPriceFull(stopPrice),
+          'Walk away with $' + fmt(stopTotal) + ' total, or ' + stopX.toFixed(2) + 'x',
+          stopX >= 1 ? 'var(--green)' : 'var(--red)')
+    + '</div>'
+    + '<div style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:10px;">'
+    + 'Figures assume you sell exactly at the target and ignore brokerage and tax. A stop is your own plan, '
+    + 'nothing is placed with your broker.</div>';
 }
 
 // 2. Laddered Exit
@@ -14124,6 +14698,12 @@ function _taxReportData(fyLabel){
     gainCrypto: sum(audCrypto.filter(e=>e.grossGain>0),'grossGain'),
     losses: sum(aud,'capitalLoss'),
     priorLosses: _carriedLoss(),
+    // The worksheet wants the split even when losses reduce the net to nil, so
+    // carry the discountable and non-discountable gross gains through separately.
+    discEligibleGain: agg.discGain,
+    nonDiscGain: agg.otherGain,
+    discGainAfterLosses: agg.discAfter,
+    nonDiscAfterLosses: agg.otherAfter,
     discount: agg.discountAmount,
     netGain: agg.netGain,
     carryForward: agg.lossCarriedForward,
@@ -14156,6 +14736,8 @@ function openTaxReport(){
   html += row('Capital gains, shares', money(r.gainShares));
   html += row('Capital gains, crypto', money(r.gainCrypto));
   html += row('Total capital gains', money(grossGains), {total:true, hint:'Before any CGT discount'});
+  html += row('Held 12 months or more', money(r.discEligibleGain), {sub:true, hint:'Eligible for the 50% discount'});
+  html += row('Held under 12 months', money(r.nonDiscGain), {sub:true, hint:'No discount available'});
 
   html += `<div class="txr-sect">Capital losses</div>`;
   html += row('Capital losses this year', r.losses > 0.004 ? ('-'+money(r.losses)) : '$0.00', {colour: r.losses>0.004?'var(--red)':undefined});
@@ -14164,7 +14746,13 @@ function openTaxReport(){
   if (r.carryForward > 0.004) html += row('Losses carried to next year', money(r.carryForward), {sub:true, colour:'var(--red)'});
 
   html += `<div class="txr-sect">Discount and net gain</div>`;
-  html += row('CGT discount applied (50%)', r.discount > 0.004 ? ('-'+money(r.discount)) : '$0.00', {colour: r.discount>0.004?'var(--green)':undefined, hint:'Only on parcels held 12 months or more'});
+  html += row('Discountable gain remaining after losses', money(r.discGainAfterLosses), {sub:true});
+  html += row('Non-discountable gain remaining after losses', money(r.nonDiscAfterLosses), {sub:true});
+  html += row('CGT discount applied (50%)', r.discount > 0.004 ? ('-'+money(r.discount)) : '$0.00',
+    {colour: r.discount>0.004?'var(--green)':undefined,
+     hint: (r.discount < 0.004 && r.discEligibleGain > 0.004)
+       ? 'Nil because losses were applied first, which is the required order'
+       : 'Only on the portion held 12 months or more'});
   html += row('Net capital gain', money(r.netGain), {total:true, colour:'var(--accent)', hint:'Tax return item 18'});
   html += row('Parcel method used', r.method, {sub:true});
 
@@ -14396,6 +14984,25 @@ function renderTax() {
   const grossUSD  = fyUSD.reduce((s,e)=>s+e.grossGain,0);
   // ATO order: losses offset gains BEFORE the 50% discount is applied
   const aggAUD = _cgtAggregate(fyAUD, _carriedLoss());
+  try {
+    // Spell out the loss-then-discount order, because a $0 discount next to
+    // eligible sales reads as a bug when it is actually the correct treatment.
+    const _lnEl = document.getElementById('tax-loss-note');
+    if (_lnEl) {
+      const _prior = _carriedLoss();
+      const _thisYr = (aggAUD.losses || 0);
+      const _absorbed = (aggAUD.discGain + aggAUD.otherGain) > 0
+        && (aggAUD.otherAfter + aggAUD.discAfter) < 0.005;
+      if (_absorbed && (_prior > 0 || _thisYr > 0)) {
+        _lnEl.style.display = '';
+        _lnEl.innerHTML = 'Your capital losses'
+          + (_prior > 0 ? (' (including $' + fmt(_prior) + ' carried forward from earlier years)') : '')
+          + ' cover the whole gain this year, so there is no taxable gain and no discount to apply. '
+          + 'Losses are used before the 50% discount, which is the order that leaves you better off. '
+          + '$' + fmt(aggAUD.lossCarriedForward) + ' of unused losses carries into next year.';
+      } else { _lnEl.style.display = 'none'; _lnEl.innerHTML = ''; }
+    }
+  } catch(e){ console.error('Folionaire: loss note failed', e); }
   const aggUSD = _cgtAggregate(fyUSD, 0);
   const discAUD   = aggAUD.discountAmount;
   const discUSD   = aggUSD.discountAmount;
@@ -14426,7 +15033,16 @@ function renderTax() {
       <div class="dash-card-title">CGT Discount</div>
       ${hasTaxAUD?`<div style="font-size:12px;"><span class="accent">-$${fmt(Math.abs(discAUD))}</span> <span style="font-size:10px;color:var(--muted);">AUD</span></div>`:''}
       ${hasTaxUSD?`<div style="font-size:12px;"><span class="accent">-$${fmt(Math.abs(discUSD))}</span> <span style="font-size:10px;color:var(--muted);">USD</span></div>`:''}
-      <div style="font-size:10px;color:var(--muted);margin-top:2px;">${fyEvents.filter(e=>e.eligible50).length} eligible</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px;">${(function(){
+        const nElig = fyEvents.filter(e=>e.eligible50).length;
+        const noDisc = (Math.abs(discAUD) < 0.005 && Math.abs(discUSD) < 0.005);
+        // A $0 discount beside "1 eligible" looks broken. It usually means losses
+        // wiped out the gain first, which is the correct order under the ATO rules.
+        if (nElig > 0 && noDisc) {
+          return nElig + ' eligible, but losses cancelled the gain before the discount could apply';
+        }
+        return nElig + ' eligible';
+      })()}</div>
     </div>
     <div class="dash-card" style="flex:1;min-width:130px;padding:12px 16px;border:1px solid var(--accent);">
       <div class="dash-card-title" style="color:var(--accent);">Taxable Gain</div>
@@ -14455,7 +15071,13 @@ function renderTax() {
       const portLabel2 = portObj2?(portObj2.emoji+' '+portObj2.name):e.portfolio;
       const gCls = e.grossGain>=0?'green':'red';
       const tCls = e.taxable>=0?'green':'red';
-      const discBadge = e.eligible50?`<span class="cgt-badge eligible" style="font-size:9px;">50% disc</span>`:'';
+      // A sale can consume parcels of different ages, so the discount often applies
+      // to only part of it. Saying "50% disc" outright overstates that.
+      const _dShare = (e.discShare != null) ? e.discShare : (e.eligible50 ? 1 : 0);
+      const discBadge = !e.eligible50 ? ''
+        : (_dShare >= 0.999
+            ? `<span class="cgt-badge eligible" style="font-size:9px;">50% disc</span>`
+            : `<span class="cgt-badge eligible" style="font-size:9px;" title="Only part of this sale had been held 12 months">50% disc on ${(_dShare*100).toFixed(0)}%</span>`);
       return `<div style="background:var(--surface2);border-radius:12px;border:1px solid var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.12);margin-bottom:10px;padding:14px 14px 0;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
           <div>
@@ -14463,7 +15085,7 @@ function renderTax() {
               <span class="ticker" style="font-size:16px;font-weight:800;">${e.ticker}</span>
               ${discBadge}
             </div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px;">${portLabel2} · Sold ${e.dateSold} · ${e.heldDays}d</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">${portLabel2} · Sold ${e.dateSold} · ${e.heldDays}d${(_dShare!=null && _dShare<0.999 && _dShare>0) ? ' oldest parcel' : ''}</div>
           </div>
           <div style="text-align:right;">
             <div class="${tCls}" style="font-weight:700;font-size:15px;">${e.taxable>=0?'+':'-'}$${fmt(Math.abs(e.taxable))}</div>
@@ -14561,38 +15183,98 @@ function _dexRisk(info, holdingUsd){
 }
 
 // Enumerate SPL token holdings so there is something to look up
-async function _solTokenAccounts(addr){
-  const RPCS = ['https://api.mainnet-beta.solana.com','https://rpc.ankr.com/solana','https://solana.publicnode.com'];
-  const body = {
-    jsonrpc:'2.0', id:1, method:'getTokenAccountsByOwner',
-    params:[ addr, { programId:'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA' }, { encoding:'jsonParsed' } ]
-  };
-  for (const rpc of RPCS){
-    try{
-      const r = await fetch(rpc, { method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(body), signal: AbortSignal.timeout(11000) });
-      const d = await r.json();
-      const accts = d && d.result && Array.isArray(d.result.value) ? d.result.value : null;
-      if(!accts) continue;
-      return accts.map(a => {
-        const info = a.account && a.account.data && a.account.data.parsed && a.account.data.parsed.info;
-        if(!info) return null;
-        const amt = info.tokenAmount || {};
-        const ui = Number(amt.uiAmount) || 0;
-        if (ui <= 0) return null;
-        return { mint: info.mint, amount: ui };
-      }).filter(Boolean).sort((a,b)=>b.amount-a.amount).slice(0, 40);
-    }catch(_){ }
+// ── Optional Solana RPC ──
+// Public endpoints throttle browsers, which made wallet scans return SOL only.
+// A user-supplied endpoint is tried first, with the public ones as fallback.
+function _solRpcList(){
+  const custom = (state.solRpc || '').trim();
+  const pub = ['https://api.mainnet-beta.solana.com','https://solana.publicnode.com','https://rpc.ankr.com/solana'];
+  return custom ? [custom, ...pub] : pub;
+}
+function saveSolRpc(){
+  const el=document.getElementById('sol-rpc-input');
+  const v=(el?.value||'').trim();
+  if(v && !/^https:\/\//i.test(v)){ notify('\u26A0 The URL needs to start with https://'); return; }
+  state.solRpc = v;
+  _trackEdit(); save(); _renderSolRpcStatus();
+  notify(v ? 'Solana RPC saved' : 'Solana RPC cleared');
+}
+function clearSolRpc(){
+  state.solRpc = '';
+  const el=document.getElementById('sol-rpc-input'); if(el) el.value='';
+  _trackEdit(); save(); _renderSolRpcStatus();
+  notify('Back to the public endpoints');
+}
+async function testSolRpc(){
+  const el=document.getElementById('sol-rpc-input');
+  const url=(el?.value||'').trim() || (state.solRpc||'').trim();
+  const st=document.getElementById('sol-rpc-status');
+  if(!url){ if(st) st.innerHTML='<span style="color:var(--muted);">Nothing to test. Paste a URL first.</span>'; return; }
+  if(st) st.innerHTML='<span style="color:var(--muted);">Testing\u2026</span>';
+  try{
+    const r=await fetch(url,{ method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({jsonrpc:'2.0',id:1,method:'getHealth'}), signal: AbortSignal.timeout(12000) });
+    if(!r.ok){ if(st) st.innerHTML='<span style="color:var(--red);">\u2717 HTTP '+r.status+'. Check the URL and any key on it.</span>'; return; }
+    const d=await r.json();
+    if(d && d.error){ if(st) st.innerHTML='<span style="color:var(--red);">\u2717 '+_escapeHtml(d.error.message||'RPC error')+'</span>'; return; }
+    if(st) st.innerHTML='<span style="color:var(--green);">\u2713 Responding. Save it and rescan your wallet.</span>';
+  }catch(e){
+    if(st) st.innerHTML='<span style="color:var(--red);">\u2717 '+_escapeHtml((e&&e.message)||String(e))+'</span>';
   }
-  return [];
+}
+function _renderSolRpcStatus(){
+  const st=document.getElementById('sol-rpc-status');
+  const el=document.getElementById('sol-rpc-input');
+  const v=(state.solRpc||'').trim();
+  if(el && document.activeElement!==el) el.value=v;
+  if(!st) return;
+  st.innerHTML = v
+    ? '<span style="color:var(--green);">\u2713 Using your endpoint first</span> <span style="color:var(--muted);">\u00b7 public endpoints remain as fallback</span>'
+    : '<span style="color:var(--muted);">Using the public endpoints. Fine for occasional checks, but they throttle.</span>';
 }
 
+async function _solTokenAccounts(addr){
+  // Two token programs exist. Legacy SPL plus Token-2022, which newer mints use, so
+  // querying only the legacy one silently hides a growing share of holdings.
+  const PROGRAMS = [
+    'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+    'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
+  ];
+  const RPCS = _solRpcList();
+  const parse = accts => (accts||[]).map(a => {
+    const info = a.account && a.account.data && a.account.data.parsed && a.account.data.parsed.info;
+    if(!info) return null;
+    const ui = Number((info.tokenAmount||{}).uiAmount) || 0;
+    if (ui <= 0) return null;
+    return { mint: info.mint, amount: ui };
+  }).filter(Boolean);
 
-// ── TradingView widgets (opt-in) ──
-// Free to embed on commercial products provided the branding and links stay intact.
-// Deliberately never fed from state.transactions or state.watchlist: sending someone's
-// holdings to a third party would break the promise the app is sold on. Only generic
-// market data, or a symbol the user explicitly types.
+  const found = [];
+  let anyReplied = false, lastErr = null;
+  for (const programId of PROGRAMS){
+    let got = false;
+    for (const rpc of RPCS){
+      try{
+        const r = await fetch(rpc, { method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ jsonrpc:'2.0', id:1, method:'getTokenAccountsByOwner',
+            params:[ addr, { programId }, { encoding:'jsonParsed' } ] }),
+          signal: AbortSignal.timeout(12000) });
+        if(!r.ok){ lastErr = 'HTTP ' + r.status + ' from ' + rpc; continue; }
+        const d = await r.json();
+        if (d && d.error){ lastErr = (d.error.message || 'RPC error') + ' from ' + rpc; continue; }
+        if (!d || !d.result || !Array.isArray(d.result.value)){ lastErr = 'Unexpected reply from ' + rpc; continue; }
+        anyReplied = true; got = true;
+        found.push(...parse(d.result.value));
+        break;                                   // this program answered, next program
+      }catch(e){ lastErr = (e && e.message) || String(e); }
+    }
+    if(!got) continue;
+  }
+  // Distinguish "nothing held" from "could not ask", so a blocked RPC does not look
+  // like an empty wallet.
+  return { tokens: found.sort((a,b)=>b.amount-a.amount).slice(0, 60),
+           ok: anyReplied, error: anyReplied ? null : (lastErr || 'No Solana RPC responded') };
+}
 function _tvEnabled(){ return !!(state.ui && state.ui.tvWidgets); }
 function setTvWidgets(on){
   state.ui = state.ui || {}; state.ui.tvWidgets = !!on;
@@ -14881,11 +15563,8 @@ async function scanBTC(addr, statusEl, resultsEl, step) {
 }
 
 async function scanSolana(addr, statusEl, resultsEl, step) {
-  const SOL_RPCS = [
-    'https://api.mainnet-beta.solana.com',
-    'https://rpc.ankr.com/solana',
-    'https://solana.publicnode.com',
-  ];
+  // Honour the endpoint chosen in Settings, public ones as fallback
+  const SOL_RPCS = _solRpcList();
   step('Fetching SOL balance\u2026');
   let solBal = 0;
   for (const rpc of SOL_RPCS) {
@@ -14920,8 +15599,17 @@ async function scanSolana(addr, statusEl, resultsEl, step) {
   step('Reading SPL token accounts\u2026');
   let splRows = '';
   let splTotal = 0;
+  let splNote = '';
   try{
-    const toks = await _solTokenAccounts(addr);
+    const res = await _solTokenAccounts(addr);
+    const toks = (res && res.tokens) || [];
+    if (!res || !res.ok){
+      // Say the lookup failed rather than leaving it looking like an empty wallet
+      splNote = '\u26A0 Could not read token accounts' + (res && res.error ? (': ' + _escapeHtml(res.error)) : '')
+        + '. Only the native SOL balance is shown. Public Solana RPCs rate limit heavily, so try again in a moment.';
+    } else if (!toks.length){
+      splNote = 'No SPL or Token-2022 balances found at this address.';
+    }
     if (toks.length){
       step('Pricing ' + toks.length + ' token' + (toks.length===1?'':'s') + ' via DexScreener\u2026');
       const info = await _dexLookup(toks.map(t=>t.mint));
@@ -14951,7 +15639,10 @@ async function scanSolana(addr, statusEl, resultsEl, step) {
         </div>`;
       }).join('');
     }
-  }catch(_){ /* native balance still shows */ }
+  }catch(e){
+    splNote = '\u26A0 Token lookup failed: ' + _escapeHtml((e && e.message) || String(e))
+      + '. The native SOL balance below is still correct.';
+  }
 
   statusEl.textContent = '✓ Solana wallet scanned';
   const _solUsdVal = solUsd ? solBal*solUsd : 0;
@@ -14965,6 +15656,7 @@ async function scanSolana(addr, statusEl, resultsEl, step) {
       </div>
     </div>
     ${splRows}
+    ${splNote ? `<div style="font-size:11px;color:var(--muted);line-height:1.6;padding:10px 0 2px;">${splNote}</div>` : ''}
     ${(splTotal>0 || _solUsdVal>0) ? `<div class="wallet-token-row" style="border-top:1px solid var(--border2);font-weight:800;">
       <div style="flex:1;">Wallet total</div>
       <div style="text-align:right;font-family:var(--font-mono);">\u2248 $${fmt(splTotal+_solUsdVal)} USD</div></div>` : ''}
@@ -15670,7 +16362,17 @@ function saveSectorEdit() {
     <button class="load-opt" onclick="pickPlatformCsv('Navexa')"><span class="load-opt-ico">🇦🇺</span><span><span class="load-opt-title">Navexa</span><span class="load-opt-sub">Portfolio → Trades → Export CSV</span></span></button>
     <button class="load-opt" onclick="pickPlatformCsv('Other')"><span class="load-opt-ico">📄</span><span><span class="load-opt-title">Other platform CSV</span><span class="load-opt-sub">Broker exports, Kraken, KuCoin, others - detects market, currency and brokerage</span></span></button>
 
-    <div style="font-size:10px;color:var(--muted);margin-top:14px;line-height:1.5;">Imports auto-detect the date, type, coin, amount and price columns. You'll be asked to <strong>merge</strong> with or <strong>replace</strong> your current data. Crypto is assumed unless the CSV says otherwise, and prices refresh right after.</div>
+    <div style="font-size:10px;color:var(--muted);margin-top:14px;line-height:1.5;">Imports auto-detect the date, type, ticker, amount and price columns. You choose which portfolio they land in and whether to <strong>add</strong> or <strong>replace</strong>, and prices refresh right after.</div>
+
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px;">
+        Coming from a spreadsheet, or your broker has no export? Start from a blank template with the right columns.
+      </div>
+      <button class="btn-ghost btn-sm" onclick="downloadCsvTemplate()" style="display:inline-flex;align-items:center;gap:7px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download blank CSV template
+      </button>
+    </div>
 
     <input type="file" id="platform-import-input" accept=".csv,.txt,.tsv,text/csv,text/plain,application/vnd.ms-excel,application/octet-stream" style="display:none" onchange="importPlatformCsv(event)">
   </div>
@@ -15815,7 +16517,7 @@ function saveSectorEdit() {
   window.__demoBooted = true;
 
   /* ── Hard locks → buy modal ── */
-  const lockFns = ['saveToFile','exportCSV','loadFileSettings','addPortfolio','renamePm','deletePm','saveNewsApiKey','editNewsApiKey','clearNewsApiKey','addWatchlistList','pickSyncFile','syncNow','reconnectSync','setAutoSync'];
+  const lockFns = ['saveToFile','exportCSV','loadFileSettings','addPortfolio','renamePm','deletePm','saveNewsApiKey','editNewsApiKey','clearNewsApiKey','addWatchlistList','saveSolRpc','clearSolRpc','pickSyncFile','syncNow','reconnectSync','setAutoSync'];
   lockFns.forEach(fn=>{ if(typeof window[fn]==='function') window[fn]=function(){ demoBuy(); }; });
 
   /* ── Custom proxy stays usable in the demo, but be honest about persistence ── */
@@ -15975,6 +16677,9 @@ function saveSectorEdit() {
       <div><label class="fld-label">Amount</label><input type="number" id="bem-amount" step="0.01" style="width:100%;"></div>
       <div><label class="fld-label">Currency</label><select id="bem-currency" style="width:100%;"><option value="AUD">AUD</option><option value="USD">USD</option></select></div>
       <div><label class="fld-label">Date</label><input type="date" id="bem-date" style="width:100%;"></div>
+      <div><label class="fld-label">One-off</label><div style="display:flex;gap:6px;"><button type="button" class="mob-spark-btn bem-oneoff-btn active" id="bem-oneoff-no" onclick="setBemOneOff(false)" style="flex:1;font-size:11px;padding:8px 4px;">Regular</button><button type="button" class="mob-spark-btn bem-oneoff-btn" id="bem-oneoff-yes" onclick="setBemOneOff(true)" style="flex:1;font-size:11px;padding:8px 4px;">One-off</button></div></div>
+      <div><label class="fld-label">Repeats</label><select id="bem-recur" style="width:100%;"><option value="">One time</option><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="yearly">Yearly</option></select></div>
+      <div><label class="fld-label">Repeat until <span class="wp-info" data-tip="Leave blank and it repeats indefinitely. Set a date to stop it, or switch Repeats to One time to end it entirely." onclick="showTradeDotTip(this)">i</span></label><input type="date" id="bem-recur-until" style="width:100%;"></div>
       <div style="grid-column:1/-1;"><label class="fld-label">Note</label><input type="text" id="bem-note" style="width:100%;"></div>
     </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
@@ -16073,6 +16778,21 @@ function saveSectorEdit() {
       <button class="btn-ghost" onclick="copyTaxReport()">Copy</button>
       <button class="btn-ghost" onclick="window.print()">Print</button>
       <button class="btn" onclick="closeTaxReport()">Done</button>
+    </div>
+  </div>
+</div>
+
+<div id="import-dest-modal" style="display:none;position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:22px;max-width:430px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.45);max-height:90vh;overflow-y:auto;">
+    <div style="font-weight:800;font-family:var(--font-head);font-size:15px;margin-bottom:3px;">Import options</div>
+    <div id="imp-dest-count" style="font-size:11px;color:var(--muted);margin-bottom:16px;"></div>
+    <div class="imp-group-label">Where should they go?</div>
+    <div id="imp-dest-options" class="imp-opts"></div>
+    <div class="imp-group-label" style="margin-top:16px;">How should they be added?</div>
+    <div id="imp-mode-options" class="imp-opts"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:20px;">
+      <button class="btn-ghost" onclick="cancelImportDest()">Cancel</button>
+      <button class="btn" onclick="confirmImportDest()">Import</button>
     </div>
   </div>
 </div>

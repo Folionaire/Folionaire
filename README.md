@@ -12,11 +12,20 @@ The whole app is one HTML file. Open it in any browser on any device, no install
 
 ## What's in the full version
 
+## Dashboard
+
+- Live market tape across the top: ten markets of your choosing, or add any Yahoo symbol or CoinGecko id
+- Needs Attention gathers targets reached, parcels nearing twelve months, dividends due and thesis triggers into one panel
+- Risk Flags warn when a position grows past your size limit or falls past your drawdown limit
+- Allocation donut beside the value chart, portfolio and crypto movers, GICS sector performance, headlines with sentiment
+- Optional TradingView charting with every holding as a one-tap shortcut
+
 ## Portfolio
 
 - Unlimited holdings, transactions and portfolios (partner, kids, super as separate tabs with a combined view)
 - Portfolio value chart with 1D through ALL ranges, in AUD, USD or combined
-- Sortable holdings table, allocation and sector breakdowns, top movers across every asset class
+- Sortable holdings table with a weight column, totals row, allocation and sector breakdowns
+- Transaction history that totals buys, sells, realised P&L and net cash for whatever filter you set
 
 ## Australian tax
 
@@ -41,13 +50,15 @@ The whole app is one HTML file. Open it in any browser on any device, no install
 - JSON backup that restores everything, CSV export, and Plain Text Accounting ledger export for hledger and beancount
 - CSV import with column auto-detection for Sharesight, Navexa, Binance, Coinbase, CoinGecko, CoinMarketCap, Crypto.com and generic broker exports
 - Watchlists with price alerts and reminders
-- News and sentiment terminal, free RSS out of the box, optional free API keys for more
+- News and sentiment terminal, free out of the box via Google News, Yahoo Finance and Motley Fool AU, optional free API keys for more
 - Crypto wallet scanner from a public address (BTC, ETH, SOL, BNB, POL)
 - Four themes including Terminal, light and dark
 - Privacy mode that hides every figure and blurs charts
 - Five CGT parcel methods, a one-page tax report and debt recycling tracking
 - Folder Sync: write straight to a file in your own Dropbox or OneDrive folder, no account or server
 - Optional TradingView market widgets, off by default and never fed your holdings
+- Optional Solana RPC so wallet scans are not throttled by public endpoints
+- Solana scans cover both SPL Token and Token-2022 holdings
 - Free updates for the life of v1. v2 onwards is a A$10 upgrade for existing owners
 - Full source code in the file. Works offline
 
@@ -58,6 +69,10 @@ Being straight about the gaps so nobody finds out the hard way:
 - Display currencies are AUD and USD
 - Managed funds only work where Yahoo Finance lists a ticker
 - Tax figures are estimates. Have a registered tax agent review a full financial year of output before you rely on them
+
+## Latest release
+
+**v1.2** rebuilt the dashboard around one question: open the app and know what you own, what moved, and what needs a decision. Market tape, Needs Attention, Risk Flags, allocation donut, crypto movers, sector heatmap, headlines and optional charting. Portfolio and transaction history finally total. Full changelog ships with the download.
 
 ## Demo limits
 The demo runs on sample data and resets when you refresh. Saving, exporting and importing are disabled, and creation is capped (15 transactions, 5 watchlist entries, 5 calendar events, 10 terminal scans a day). Everything else is the real app.
